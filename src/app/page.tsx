@@ -298,7 +298,7 @@ export default function SearchPage() {
           
           <div className="flex-shrink-0">
             <a className="navbar-brand" href="#">
-              <img className="nav-img h-12 sm:h-16 w-auto object-contain" src="/images/logo-ar-black.png" alt="شعار الوزارة" />
+              <img className="nav-img h-12 sm:h-16 w-auto object-contain" src="https://81.21.104.211.moheg.com/images/logo-ar-black.png" alt="شعار الوزارة" />
             </a>
           </div>
 
@@ -310,10 +310,10 @@ export default function SearchPage() {
 
           <div className="flex items-center justify-center gap-4 shrink-0">
             <div className="w-20 sm:w-24">
-              <img src="/images/100Million.png" alt="100 مليون صحة" style={{ width: '100%' }} />
+              <img src="https://81.21.104.211.moheg.com/images/100Million.png" alt="100 مليون صحة" style={{ width: '100%' }} />
             </div>
             <div className="w-20 sm:w-24">
-              <img src="/images/OncLogo.png" alt="Onc Logo" style={{ width: '100%' }} />
+              <img src="https://81.21.104.211.moheg.com/images/OncLogo.png" alt="Onc Logo" style={{ width: '100%' }} />
             </div>
           </div>
 
