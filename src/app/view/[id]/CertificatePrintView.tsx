@@ -153,8 +153,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       {/* Official A4 Layout Replication */}
       <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
         {/* Top Section: Header Information & Photo Box */}
-        <div className="flex justify-between items-start mb-3">
-          <div className="flex-1 grid grid-cols-3 gap-2 pt-2 text-[13px] font-bold text-black">
+        <div className="flex justify-between items-end mb-2">
+          <div className="flex-1 grid grid-cols-3 gap-2 text-[13px] font-bold text-black pb-1">
             <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
             <div className="text-center">اسم الوحدة: {certificate.unitName}</div>
             <div className="text-left pr-4">المحافظة: {certificate.governorate}</div>
@@ -164,7 +164,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <div className="border border-black flex items-center justify-center text-[13px] text-black font-bold mb-1" style={{ width: '40mm', height: '60mm' }}>
               <span dir="ltr">4*6</span>
             </div>
-            <span className="text-[11px] text-black font-bold mt-1">ختم شعار الجمهورية</span>
+            <span className="text-[11px] text-black font-bold">ختم شعار الجمهورية</span>
           </div>
         </div>
 
