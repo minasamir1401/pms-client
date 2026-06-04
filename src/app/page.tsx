@@ -294,9 +294,8 @@ export default function SearchPage() {
 
       {/* Responsive Official Header based on provided layout */}
       <header 
-        className="relative z-10 border-b border-slate-200 bg-cover bg-center sticky top-0 shadow-sm w-full" 
+        className="relative z-10 border-b border-sky-100 bg-gradient-to-r from-sky-50 via-teal-50 to-blue-50 sticky top-0 shadow-sm w-full" 
         id="removeLayoutHeader"
-        style={{ backgroundImage: "url('/images/header-bg.png')" }}
       >
         <div className="w-full px-4 sm:px-8 py-2 flex flex-col md:flex-row items-center justify-between gap-4">
           
