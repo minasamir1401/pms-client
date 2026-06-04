@@ -71,20 +71,20 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col items-center py-6 px-4 print:bg-white print:text-black print:p-0 print:m-0">
-      {/* Import Standard System Arabic Fonts and Print Settings */}
       <style jsx global>{`
         body, html {
-          font-family: 'Simplified Arabic', 'Segoe UI', Tahoma, Arial, sans-serif !important;
+          font-family: Arial, 'Segoe UI', Tahoma, sans-serif !important;
           color: #000000 !important;
         }
 
         .print-page {
           width: 210mm;
           height: 297mm;
-          padding: 15mm 20mm;
+          padding: 15mm 15mm;
           box-sizing: border-box;
           background-color: #ffffff;
           color: #000000 !important;
+          font-size: 15px;
         }
 
         @media print {
@@ -105,7 +105,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             box-shadow: none !important;
             border: none !important;
             margin: 0 !important;
-            padding: 15mm 20mm !important;
+            padding: 15mm 15mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
@@ -122,7 +122,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         <div className="flex items-center gap-2">
           <CheckCircle className="h-5 w-5 text-teal-400" />
           <span className="text-xs font-semibold">
-            معاينة الشهادة الطبية الرسمية قبل الطباعة. تم استيراد الخطوط والتنسيقات الرسمية.
+            معاينة الشهادة الطبية الرسمية قبل الطباعة. تم استيراد الخطوط والتنسيقات الرسمية بمقاسات دقيقة بالملي.
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -144,279 +144,162 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       </div>
 
       {/* Official A4 Layout Replication */}
-      <div className="print-page bg-white text-black shadow-xl flex flex-col justify-between" dir="rtl">
-        <div>
-          {/* Top Section: Photo Box & Header Information */}
-          <div className="flex justify-between items-center mb-5 pl-2" dir="rtl">
-            <div className="flex-1 flex justify-between items-center pl-8 text-xs font-bold text-black">
-              <div>
-                <span>تاريخ اإلصدار : </span>
-                <span>{formatDate(certificate.issueDate)}</span>
-              </div>
-              <div>
-                <span>اسم الوحدة: </span>
-                <span>{certificate.unitName}</span>
-              </div>
-              <div>
-                <span>المحافظة: </span>
-                <span>{certificate.governorate}</span>
-              </div>
-            </div>
-
-            {/* Photo Box Block 4*6 */}
-            <div className="flex flex-col items-center shrink-0">
-              <div className="w-[84px] h-[112px] border border-black flex flex-col items-center justify-center text-[10px] text-slate-400 font-bold mb-1">
-                <span>4*6</span>
-              </div>
-              <span className="text-[9px] text-black font-bold">ختم شعار الجمهورية</span>
-            </div>
+      <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
+        {/* Top Section: Header Information & Photo Box */}
+        <div className="flex justify-between items-start mb-8">
+          <div className="flex-1 grid grid-cols-3 gap-2 pt-6 text-[15px] font-bold text-black">
+            <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
+            <div className="text-center">اسم الوحدة: {certificate.unitName}</div>
+            <div className="text-left pr-4">المحافظة: {certificate.governorate}</div>
           </div>
-
-          {/* Section 1: Basic Information */}
-          <div className="mb-5">
-            <h3 className="text-[14px] font-bold text-black mb-3">البيانات األساسية</h3>
-            <div className="grid grid-cols-3 gap-y-2.5 text-[12px] leading-relaxed text-black">
-              <div className="flex items-center">
-                <span className="font-normal">االسم : </span>
-                <span className="font-bold mr-1">{certificate.fullName}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">الرقم القومى : </span>
-                <span className="font-bold mr-1">{certificate.nationalId}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">النوع : </span>
-                <span className="font-bold mr-1">{certificate.gender}</span>
-              </div>
-
-              <div className="flex items-center">
-                <span className="font-normal">الجنسية : </span>
-                <span className="font-bold mr-1">{certificate.nationality}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">السن : </span>
-                <span className="font-bold mr-1">{certificate.age}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">رقم الهاتف : </span>
-                <span className="font-bold mr-1">{certificate.phoneNumber}</span>
-              </div>
-
-              <div className="flex items-center">
-                <span className="font-normal">العنوان بالبطاقة : </span>
-                <span className="font-bold mr-1">{certificate.idAddress}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">عنوان سكن الزوجية : </span>
-                <span className="font-bold mr-1">{certificate.maritalAddress || "-"}</span>
-              </div>
-              <div></div>
+          
+          <div className="flex flex-col items-center mr-8">
+            <div className="border border-black flex items-center justify-center text-[16px] text-black font-bold mb-1" style={{ width: '40mm', height: '60mm' }}>
+              <span dir="ltr">4*6</span>
             </div>
+            <span className="text-[13px] text-black font-bold mt-1">ختم شعار الجمهورية</span>
           </div>
+        </div>
 
-          {/* Section 2: Medical Examinations */}
-          <div className="mb-5">
-            <h3 className="text-[14px] font-bold text-black mb-3">الفحوصات الطبية</h3>
-            <div className="grid grid-cols-3 gap-y-3 text-[12px] leading-relaxed text-black">
-              <div className="flex items-center">
-                <span className="font-normal">الطول(سم) : </span>
-                <span className="font-bold mr-1">{certificate.height}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">الوزن(كجم) : </span>
-                <span className="font-bold mr-1">{certificate.weight}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">BMI : </span>
-                <span className="font-bold mr-1">{certificate.bmi}</span>
-              </div>
-
-              <div className="flex items-center">
-                <span className="font-normal">RH : </span>
-                <span className="font-bold mr-1">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">فصيلة الدم : </span>
-                <span className="font-bold mr-1">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">Hb : </span>
-                <span className="font-bold mr-1">{certificate.hb}</span>
-              </div>
-
-              <div className="flex items-center">
-                <span className="font-normal">HBs Ag : </span>
-                <span className="font-bold mr-1">{certificate.hbsAg}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">Anti-HIV : </span>
-                <span className="font-bold mr-1">{certificate.antiHiv}</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-normal">Anti-HCV : </span>
-                <span className="font-bold mr-1">{certificate.antiHcv}</span>
-              </div>
-
-              <div className="flex items-center">
-                <span className="font-normal">ضغط الدم : </span>
-                <span className="font-bold mr-1">{certificate.bloodPressure}</span>
-              </div>
-              <div className="flex items-center col-span-2">
-                <span className="font-normal">نتيجة فحص السكر(العشوائى) : </span>
-                <span className="font-bold mr-1">{certificate.randomBloodSugar}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Section 3: Hb Electrophoresis */}
-          <div className="mb-5 text-left" dir="ltr">
-            <h4 className="text-[12px] font-bold text-black mb-3 inline-block border-b border-black pb-0.5">Hb Electrophoresis :</h4>
-            <div className="grid grid-cols-5 text-center text-[12px] text-black font-bold">
-              <div>
-                <div>A : {certificate.hbA}%</div>
-                <div className="font-bold mt-1 text-black">Normal</div>
-              </div>
-              <div>
-                <div>F : {certificate.hbF}%</div>
-                <div className="font-bold mt-1 text-black">Normal</div>
-              </div>
-              <div>
-                <div>A2 : {certificate.hbA2}%</div>
-                <div className="font-bold mt-1 text-black">Normal</div>
-              </div>
-              <div>
-                <div>C : {certificate.hbC}%</div>
-                <div className="font-bold mt-1 text-black">Normal</div>
-              </div>
-              <div>
-                <div>S : {certificate.hbS}%</div>
-                <div className="font-bold mt-1 text-black">Normal</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Section 4: Declaration Block */}
-          <div className="mb-5">
-            <h3 className="text-[13px] font-bold text-center text-black mb-3">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
+        {/* Section 1: Basic Information */}
+        <div className="mb-8">
+          <h3 className="text-[18px] font-bold text-black mb-6">البيانات الأساسية</h3>
+          <div className="grid grid-cols-3 gap-y-6 text-[15px] font-bold text-black">
+            <div className="text-right">الاسم : <span className="font-semibold">{certificate.fullName}</span></div>
+            <div className="text-center">الرقم القومى : <span className="font-semibold">{certificate.nationalId}</span></div>
+            <div className="text-left">النوع : <span className="font-semibold">{certificate.gender}</span></div>
             
-            <div className="flex justify-between items-center gap-4 text-black">
-              {/* Signatures Columns */}
-              <div className="flex-1 grid grid-cols-2 gap-y-3 text-[12px] font-normal">
-                <div className="flex items-center">
-                  <span>اسم الممرض/الممرضة : </span>
-                  <span className="mr-1">--------------</span>
-                </div>
-                <div className="flex items-center">
-                  <span>التوقيع : </span>
-                  <span className="mr-1">----------------------</span>
-                </div>
-
-                <div className="flex items-center">
-                  <span>اسم الطبيب/الطبيبة : </span>
-                  <span className="mr-1">-----------------</span>
-                </div>
-                <div className="flex items-center">
-                  <span>التوقيع : </span>
-                  <span className="mr-1">----------------------</span>
-                </div>
-
-                <div className="flex items-center">
-                  <span>مدير الوحدة : </span>
-                  <span className="mr-1">-------------------------</span>
-                </div>
-                <div className="flex items-center">
-                  <span>التوقيع : </span>
-                  <span className="mr-1">----------------------</span>
-                </div>
-              </div>
-
-              {/* Committee Stamp Circle */}
-              <div className="flex flex-col items-center justify-center shrink-0 pl-12">
-                <div className="w-[72px] h-[72px] rounded-full border border-black flex items-center justify-center mb-1">
-                  {/* Empty inside */}
-                </div>
-                <span className="text-[10px] font-bold">ختم شعار الجمهورية</span>
-              </div>
-            </div>
+            <div className="text-right">الجنسية : <span className="font-semibold">{certificate.nationality}</span></div>
+            <div className="text-center">السن : <span className="font-semibold">{certificate.age}</span></div>
+            <div className="text-left">رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
+            
+            <div className="text-right">العنوان بالبطاقة : <span className="font-semibold">{certificate.idAddress}</span></div>
+            <div className="text-center">عنوان سكن الزوجية : <span className="font-semibold">{certificate.maritalAddress || "-"}</span></div>
+            <div></div>
           </div>
+        </div>
 
-          {/* Section 5: Individual Consent Text */}
-          <div className="mb-5 border-t border-slate-200 pt-4 text-black">
-            <div className="flex justify-between text-[12px] font-bold mb-3">
-              <div>
-                <span>أقر أنا الموقع/الموقعه أدناه : </span>
-                <span>{certificate.fullName}</span>
-              </div>
-              <div className="pl-12">
-                <span>رقم القومى : </span>
-                <span className="font-mono">{certificate.nationalId}</span>
-              </div>
-            </div>
+        {/* Section 2: Medical Examinations */}
+        <div className="mb-8">
+          <h3 className="text-[18px] font-bold text-black mb-6">الفحوصات الطبية</h3>
+          <div className="grid grid-cols-3 gap-y-6 text-[15px] font-bold text-black">
+            <div className="text-right">الطول(سم): <span className="font-semibold">{certificate.height}</span></div>
+            <div className="text-center">الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
+            <div className="text-left">BMI: <span className="font-semibold">{certificate.bmi}</span></div>
 
-            <p className="text-[11px] text-justify leading-relaxed font-bold">
-              بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج األخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .
-            </p>
+            <div className="text-right">RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
+            <div className="text-center">فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
+            <div className="text-left">Hb: <span className="font-semibold">{certificate.hb}</span></div>
+
+            <div className="text-right">HBs Ag : <span className="font-semibold">{certificate.hbsAg}</span></div>
+            <div className="text-center">Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
+            <div className="text-left">Anti-HCV : <span className="font-semibold">{certificate.antiHcv}</span></div>
+
+            <div className="text-right">ضغط الدم : <span className="font-semibold">{certificate.bloodPressure}</span></div>
+            <div className="text-center">نتيجة فحص السكر(العشوائى) : <span className="font-semibold">{certificate.randomBloodSugar}</span></div>
+            <div></div>
           </div>
+        </div>
 
-          {/* Section 6: Thumbprint & Partner Info */}
-          <div className="grid grid-cols-3 items-stretch gap-4 text-[12px] font-normal text-black border-t border-slate-200 pt-4">
-            {/* Column 1: Examining Person details */}
-            <div className="flex flex-col justify-between py-2 space-y-4">
-              <div className="flex items-center">
-                <span>الاسم (رباعى) : </span>
-                <span className="mr-1">------------------</span>
-              </div>
-              <div className="flex items-center">
-                <span>التوقيع : </span>
-                <span className="mr-1">-----------------------</span>
-              </div>
+        {/* Section 3: Hb Electrophoresis */}
+        <div className="mb-10">
+          <h4 className="text-[16px] font-bold text-black mb-6 text-right underline underline-offset-4" dir="ltr">Hb Electrophoresis :</h4>
+          <div className="flex justify-between items-center text-center text-[15px] font-bold text-black px-12" dir="ltr">
+            <div>
+              <div>A : {certificate.hbA} %</div>
+              <div className="mt-2">Normal</div>
             </div>
-
-            {/* Column 2: Thumbprint Circle */}
-            <div className="flex flex-col items-center justify-center border-r border-l border-slate-300 px-4 py-1">
-              <div className="w-[64px] h-[64px] rounded-full border border-black flex items-center justify-center mb-1">
-                {/* Empty inside */}
-              </div>
-              <span className="text-[10px] font-bold">بصمة اإلبهام</span>
+            <div>
+              <div>F : {certificate.hbF} %</div>
+              <div className="mt-2">Normal</div>
             </div>
-
-            {/* Column 3: Partner details */}
-            <div className="flex flex-col justify-between py-2 space-y-3">
-              <div className="flex items-center">
-                <span>اسم الطرف الاخر (رباعى) : </span>
-                <span className="font-bold mr-1">{certificate.partnerName || "---------------"}</span>
-              </div>
-              <div className="flex items-center">
-                <span>توقيع الطرف االخر : </span>
-                <span className="mr-1">--------------------</span>
-              </div>
-              <div className="flex items-center">
-                <span>الرقم القومى للطرف االخر : </span>
-                <span className="font-bold font-mono mr-1">{certificate.partnerNationalId || "-------------"}</span>
-              </div>
+            <div>
+              <div>A2 : {certificate.hbA2} %</div>
+              <div className="mt-2">Normal</div>
+            </div>
+            <div>
+              <div>C : {certificate.hbC} %</div>
+              <div className="mt-2">Normal</div>
+            </div>
+            <div>
+              <div>S : {certificate.hbS} %</div>
+              <div className="mt-2">Normal</div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Block: Footer Validity & Verification QR */}
-        <div className="border-t border-slate-200 pt-4 flex justify-between items-end text-black">
-          {/* Validity statement */}
-          <div className="text-[11px] font-bold pb-2">
-            *هذه الوثيقة صالحة لمدة ستة أشهر من تاريخ اإلصدار
+        {/* Section 4: Declaration Block */}
+        <div className="mb-10">
+          <h3 className="text-[17px] font-bold text-black mb-6 text-right">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
+          
+          <div className="flex justify-between items-center text-black">
+            <div className="flex-1 grid grid-cols-2 gap-y-6 text-[15px] font-bold">
+              <div className="text-right">اسم الممرض/الممرضة : <span className="font-normal text-gray-400">--------------</span></div>
+              <div className="text-right pr-16">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+
+              <div className="text-right">اسم الطبيب/الطبيبة : <span className="font-normal text-gray-400">-----------------</span></div>
+              <div className="text-right pr-16">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+
+              <div className="text-right">مدير الوحدة : <span className="font-normal text-gray-400">-------------------------</span></div>
+              <div className="text-right pr-16">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+            </div>
+
+            <div className="flex flex-col items-center ml-16">
+              <div className="w-[90px] h-[90px] rounded-full border border-black mb-2"></div>
+              <span className="text-[14px] font-bold">ختم شعار الجمهورية</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Section 5: Individual Consent Text */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center text-[16px] font-bold text-black mb-4">
+            <div>أقر أنا الموقع/الموقعه أدناه : <span className="font-bold">{certificate.fullName}</span></div>
+            <div className="pl-32">رقم القومى : <span className="font-mono">{certificate.nationalId}</span></div>
+          </div>
+          <p className="text-[16px] font-bold text-black leading-loose text-justify">
+            بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .
+          </p>
+        </div>
+
+        {/* Section 6: Thumbprint & Partner Info */}
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[15px] font-bold text-black mt-10 mb-4">
+          <div className="flex flex-col space-y-6">
+            <div>الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
+            <div>التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
           </div>
 
-          {/* Verification QR block */}
-          <div className="flex flex-col items-center pl-8">
-            <div className="bg-white">
+          <div className="flex flex-col items-center justify-center border-r-2 border-l-2 border-slate-300 px-12 py-4 h-full">
+            <div className="w-[80px] h-[80px] rounded-full border border-black mb-3"></div>
+            <span className="text-[15px] font-bold">بصمة الإبهام</span>
+          </div>
+
+          <div className="flex flex-col space-y-6 pr-12">
+            <div>اسم الطرف الاخر(رباعى) : <span className="font-bold">{certificate.partnerName || "---------------"}</span></div>
+            <div>توقيع الطرف الاخر : <span className="font-normal text-gray-400">--------------------</span></div>
+            <div>الرقم القومى للطرف الاخر : <span className="font-bold font-mono">{certificate.partnerNationalId || "-------------"}</span></div>
+          </div>
+        </div>
+
+        {/* Spacer to push footer to bottom */}
+        <div className="flex-grow"></div>
+
+        {/* Footer Block */}
+        <div className="flex justify-between items-end text-black pt-4 mt-8">
+          <div className="text-[14px] font-bold mb-4">
+            *هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار
+          </div>
+          <div className="flex flex-col items-center">
+            <div className="bg-white p-1">
               {currentUrl ? (
-                <QRCodeSVG value={currentUrl} size={64} />
+                <QRCodeSVG value={currentUrl} size={100} />
               ) : (
-                <div className="h-[64px] w-[64px] bg-slate-100 flex items-center justify-center text-[6px] text-slate-400">
+                <div className="h-[100px] w-[100px] bg-slate-100 flex items-center justify-center text-[12px] text-slate-400">
                   QR
                 </div>
               )}
             </div>
-            <span className="mt-1 font-mono font-bold text-[10px] tracking-wider">
+            <span className="mt-1 font-bold text-[14px]">
               {certificate.qrCodeLabel || `2026-${certificate.certificateId}`}
             </span>
           </div>
