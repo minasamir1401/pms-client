@@ -152,20 +152,37 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
       {/* Official A4 Layout Replication */}
       <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
-        {/* Top Section: Header Information & Photo Box */}
-        <div className="flex justify-between items-end mb-2">
-          <div className="flex-1 grid grid-cols-3 gap-2 text-[13px] font-bold text-black pb-1">
-            <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
-            <div className="text-center">اسم الوحدة: {certificate.unitName}</div>
-            <div className="text-left pr-4">المحافظة: {certificate.governorate}</div>
+        {/* Topmost Row: Logo, Title, Photo Box */}
+        <div className="flex justify-between items-center mb-6 mt-2">
+          {/* Right: Logo */}
+          <div className="flex flex-col items-center w-[80px]">
+            <img src="/moh-logo.png" alt="شعار وزارة الصحة" className="w-[70px] h-[70px] object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+            <div className="hidden w-[70px] h-[70px] border-2 border-dashed border-gray-300 flex items-center justify-center text-[10px] text-center text-gray-400 font-bold">
+              شعار<br/>الوزارة
+            </div>
+          </div>
+
+          {/* Middle: Title Rectangle */}
+          <div className="flex-1 flex justify-center px-4">
+            <div className="border-2 border-black py-2 px-8 text-[18px] font-bold text-black text-center shadow-sm">
+              شهادة صحية لراغبي الزواج
+            </div>
           </div>
           
-          <div className="flex flex-col items-center mr-8">
-            <div className="border border-black flex items-center justify-center text-[13px] text-black font-bold mb-1" style={{ width: '60mm', height: '40mm' }}>
+          {/* Left: Photo Box */}
+          <div className="flex flex-col items-center">
+            <div className="border-2 border-black flex items-center justify-center text-[14px] text-black font-bold mb-1" style={{ width: '60mm', height: '40mm' }}>
               <span dir="ltr">6*4</span>
             </div>
             <span className="text-[11px] text-black font-bold">ختم شعار الجمهورية</span>
           </div>
+        </div>
+
+        {/* Second Row: Header Information directly above Basic Info */}
+        <div className="grid grid-cols-3 gap-2 text-[13px] font-bold text-black mb-2">
+          <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
+          <div className="text-center">اسم الوحدة: {certificate.unitName}</div>
+          <div className="text-left pr-4">المحافظة: {certificate.governorate}</div>
         </div>
 
         {/* Section 1: Basic Information */}
