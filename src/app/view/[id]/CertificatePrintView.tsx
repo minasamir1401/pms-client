@@ -155,9 +155,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {/* Topmost Row: Logo, Title, Photo Box */}
         <div className="flex justify-between items-center mb-6 mt-2">
           {/* Right: Logo */}
-          <div className="flex flex-col items-center w-[80px]">
-            <img src="/images/Ministry of Health and population (5).png" alt="شعار وزارة الصحة" className="w-[80px] h-[80px] object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
-            <div className="hidden w-[80px] h-[80px] border-2 border-dashed border-gray-300 flex items-center justify-center text-[10px] text-center text-gray-400 font-bold">
+          <div className="flex flex-col items-center w-[100px]">
+            <img src="/images/Ministry of Health and population (5).png" alt="شعار وزارة الصحة" className="w-[100px] h-[100px] object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+            <div className="hidden w-[100px] h-[100px] border-2 border-dashed border-gray-300 flex items-center justify-center text-[10px] text-center text-gray-400 font-bold">
               شعار<br/>الوزارة
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           
           {/* Left: Photo Box */}
           <div className="flex flex-col items-center">
-            <div className="border border-black flex items-center justify-center text-[14px] text-black font-bold mb-1" style={{ width: '35mm', height: '45mm' }}>
+            <div className="border border-black flex items-center justify-center text-[14px] text-black font-bold mb-1" style={{ width: '35mm', height: '40mm' }}>
               <span dir="ltr">4*6</span>
             </div>
             <span className="text-[11px] text-black font-bold">ختم شعار الجمهورية</span>
