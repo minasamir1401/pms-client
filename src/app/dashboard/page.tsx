@@ -88,16 +88,22 @@ export default function DashboardPage() {
   // Handle Logout
   const handleLogout = async () => {
     try {
+      // Clear localStorage and local cookie for cross-domain cookie fallback
+      localStorage.removeItem("admin_token");
+      document.cookie = "admin_session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+
       const res = await fetch(`${API_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include"
       });
-      if (res.ok) {
-        router.push("/login");
-        router.refresh();
-      }
+      
+      router.push("/login");
+      router.refresh();
     } catch (err) {
       console.error("Logout failed:", err);
+      // Fallback redirect even if API call fails
+      router.push("/login");
+      router.refresh();
     }
   };
 
