@@ -21,7 +21,6 @@ async function verifyJWT(token: string, secret: string): Promise<boolean> {
       ["verify"]
     );
 
-    // Convert Base64Url to Base64 standard
     const b64 = signatureB64.replace(/-/g, "+").replace(/_/g, "/");
     const rawSignature = atob(b64);
     const signatureBin = new Uint8Array(rawSignature.length);
@@ -54,10 +53,11 @@ async function verifyJWT(token: string, secret: string): Promise<boolean> {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Check token from cookie only (set by backend or client manually)
+  const session = request.cookies.get("admin_session")?.value;
+
   // Protect /dashboard
   if (pathname.startsWith("/dashboard")) {
-    const session = request.cookies.get("admin_session")?.value;
-
     if (!session || !(await verifyJWT(session, JWT_SECRET))) {
       const url = request.nextUrl.clone();
       url.pathname = "/login";
@@ -67,7 +67,6 @@ export async function proxy(request: NextRequest) {
 
   // Redirect to dashboard if logged in and accessing login page
   if (pathname === "/login") {
-    const session = request.cookies.get("admin_session")?.value;
     if (session && (await verifyJWT(session, JWT_SECRET))) {
       const url = request.nextUrl.clone();
       url.pathname = "/dashboard";
