@@ -161,8 +161,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
           
           <div className="flex flex-col items-center mr-8">
-            <div className="border border-black flex items-center justify-center text-[13px] text-black font-bold mb-1" style={{ width: '40mm', height: '60mm' }}>
-              <span dir="ltr">4*6</span>
+            <div className="border border-black flex items-center justify-center text-[13px] text-black font-bold mb-1" style={{ width: '60mm', height: '40mm' }}>
+              <span dir="ltr">6*4</span>
             </div>
             <span className="text-[11px] text-black font-bold">ختم شعار الجمهورية</span>
           </div>
