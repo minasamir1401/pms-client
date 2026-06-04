@@ -294,7 +294,10 @@ export default function SearchPage() {
 
       {/* Responsive Official Header based on provided layout */}
       <header className="relative z-10 border-b border-slate-200 bg-white sticky top-0 shadow-sm" id="removeLayoutHeader">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-50">
+        <div 
+          className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-4 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/header-bg.png')" }}
+        >
           
           <div className="flex-shrink-0">
             <a className="navbar-brand" href="#">
