@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Check, AlertCircle } from "lucide-react";
+import API_URL from "@/config";
 
 interface CertificateFormProps {
   initialData?: any;
@@ -149,11 +150,10 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
     };
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const isEdit = !!initialData?.certificateId;
       const url = isEdit
-        ? `${apiUrl}/api/certificates/${initialData.certificateId}`
-        : `${apiUrl}/api/certificates`;
+        ? `${API_URL}/api/certificates/${initialData.certificateId}`
+        : `${API_URL}/api/certificates`;
       const method = isEdit ? "PUT" : "POST";
 
       const res = await fetch(url, {

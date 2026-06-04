@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { LogOut, Plus, ShieldAlert, Award, Users, Activity, CheckCircle2, Lock } from "lucide-react";
 import CertificateTable from "@/components/CertificateTable";
 import CertificateForm from "@/components/CertificateForm";
+import API_URL from "@/config";
 
 interface Certificate {
   certificateId: string;
@@ -40,8 +41,7 @@ export default function DashboardPage() {
     setLoading(true);
     setError("");
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const res = await fetch(`${apiUrl}/api/certificates`, {
+      const res = await fetch(`${API_URL}/api/certificates`, {
         credentials: "include"
       });
       if (res.ok) {
@@ -69,8 +69,7 @@ export default function DashboardPage() {
     }
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const res = await fetch(`${apiUrl}/api/certificates/${id}`, {
+      const res = await fetch(`${API_URL}/api/certificates/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -89,8 +88,7 @@ export default function DashboardPage() {
   // Handle Logout
   const handleLogout = async () => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const res = await fetch(`${apiUrl}/api/auth/logout`, {
+      const res = await fetch(`${API_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include"
       });
@@ -116,8 +114,7 @@ export default function DashboardPage() {
     setSettingsLoading(true);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const res = await fetch(`${apiUrl}/api/auth/credentials`, {
+      const res = await fetch(`${API_URL}/api/auth/credentials`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

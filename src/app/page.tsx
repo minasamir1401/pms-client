@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, ShieldCheck, AlertCircle, FileText, User, Heart, Activity, Upload, QrCode } from "lucide-react";
 import Link from "next/link";
+import API_URL from "@/config";
+
 
 interface Certificate {
   certificateId: string;
@@ -74,8 +76,7 @@ export default function SearchPage() {
     setCertificate(null);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-      const res = await fetch(`${apiUrl}/api/certificates/${code}`);
+      const res = await fetch(`${API_URL}/api/certificates/${code}`);
       if (res.ok) {
         const data = await res.json();
         if (data.qrCodeLabel && !data.qrCodeLabel.startsWith(prefix)) {
