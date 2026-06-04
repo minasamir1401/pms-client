@@ -31,6 +31,12 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok && data.success) {
+        // Save token in localStorage as fallback for cross-domain cookie issues
+        if (data.token) {
+          localStorage.setItem("admin_token", data.token);
+          // Also set a client-readable cookie as fallback
+          document.cookie = `admin_session=${data.token}; path=/; max-age=${60 * 60 * 24}; SameSite=None; Secure`;
+        }
         router.push("/dashboard");
         router.refresh();
       } else {
