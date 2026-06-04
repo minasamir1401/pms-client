@@ -292,19 +292,40 @@ export default function SearchPage() {
         <div className="absolute bottom-[-10%] left-[-10%] h-[50%] w-[60%] rounded-full bg-emerald-500/5 blur-[120px]" />
       </div>
 
-      {/* Header */}
-      <header className="relative z-10 border-b border-slate-200/80 bg-white/70 backdrop-blur-md sticky top-0 shadow-sm shadow-slate-100/50">
-        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-600 shadow-inner">
-              <ShieldCheck className="h-4.5 sm:h-5 sm:w-5 w-4.5" />
-            </div>
-            <div>
-              <h1 className="text-xs sm:text-base font-bold bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent leading-tight">
-                البوابة الرسمية للتحقق من الفحص الطبي قبل الزواج
-              </h1>
-              <p className="text-[9px] sm:text-[10px] text-slate-400">وزارة الصحة والسكان - جمهورية مصر العربية</p>
-            </div>
+      {/* Responsive Official Header */}
+      <header className="relative z-10 border-b border-slate-200 bg-white sticky top-0 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          {/* Right: Ministry of Health Logo */}
+          <div className="flex items-center justify-center shrink-0">
+            <a href="#">
+              <img 
+                src="/images/logo-ar-black.png" 
+                alt="وزارة الصحة والسكان" 
+                className="h-12 sm:h-16 w-auto object-contain"
+              />
+            </a>
+          </div>
+
+          {/* Middle: Campaign Title */}
+          <div className="text-center flex-grow py-1">
+            <h4 className="text-sm sm:text-base md:text-lg font-bold text-slate-800 leading-snug">
+              مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
+            </h4>
+          </div>
+
+          {/* Left: Campaign Logos */}
+          <div className="flex items-center justify-center gap-4 shrink-0">
+            <img 
+              src="/images/100Million.png" 
+              alt="100 مليون صحة" 
+              className="h-10 sm:h-14 w-auto object-contain"
+            />
+            <img 
+              src="/images/OncLogo.png" 
+              alt="Onc Logo" 
+              className="h-10 sm:h-14 w-auto object-contain"
+            />
           </div>
 
         </div>
