@@ -300,7 +300,7 @@ export default function SearchPage() {
           <div className="flex items-center justify-center shrink-0">
             <a href="#">
               <img 
-                src="/images/logo-ar-black.png" 
+                src="/moh-logo.svg" 
                 alt="وزارة الصحة والسكان" 
                 className="h-12 sm:h-16 w-auto object-contain"
                 onError={(e) => e.currentTarget.style.display = 'none'}
@@ -318,13 +318,13 @@ export default function SearchPage() {
           {/* Left: Campaign Logos */}
           <div className="flex items-center justify-center gap-4 shrink-0">
             <img 
-              src="/images/100Million.png" 
+              src="/images/100Million.svg" 
               alt="100 مليون صحة" 
               className="h-10 sm:h-14 w-auto object-contain"
               onError={(e) => e.currentTarget.style.display = 'none'}
             />
             <img 
-              src="/images/OncLogo.png" 
+              src="/images/OncLogo.svg" 
               alt="Onc Logo" 
               className="h-10 sm:h-14 w-auto object-contain"
               onError={(e) => e.currentTarget.style.display = 'none'}
