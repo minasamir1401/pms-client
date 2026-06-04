@@ -292,43 +292,29 @@ export default function SearchPage() {
         <div className="absolute bottom-[-10%] left-[-10%] h-[50%] w-[60%] rounded-full bg-emerald-500/5 blur-[120px]" />
       </div>
 
-      {/* Responsive Official Header */}
-      <header className="relative z-10 border-b border-slate-200 bg-white sticky top-0 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* Responsive Official Header based on provided layout */}
+      <header className="relative z-10 border-b border-slate-200 bg-white sticky top-0 shadow-sm" id="removeLayoutHeader">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-50">
           
-          {/* Right: Ministry of Health Logo */}
-          <div className="flex items-center justify-center shrink-0">
-            <a href="#">
-              <img 
-                src="/moh-logo.svg" 
-                alt="وزارة الصحة والسكان" 
-                className="h-12 sm:h-16 w-auto object-contain"
-                onError={(e) => e.currentTarget.style.display = 'none'}
-              />
+          <div className="flex-shrink-0">
+            <a className="navbar-brand" href="#">
+              <img className="nav-img h-12 sm:h-16 w-auto object-contain" src="/images/logo-ar-black.png" alt="شعار الوزارة" />
             </a>
           </div>
 
-          {/* Middle: Campaign Title */}
-          <div className="text-center flex-grow py-1">
-            <h4 className="text-sm sm:text-base md:text-lg font-bold text-slate-800 leading-snug">
+          <div className="site-name flex-grow text-center" id="sitename">
+            <h4 style={{ textAlign: 'center' }} className="text-sm sm:text-base md:text-lg font-bold text-slate-800 leading-snug">
               مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
             </h4>
           </div>
 
-          {/* Left: Campaign Logos */}
           <div className="flex items-center justify-center gap-4 shrink-0">
-            <img 
-              src="/images/100Million.svg" 
-              alt="100 مليون صحة" 
-              className="h-10 sm:h-14 w-auto object-contain"
-              onError={(e) => e.currentTarget.style.display = 'none'}
-            />
-            <img 
-              src="/images/OncLogo.svg" 
-              alt="Onc Logo" 
-              className="h-10 sm:h-14 w-auto object-contain"
-              onError={(e) => e.currentTarget.style.display = 'none'}
-            />
+            <div className="w-20 sm:w-24">
+              <img src="/images/100Million.png" alt="100 مليون صحة" style={{ width: '100%' }} />
+            </div>
+            <div className="w-20 sm:w-24">
+              <img src="/images/OncLogo.png" alt="Onc Logo" style={{ width: '100%' }} />
+            </div>
           </div>
 
         </div>
