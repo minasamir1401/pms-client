@@ -71,12 +71,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col items-center py-6 px-4 print:bg-white print:text-black print:p-0 print:m-0">
-      {/* Import Cairo Font and Print Settings */}
+      {/* Import Standard System Arabic Fonts and Print Settings */}
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-        
         body, html {
-          font-family: 'Cairo', sans-serif !important;
+          font-family: 'Simplified Arabic', 'Segoe UI', Tahoma, Arial, sans-serif !important;
+          color: #000000 !important;
         }
 
         .print-page {
@@ -85,6 +84,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           padding: 15mm 20mm;
           box-sizing: border-box;
           background-color: #ffffff;
+          color: #000000 !important;
         }
 
         @media print {
@@ -108,6 +108,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             padding: 15mm 20mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
+            color: #000000 !important;
           }
         }
         @page {
@@ -146,7 +147,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       <div className="print-page bg-white text-black shadow-xl flex flex-col justify-between" dir="rtl">
         <div>
           {/* Top Section: Photo Box & Header Information */}
-          <div className="flex justify-between items-center mb-6 pl-2" dir="rtl">
+          <div className="flex justify-between items-center mb-5 pl-2" dir="rtl">
             <div className="flex-1 flex justify-between items-center pl-8 text-xs font-bold text-black">
               <div>
                 <span>تاريخ اإلصدار : </span>
@@ -172,105 +173,105 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 1: Basic Information */}
-          <div className="mb-6">
-            <h3 className="text-[13px] font-bold text-black mb-3">البيانات األساسية</h3>
-            <div className="grid grid-cols-3 gap-y-2.5 text-[11px] leading-relaxed text-black">
+          <div className="mb-5">
+            <h3 className="text-[14px] font-bold text-black mb-3">البيانات األساسية</h3>
+            <div className="grid grid-cols-3 gap-y-2.5 text-[12px] leading-relaxed text-black">
               <div className="flex items-center">
-                <span className="font-bold">االسم : </span>
+                <span className="font-normal">االسم : </span>
                 <span className="font-bold mr-1">{certificate.fullName}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">الرقم القومى : </span>
+                <span className="font-normal">الرقم القومى : </span>
                 <span className="font-bold mr-1">{certificate.nationalId}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">النوع : </span>
-                <span className="mr-1">{certificate.gender}</span>
+                <span className="font-normal">النوع : </span>
+                <span className="font-bold mr-1">{certificate.gender}</span>
               </div>
 
               <div className="flex items-center">
-                <span className="font-bold">الجنسية : </span>
-                <span className="mr-1">{certificate.nationality}</span>
+                <span className="font-normal">الجنسية : </span>
+                <span className="font-bold mr-1">{certificate.nationality}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">السن : </span>
-                <span className="mr-1">{certificate.age}</span>
+                <span className="font-normal">السن : </span>
+                <span className="font-bold mr-1">{certificate.age}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">رقم الهاتف : </span>
-                <span className="mr-1">{certificate.phoneNumber}</span>
+                <span className="font-normal">رقم الهاتف : </span>
+                <span className="font-bold mr-1">{certificate.phoneNumber}</span>
               </div>
 
               <div className="flex items-center">
-                <span className="font-bold">العنوان بالبطاقة : </span>
-                <span className="mr-1">{certificate.idAddress}</span>
+                <span className="font-normal">العنوان بالبطاقة : </span>
+                <span className="font-bold mr-1">{certificate.idAddress}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">عنوان سكن الزوجية : </span>
-                <span className="mr-1">{certificate.maritalAddress || "-"}</span>
+                <span className="font-normal">عنوان سكن الزوجية : </span>
+                <span className="font-bold mr-1">{certificate.maritalAddress || "-"}</span>
               </div>
               <div></div>
             </div>
           </div>
 
           {/* Section 2: Medical Examinations */}
-          <div className="mb-6">
-            <h3 className="text-[13px] font-bold text-black mb-3">الفحوصات الطبية</h3>
-            <div className="grid grid-cols-3 gap-y-3 text-[11px] leading-relaxed text-black">
+          <div className="mb-5">
+            <h3 className="text-[14px] font-bold text-black mb-3">الفحوصات الطبية</h3>
+            <div className="grid grid-cols-3 gap-y-3 text-[12px] leading-relaxed text-black">
               <div className="flex items-center">
-                <span className="font-bold">الطول(سم) : </span>
+                <span className="font-normal">الطول(سم) : </span>
                 <span className="font-bold mr-1">{certificate.height}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">الوزن(كجم) : </span>
+                <span className="font-normal">الوزن(كجم) : </span>
                 <span className="font-bold mr-1">{certificate.weight}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">BMI : </span>
+                <span className="font-normal">BMI : </span>
                 <span className="font-bold mr-1">{certificate.bmi}</span>
               </div>
 
               <div className="flex items-center">
-                <span className="font-bold">RH : </span>
+                <span className="font-normal">RH : </span>
                 <span className="font-bold mr-1">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">فصيلة الدم : </span>
+                <span className="font-normal">فصيلة الدم : </span>
                 <span className="font-bold mr-1">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">Hb : </span>
+                <span className="font-normal">Hb : </span>
                 <span className="font-bold mr-1">{certificate.hb}</span>
               </div>
 
               <div className="flex items-center">
-                <span className="font-bold">HBs Ag : </span>
-                <span className="mr-1">{certificate.hbsAg}</span>
+                <span className="font-normal">HBs Ag : </span>
+                <span className="font-bold mr-1">{certificate.hbsAg}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">Anti-HIV : </span>
-                <span className="mr-1">{certificate.antiHiv}</span>
+                <span className="font-normal">Anti-HIV : </span>
+                <span className="font-bold mr-1">{certificate.antiHiv}</span>
               </div>
               <div className="flex items-center">
-                <span className="font-bold">Anti-HCV : </span>
-                <span className="mr-1">{certificate.antiHcv}</span>
+                <span className="font-normal">Anti-HCV : </span>
+                <span className="font-bold mr-1">{certificate.antiHcv}</span>
               </div>
 
               <div className="flex items-center">
-                <span className="font-bold">ضغط الدم : </span>
+                <span className="font-normal">ضغط الدم : </span>
                 <span className="font-bold mr-1">{certificate.bloodPressure}</span>
               </div>
               <div className="flex items-center col-span-2">
-                <span className="font-bold">نتيجة فحص السكر(العشوائى) : </span>
+                <span className="font-normal">نتيجة فحص السكر(العشوائى) : </span>
                 <span className="font-bold mr-1">{certificate.randomBloodSugar}</span>
               </div>
             </div>
           </div>
 
           {/* Section 3: Hb Electrophoresis */}
-          <div className="mb-6 text-left" dir="ltr">
+          <div className="mb-5 text-left" dir="ltr">
             <h4 className="text-[12px] font-bold text-black mb-3 inline-block border-b border-black pb-0.5">Hb Electrophoresis :</h4>
-            <div className="grid grid-cols-5 text-center text-[11px] text-black font-bold">
+            <div className="grid grid-cols-5 text-center text-[12px] text-black font-bold">
               <div>
                 <div>A : {certificate.hbA}%</div>
                 <div className="font-bold mt-1 text-black">Normal</div>
@@ -295,12 +296,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 4: Declaration Block */}
-          <div className="mb-6">
-            <h3 className="text-xs font-bold text-center text-black mb-3">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
+          <div className="mb-5">
+            <h3 className="text-[13px] font-bold text-center text-black mb-3">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
             
             <div className="flex justify-between items-center gap-4 text-black">
               {/* Signatures Columns */}
-              <div className="flex-1 grid grid-cols-2 gap-y-3 text-[11px] font-bold">
+              <div className="flex-1 grid grid-cols-2 gap-y-3 text-[12px] font-normal">
                 <div className="flex items-center">
                   <span>اسم الممرض/الممرضة : </span>
                   <span className="mr-1">--------------</span>
@@ -340,8 +341,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 5: Individual Consent Text */}
-          <div className="mb-6 border-t border-slate-200 pt-4 text-black">
-            <div className="flex justify-between text-[11px] font-bold mb-3">
+          <div className="mb-5 border-t border-slate-200 pt-4 text-black">
+            <div className="flex justify-between text-[12px] font-bold mb-3">
               <div>
                 <span>أقر أنا الموقع/الموقعه أدناه : </span>
                 <span>{certificate.fullName}</span>
@@ -352,13 +353,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               </div>
             </div>
 
-            <p className="text-[10px] text-justify leading-relaxed font-bold">
+            <p className="text-[11px] text-justify leading-relaxed font-bold">
               بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج األخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .
             </p>
           </div>
 
           {/* Section 6: Thumbprint & Partner Info */}
-          <div className="grid grid-cols-3 items-stretch gap-4 text-[11px] font-bold text-black border-t border-slate-200 pt-4">
+          <div className="grid grid-cols-3 items-stretch gap-4 text-[12px] font-normal text-black border-t border-slate-200 pt-4">
             {/* Column 1: Examining Person details */}
             <div className="flex flex-col justify-between py-2 space-y-4">
               <div className="flex items-center">
@@ -376,14 +377,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <div className="w-[64px] h-[64px] rounded-full border border-black flex items-center justify-center mb-1">
                 {/* Empty inside */}
               </div>
-              <span className="text-[10px]">بصمة اإلبهام</span>
+              <span className="text-[10px] font-bold">بصمة اإلبهام</span>
             </div>
 
             {/* Column 3: Partner details */}
             <div className="flex flex-col justify-between py-2 space-y-3">
               <div className="flex items-center">
                 <span>اسم الطرف الاخر (رباعى) : </span>
-                <span className="mr-1">{certificate.partnerName || "---------------"}</span>
+                <span className="font-bold mr-1">{certificate.partnerName || "---------------"}</span>
               </div>
               <div className="flex items-center">
                 <span>توقيع الطرف االخر : </span>
@@ -391,7 +392,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               </div>
               <div className="flex items-center">
                 <span>الرقم القومى للطرف االخر : </span>
-                <span className="font-mono mr-1">{certificate.partnerNationalId || "-------------"}</span>
+                <span className="font-bold font-mono mr-1">{certificate.partnerNationalId || "-------------"}</span>
               </div>
             </div>
           </div>
@@ -415,8 +416,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 </div>
               )}
             </div>
-            <span className="mt-1 font-mono font-bold text-[9px] text-slate-900 tracking-wider">
-              2026-{certificate.certificateId}
+            <span className="mt-1 font-mono font-bold text-[10px] tracking-wider">
+              {certificate.qrCodeLabel || `2026-${certificate.certificateId}`}
             </span>
           </div>
         </div>
