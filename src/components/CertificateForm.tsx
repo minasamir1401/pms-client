@@ -405,6 +405,9 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
               >
                 <option value="سلبي">سلبي (Negative)</option>
                 <option value="إيجابي">إيجابي (Positive)</option>
+                <option value="سالب">سالب</option>
+                <option value="موجب">موجب</option>
+                <option value="غير متفاعل">غير متفاعل</option>
               </select>
             </div>
             <div className="space-y-2">
@@ -416,6 +419,9 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
               >
                 <option value="سلبي">سلبي (Negative)</option>
                 <option value="إيجابي">إيجابي (Positive)</option>
+                <option value="سالب">سالب</option>
+                <option value="موجب">موجب</option>
+                <option value="غير متفاعل">غير متفاعل</option>
               </select>
             </div>
             <div className="space-y-2">
@@ -427,6 +433,9 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
               >
                 <option value="سلبي">سلبي (Negative)</option>
                 <option value="إيجابي">إيجابي (Positive)</option>
+                <option value="سالب">سالب</option>
+                <option value="موجب">موجب</option>
+                <option value="غير متفاعل">غير متفاعل</option>
               </select>
             </div>
             <div className="space-y-2">

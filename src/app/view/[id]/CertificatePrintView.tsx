@@ -209,11 +209,17 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <div className="grid grid-cols-3 gap-y-3 text-[13px] font-bold text-black">
             <div className="text-right">الطول(سم): <span className="font-semibold">{certificate.height}</span></div>
             <div className="text-center">الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
-            <div className="text-left">BMI: <span className="font-semibold">{certificate.bmi}</span></div>
+            <div className="text-left flex items-center justify-start gap-1" dir="ltr">
+              <span className="font-semibold">{certificate.bmi}</span>
+              <span>:BMI</span>
+            </div>
 
             <div className="text-right">RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
             <div className="text-center">فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
-            <div className="text-left">Hb: <span className="font-semibold">{certificate.hb}</span></div>
+            <div className="text-left flex items-center justify-start gap-1" dir="ltr">
+              <span className="font-semibold">{certificate.hb}</span>
+              <span>:Hb</span>
+            </div>
 
             <div className="text-right">HBs Ag : <span className="font-semibold">{certificate.hbsAg}</span></div>
             <div className="text-center">Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
@@ -227,7 +233,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
         {/* Section 3: Hb Electrophoresis */}
         <div className="mb-4">
-          <h4 className="text-[13px] font-bold text-black mb-2 text-right underline underline-offset-2" dir="ltr">Hb Electrophoresis :</h4>
+          <h4 className="text-[13px] font-bold text-black mb-2 text-left underline underline-offset-2" dir="ltr">Hb Electrophoresis :</h4>
           <div className="flex justify-between items-center text-center text-[13px] font-bold text-black px-12" dir="ltr">
             <div>
               <div>A : {certificate.hbA} %</div>

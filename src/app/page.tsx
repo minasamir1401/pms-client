@@ -41,7 +41,7 @@ interface Certificate {
 }
 
 export default function SearchPage() {
-  const [yearPrefix, setYearPrefix] = useState("2026");
+  const [yearPrefix, setYearPrefix] = useState("");
   const [certCode, setCertCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [scanLoading, setScanLoading] = useState(false);
@@ -297,25 +297,25 @@ export default function SearchPage() {
         className="relative z-10 border-b border-sky-100 bg-gradient-to-r from-sky-50 via-teal-50 to-blue-50 sticky top-0 shadow-sm w-full" 
         id="removeLayoutHeader"
       >
-        <div className="w-full px-4 sm:px-8 py-2 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-4 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-6">
           
           <div className="flex-shrink-0">
             <a className="navbar-brand" href="#">
-              <img className="nav-img h-12 sm:h-16 w-auto object-contain" src="/images/logo-ar-black.png" alt="شعار الوزارة" />
+              <img className="nav-img h-16 sm:h-20 md:h-24 w-auto object-contain" src="/images/logo-ar-black.png" alt="شعار الوزارة" />
             </a>
           </div>
 
           <div className="site-name flex-grow text-center" id="sitename">
-            <h4 style={{ textAlign: 'center' }} className="text-sm sm:text-base md:text-lg font-bold text-slate-800 leading-snug">
+            <h4 style={{ textAlign: 'center' }} className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-slate-800 leading-snug">
               مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
             </h4>
           </div>
 
-          <div className="flex items-center justify-center gap-4 shrink-0">
-            <div className="w-20 sm:w-24">
+          <div className="flex items-center justify-center gap-5 sm:gap-6 shrink-0">
+            <div className="w-24 sm:w-28 md:w-32">
               <img src="/images/100Million.png" alt="100 مليون صحة" style={{ width: '100%' }} />
             </div>
-            <div className="w-20 sm:w-24">
+            <div className="w-24 sm:w-28 md:w-32">
               <img src="/images/OncLogo.png" alt="Onc Logo" style={{ width: '100%' }} />
             </div>
           </div>
