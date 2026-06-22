@@ -26,6 +26,11 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
   const [phoneNumber, setPhoneNumber] = useState(initialData?.phoneNumber || "");
   const [maritalAddress, setMaritalAddress] = useState(initialData?.maritalAddress || "");
   const [idAddress, setIdAddress] = useState(initialData?.idAddress || "");
+  const [issueDate, setIssueDate] = useState(
+    initialData?.issueDate
+      ? new Date(initialData.issueDate).toLocaleDateString("en-CA")
+      : new Date().toLocaleDateString("en-CA")
+  );
 
   // Medical Tests
   const [height, setHeight] = useState(initialData?.height?.toString() || "");
@@ -147,6 +152,7 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
       hbS: parseFloat(hbS) || 0,
       partnerName: partnerName || null,
       partnerNationalId: partnerNationalId || null,
+      issueDate: issueDate || null,
     };
 
     try {
@@ -298,6 +304,16 @@ export default function CertificateForm({ initialData, onSuccess, onCancel }: Ce
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full rounded-lg border border-slate-200 bg-white py-2.5 px-3.5 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-slate-800 placeholder-slate-400 shadow-sm text-left"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-semibold text-slate-600">تاريخ الإصدار *</label>
+              <input
+                type="date"
+                required
+                value={issueDate}
+                onChange={(e) => setIssueDate(e.target.value)}
+                className="w-full rounded-lg border border-slate-200 bg-white py-2.5 px-3.5 text-sm outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 text-slate-800 shadow-sm text-right"
               />
             </div>
             <div className="space-y-2 md:col-span-2">
