@@ -152,25 +152,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
       {/* Official A4 Layout Replication */}
       <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
-        {/* Topmost Row: Logo, Title, Photo Box */}
-        <div className="flex justify-between items-center mb-4 mt-1.5 relative">
-          {/* Right: Logo */}
-          <div className="flex flex-col items-center w-[200px] relative -top-[35px]">
-            <img src="/images/Ministry of Health and population (5).png" alt="شعار وزارة الصحة" className="w-[200px] h-[200px] object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
-            <div className="hidden w-[200px] h-[200px] border-2 border-dashed border-gray-300 flex items-center justify-center text-[10px] text-center text-gray-400 font-bold">
-              شعار<br />الوزارة
-            </div>
-          </div>
-
-          {/* Middle: Title Rectangle */}
-          <div className="absolute left-1/2 -translate-x-1/2">
-            <div className="border-2 border-black rounded-[12px] py-2 w-[280px] text-[21px] font-bold text-black text-center shadow-sm relative -top-[30px]">
-              شهادة صحية لراغبي الزواج
-            </div>
-          </div>
-
+        {/* Topmost Row: Photo Box */}
+        <div className="flex justify-between items-center mb-4 mt-1.5">
+          <div></div>
           {/* Left: Photo Box */}
-          <div className="flex flex-col items-center relative top-[20px] left-[100px]">
+          <div className="flex flex-col items-center">
             <div className="border border-black flex items-center justify-center text-[12px] text-black font-bold mb-1" style={{ width: '21mm', height: '26mm' }}>
               <span dir="ltr">4*6</span>
             </div>
