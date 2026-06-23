@@ -182,11 +182,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <div className="grid grid-cols-3 gap-y-2 text-[14.5px] font-bold text-black">
             <div className="text-right">الاسم : <span className="font-semibold">{certificate.fullName}</span></div>
             <div className="text-center">الرقم القومى : <span className="font-semibold">{certificate.nationalId}</span></div>
-            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '50px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
+            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '100px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
 
             <div className="text-right">الجنسية : <span className="font-semibold">{certificate.nationality}</span></div>
             <div className="text-center">السن : <span className="font-semibold">{certificate.age}</span></div>
-            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '50px' }}>رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
+            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '100px' }}>رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
 
             <div className="text-right">العنوان بالبطاقة : <span className="font-semibold">{certificate.idAddress}</span></div>
             <div className="text-center">عنوان سكن الزوجية : <span className="font-semibold">{certificate.maritalAddress || "-"}</span></div>
