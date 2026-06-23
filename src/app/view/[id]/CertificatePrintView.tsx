@@ -58,12 +58,17 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   const formatDate = (dateStr: string) => {
     try {
+      if (!dateStr) return "";
+      const match = dateStr.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if (match) {
+        return `${match[3]}-${match[2]}-${match[1]}`;
+      }
       const date = new Date(dateStr);
-      return date.toLocaleDateString("en-CA", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
+      if (isNaN(date.getTime())) return dateStr;
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`;
     } catch (e) {
       return dateStr;
     }
@@ -177,11 +182,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <div className="grid grid-cols-3 gap-y-2 text-[13px] font-bold text-black">
             <div className="text-right">الاسم : <span className="font-semibold">{certificate.fullName}</span></div>
             <div className="text-center">الرقم القومى : <span className="font-semibold">{certificate.nationalId}</span></div>
-            <div className="text-right pr-[7px]">النوع : <span className="font-semibold">{certificate.gender}</span></div>
+            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '60px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
 
             <div className="text-right">الجنسية : <span className="font-semibold">{certificate.nationality}</span></div>
             <div className="text-center">السن : <span className="font-semibold">{certificate.age}</span></div>
-            <div className="text-right pr-[7px]">رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
+            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '60px' }}>رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
 
             <div className="text-right">العنوان بالبطاقة : <span className="font-semibold">{certificate.idAddress}</span></div>
             <div className="text-center">عنوان سكن الزوجية : <span className="font-semibold">{certificate.maritalAddress || "-"}</span></div>
@@ -194,25 +199,25 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <h3 className="text-[15px] font-bold text-black mb-2">الفحوصات الطبية</h3>
           <div className="grid grid-cols-3 gap-y-2 text-[13px] font-bold text-black">
             <div className="text-right">الطول(سم): <span className="font-semibold">{certificate.height}</span></div>
-            <div className="text-center">الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '30px' }}>الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
             <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
               <span className="font-semibold">{certificate.bmi}</span>
               <span>:BMI</span>
             </div>
 
             <div className="text-right">RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
-            <div className="text-center">فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '30px' }}>فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
             <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
               <span className="font-semibold">{certificate.hb}</span>
               <span>:Hb</span>
             </div>
 
             <div className="text-right">HBs Ag : <span className="font-semibold">{certificate.hbsAg}</span></div>
-            <div className="text-center">Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '30px' }}>Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
             <div className="text-right pr-[7px]">Anti-HCV : <span className="font-semibold">{certificate.antiHcv}</span></div>
 
             <div className="text-right">ضغط الدم : <span className="font-semibold">{certificate.bloodPressure}</span></div>
-            <div className="text-center">نتيجة فحص السكر(العشوائى) : <span className="font-semibold">{certificate.randomBloodSugar}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '30px' }}>نتيجة فحص السكر(العشوائى) : <span className="font-semibold">{certificate.randomBloodSugar}</span></div>
             <div></div>
           </div>
         </div>
@@ -309,7 +314,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         <div className="flex justify-between items-end text-black pt-2 mt-2">
           <div></div>
           <div className="flex flex-col items-center mb-[150px] ml-[28px]">
-            <div className="bg-white p-1">
+            <div className="bg-white p-1 border border-black">
               {currentUrl ? (
                 <QRCodeSVG value={currentUrl} size={70} />
               ) : (
