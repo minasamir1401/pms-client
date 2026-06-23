@@ -172,8 +172,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {/* Second Row: Header Information directly above Basic Info */}
         <div className="grid grid-cols-3 gap-2 text-[14px] font-bold text-black mb-1.5">
           <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
-          <div className="text-center">اسم الوحدة: {certificate.unitName}</div>
-          <div className="text-right pr-[7px]">المحافظة: {certificate.governorate}</div>
+          <div className="text-center" style={{ position: 'relative', left: '30px' }}>اسم الوحدة: {certificate.unitName}</div>
+          <div className="text-right pr-[7px]" style={{ position: 'relative', left: '30px' }}>المحافظة: {certificate.governorate}</div>
         </div>
 
         {/* Section 1: Basic Information */}
