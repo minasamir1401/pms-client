@@ -182,11 +182,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <div className="grid grid-cols-3 gap-y-2 text-[13px] font-bold text-black">
             <div className="text-right">الاسم : <span className="font-semibold">{certificate.fullName}</span></div>
             <div className="text-center">الرقم القومى : <span className="font-semibold">{certificate.nationalId}</span></div>
-            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '60px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
+            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '20px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
 
             <div className="text-right">الجنسية : <span className="font-semibold">{certificate.nationality}</span></div>
             <div className="text-center">السن : <span className="font-semibold">{certificate.age}</span></div>
-            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '60px' }}>رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
+            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '20px' }}>رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
 
             <div className="text-right">العنوان بالبطاقة : <span className="font-semibold">{certificate.idAddress}</span></div>
             <div className="text-center">عنوان سكن الزوجية : <span className="font-semibold">{certificate.maritalAddress || "-"}</span></div>
@@ -199,25 +199,25 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <h3 className="text-[15px] font-bold text-black mb-2">الفحوصات الطبية</h3>
           <div className="grid grid-cols-3 gap-y-2 text-[13px] font-bold text-black">
             <div className="text-right">الطول(سم): <span className="font-semibold">{certificate.height}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '30px' }}>الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '15px' }}>الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
             <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
               <span className="font-semibold">{certificate.bmi}</span>
               <span>:BMI</span>
             </div>
 
             <div className="text-right">RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '30px' }}>فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '15px' }}>فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
             <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
               <span className="font-semibold">{certificate.hb}</span>
               <span>:Hb</span>
             </div>
 
             <div className="text-right">HBs Ag : <span className="font-semibold">{certificate.hbsAg}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '30px' }}>Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '15px' }}>Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
             <div className="text-right pr-[7px]">Anti-HCV : <span className="font-semibold">{certificate.antiHcv}</span></div>
 
             <div className="text-right">ضغط الدم : <span className="font-semibold">{certificate.bloodPressure}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '30px' }}>نتيجة فحص السكر(العشوائى) : <span className="font-semibold">{certificate.randomBloodSugar}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '15px' }}>نتيجة فحص السكر(العشوائى) : <span className="font-semibold">{certificate.randomBloodSugar}</span></div>
             <div></div>
           </div>
         </div>
@@ -314,7 +314,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         <div className="flex justify-between items-end text-black pt-2 mt-2">
           <div></div>
           <div className="flex flex-col items-center mb-[150px] ml-[28px]">
-            <div className="bg-white p-1 border border-black">
+            <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
               {currentUrl ? (
                 <QRCodeSVG value={currentUrl} size={70} />
               ) : (
