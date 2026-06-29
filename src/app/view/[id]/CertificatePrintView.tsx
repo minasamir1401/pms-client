@@ -161,7 +161,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         <div className="flex justify-between items-center mb-2 mt-1">
           <div></div>
           {/* Left: Photo Box */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center ml-[60px]">
             <div className="border border-black flex items-center justify-center text-[13.5px] text-black font-bold mb-1" style={{ width: '21mm', height: '26mm' }}>
               <span dir="ltr">4*6</span>
             </div>
@@ -313,7 +313,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {/* Footer Block */}
         <div className="flex justify-between items-end text-black pt-2 mt-2">
           <div></div>
-          <div className="flex flex-col items-center mb-[50px] ml-[88px]">
+          <div className="flex flex-col items-center mb-[370px] ml-[88px]">
             <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
               {currentUrl ? (
                 <QRCodeSVG value={currentUrl} size={70} />
