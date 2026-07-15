@@ -205,8 +205,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <span>:BMI</span>
             </div>
 
-            <div className="text-right">RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '10px' }}>فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
+            <div className="text-right">فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
+            <div className="text-center" style={{ position: 'relative', left: '10px' }}>RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
             <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
               <span className="font-semibold">{certificate.hb}</span>
               <span>:Hb</span>
@@ -252,17 +252,20 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {/* Section 4: Declaration Block */}
         <div className="mb-1">
           <h3 className="text-[16px] font-bold text-black mb-0.5 text-right pr-[5%]">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
+          <p className="text-[11px] font-bold text-black mb-1.5 text-right pr-[5%] leading-none">
+            للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg
+          </p>
 
           <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
             <div className="flex-1 grid grid-cols-2 gap-y-0.5 text-[14px] font-bold">
               <div className="text-right">اسم الممرض/الممرضة : <span className="font-normal text-gray-400">--------------</span></div>
-              <div className="text-right pr-16">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+              <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
 
               <div className="text-right">اسم الطبيب/الطبيبة : <span className="font-normal text-gray-400">-----------------</span></div>
-              <div className="text-right pr-16">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+              <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
 
               <div className="text-right">مدير الوحدة : <span className="font-normal text-gray-400">-------------------------</span></div>
-              <div className="text-right pr-16">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+              <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
             </div>
 
             <div className="flex flex-col items-center ml-8">
@@ -278,14 +281,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <div>أقر أنا الموقع/الموقعه أدناه : <span className="font-bold">{certificate.fullName}</span></div>
             <div className="pl-16">رقم القومى : <span className="font-mono">{certificate.nationalId}</span></div>
           </div>
-          <p className="text-[13.5px] font-bold text-black leading-snug text-justify">
+          <p className="text-[12.5px] font-bold text-black leading-snug text-justify tracking-tight" style={{ wordSpacing: "-0.4px" }}>
             بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .
           </p>
         </div>
 
         {/* Section 6: Thumbprint & Partner Info */}
         <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[14px] font-bold text-black mt-1 mb-0.5 max-w-[90%] mx-auto">
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-2 relative -top-[15px]">
             <div>الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
             <div>التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
           </div>
@@ -302,18 +305,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
         </div>
 
-        {/* Validity Text */}
-        <div className="text-[13.5px] font-bold text-black mt-2 mb-1 text-right">
-          *هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار
-        </div>
-
-        {/* Spacer to push footer to bottom */}
-        <div className="flex-grow"></div>
-
         {/* Footer Block */}
-        <div className="flex justify-between items-end text-black pt-2 mt-2">
-          <div></div>
-          <div className="flex flex-col items-center mb-[370px] ml-[88px]">
+        <div className="flex justify-between items-end text-black pt-2 mt-2 max-w-[90%] mx-auto w-full">
+          <div className="text-[13.5px] font-bold text-black text-right pb-1 relative -top-[85px]">
+            *هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار
+          </div>
+          <div className="flex flex-col items-center ml-[88px]">
             <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
               {currentUrl ? (
                 <QRCodeSVG value={currentUrl} size={70} />
@@ -328,6 +325,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </span>
           </div>
         </div>
+
+        {/* Spacer to push footer to bottom */}
+        <div className="flex-grow"></div>
 
       </div>
     </div>
