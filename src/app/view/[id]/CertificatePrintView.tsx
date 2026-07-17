@@ -45,6 +45,23 @@ interface CertificatePrintViewProps {
 
 export default function CertificatePrintView({ certificate }: CertificatePrintViewProps) {
   const [currentUrl, setCurrentUrl] = useState("");
+  const [editedCert, setEditedCert] = useState(certificate);
+  const [isEditingText, setIsEditingText] = useState(false);
+  const [fontSize, setFontSize] = useState(12.5);
+  const [lineHeight, setLineHeight] = useState(1.2);
+  const [paddingX, setPaddingX] = useState(12);
+  const [paddingY, setPaddingY] = useState(6);
+  const [qrSize, setQrSize] = useState(45);
+
+  const [consentText, setConsentText] = useState(
+    "بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها ."
+  );
+  const [hotlineText, setHotlineText] = useState(
+    "للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg"
+  );
+  const [validityText, setValidityText] = useState(
+    "*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار"
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -74,8 +91,37 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     }
   };
 
+  const renderEditableField = (
+    key: keyof Certificate,
+    type: "text" | "number" = "text",
+    className = "font-semibold",
+    widthClass = "w-full max-w-[140px]"
+  ) => {
+    const val = editedCert[key];
+    if (!isEditingText) {
+      return <span className={className}>{val !== null ? val : "-"}</span>;
+    }
+
+    return (
+      <input
+        type={type}
+        value={val !== null ? val : ""}
+        onChange={(e) => {
+          let value: any = e.target.value;
+          if (type === "number") {
+            value = e.target.value === "" ? 0 : parseFloat(e.target.value);
+            if (isNaN(value)) value = 0;
+          }
+          setEditedCert({ ...editedCert, [key]: value });
+        }}
+        className={`bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] inline-block ${widthClass}`}
+        dir="rtl"
+      />
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col items-center py-4 px-4 print:bg-white print:text-black print:p-0 print:m-0">
+    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col lg:flex-row print:bg-white print:text-black print:p-0 print:m-0 w-full">
       <style jsx global>{`
         body, html {
           font-family: Arial, 'Segoe UI', Tahoma, sans-serif !important;
@@ -85,12 +131,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         .print-page {
           width: 210mm;
           height: 295mm; /* slightly less than 297mm to prevent overflow */
-          padding: 6mm 12mm;
+          padding: ${paddingY}mm ${paddingX}mm;
           box-sizing: border-box;
           background-color: #ffffff;
           color: #000000 !important;
-          font-size: 12.5px;
-          line-height: 1.2;
+          font-size: ${fontSize}px;
+          line-height: ${lineHeight};
           overflow: hidden;
         }
 
@@ -113,7 +159,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             box-shadow: none !important;
             border: none !important;
             margin: 0 !important;
-            padding: 6mm 12mm !important;
+            padding: ${paddingY}mm ${paddingX}mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
@@ -130,206 +176,514 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         }
       `}</style>
 
-      {/* Admin Action Bar (Hidden during print) */}
-      <div className="no-print w-full max-w-4xl mb-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900 text-slate-100 p-4 rounded-xl border border-slate-800 shadow-md">
-        <div className="flex items-center gap-2">
-          <CheckCircle className="h-5 w-5 text-teal-400" />
-          <span className="text-xs font-semibold">
-            معاينة الشهادة الطبية الرسمية قبل الطباعة. تم تقليل المسافات بقوة لتظهر في صفحة واحدة فقط.
-          </span>
+      {/* Control Panel Sidebar (Hidden during print) */}
+      <div className="no-print w-full lg:w-80 bg-slate-900 text-slate-100 border-b lg:border-r border-slate-800 p-6 flex flex-col gap-5 shrink-0 select-none font-sans" dir="rtl">
+        <div>
+          <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-1">
+            <span className="p-1.5 bg-teal-500/10 text-teal-400 rounded-lg">⚙️</span>
+            لوحة تحكم الطباعة
+          </h2>
+          <p className="text-xs text-slate-400">تحكم كامل في مظهر ومحتوى الشهادة قبل الطباعة</p>
         </div>
-        <div className="flex items-center gap-3">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 py-1.5 px-4 text-xs font-semibold text-slate-200 hover:text-white transition"
-          >
-            <ArrowRight className="h-4 w-4" />
-            لوحة التحكم
-          </Link>
+
+        <hr className="border-slate-800" />
+
+        {/* Text Editing Toggle */}
+        <div className="flex items-center justify-between bg-slate-800/40 p-3 rounded-lg border border-slate-800/80">
+          <span className="text-xs font-semibold text-slate-300">تعديل نصوص الشهادة</span>
           <button
-            onClick={handlePrint}
-            className="flex items-center gap-1.5 rounded-lg bg-teal-500 py-1.5 px-5 text-xs font-bold text-slate-950 hover:bg-teal-400 transition"
+            onClick={() => setIsEditingText(!isEditingText)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${
+              isEditingText ? "bg-teal-500" : "bg-slate-700"
+            }`}
           >
-            <Printer className="h-4 w-4" />
-            طباعة (Ctrl+P)
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
+                isEditingText ? "-translate-x-6" : "-translate-x-1"
+              }`}
+            />
+          </button>
+        </div>
+
+        {/* Sliders */}
+        <div className="flex flex-col gap-4">
+          <h3 className="text-xs font-bold text-slate-400 tracking-wider uppercase">أبعاد وحجم الخطوط</h3>
+          
+          {/* Font Size */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">حجم الخط الرئيسي</span>
+              <span className="text-teal-400 font-mono">{fontSize}px</span>
+            </div>
+            <input
+              type="range"
+              min="10"
+              max="18"
+              step="0.5"
+              value={fontSize}
+              onChange={(e) => setFontSize(parseFloat(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Line Height */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">المسافة بين السطور</span>
+              <span className="text-teal-400 font-mono">{lineHeight}</span>
+            </div>
+            <input
+              type="range"
+              min="1.0"
+              max="2.0"
+              step="0.05"
+              value={lineHeight}
+              onChange={(e) => setLineHeight(parseFloat(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Padding Y */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">الهامش العلوي والسفلي</span>
+              <span className="text-teal-400 font-mono">{paddingY}mm</span>
+            </div>
+            <input
+              type="range"
+              min="2"
+              max="20"
+              step="1"
+              value={paddingY}
+              onChange={(e) => setPaddingY(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Padding X */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">الهامش الجانبي (يمين/يسار)</span>
+              <span className="text-teal-400 font-mono">{paddingX}mm</span>
+            </div>
+            <input
+              type="range"
+              min="5"
+              max="25"
+              step="1"
+              value={paddingX}
+              onChange={(e) => setPaddingX(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* QR Size */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">حجم الباركود (QR Code)</span>
+              <span className="text-teal-400 font-mono">{qrSize}px</span>
+            </div>
+            <input
+              type="range"
+              min="30"
+              max="90"
+              step="5"
+              value={qrSize}
+              onChange={(e) => setQrSize(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+        </div>
+
+        <hr className="border-slate-800" />
+
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-2 mt-auto">
+          <button
+            onClick={() => {
+              setFontSize(12.5);
+              setLineHeight(1.2);
+              setPaddingX(12);
+              setPaddingY(6);
+              setQrSize(45);
+              setIsEditingText(false);
+              setEditedCert(certificate);
+              setConsentText("بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .");
+              setHotlineText("للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg");
+              setValidityText("*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار");
+            }}
+            className="w-full py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition text-center"
+          >
+            إعادة ضبط القيم الافتراضية
           </button>
         </div>
       </div>
 
-      {/* Official A4 Layout Replication */}
-      <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
-        {/* Topmost Row: Photo Box */}
-        <div className="flex justify-between items-center mb-1 mt-0.5">
-          <div></div>
-          {/* Left: Photo Box */}
-          <div className="flex flex-col items-center ml-[60px]">
-            <div className="border border-black flex items-center justify-center text-[12px] text-black font-bold mb-0.5" style={{ width: '19mm', height: '24mm' }}>
-              <span dir="ltr">4*6</span>
-            </div>
-            <span className="text-[11.5px] text-black font-bold">ختم شعار الجمهورية</span>
-          </div>
-        </div>
-
-        {/* Second Row: Header Information directly above Basic Info */}
-        <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black mb-0.5 max-w-[90%] mx-auto">
-          <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
-          <div className="text-center" style={{ position: 'relative', left: '10px' }}>اسم الوحدة: {certificate.unitName}</div>
-          <div className="text-right pr-[7px]" style={{ position: 'relative', left: '10px' }}>المحافظة: {certificate.governorate}</div>
-        </div>
-
-        {/* Section 1: Basic Information */}
-        <div className="mb-0.5">
-          <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">البيانات الأساسية</h3>
-          <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
-            <div className="text-right">الاسم : <span className="font-semibold">{certificate.fullName}</span></div>
-            <div className="text-center">الرقم القومى : <span className="font-semibold">{certificate.nationalId}</span></div>
-            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '30px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
-
-            <div className="text-right">الجنسية : <span className="font-semibold">{certificate.nationality}</span></div>
-            <div className="text-center">السن : <span className="font-semibold">{certificate.age}</span></div>
-            <div className="text-right pr-[7px]" style={{ position: 'relative', right: '30px' }}>رقم الهاتف : <span className="font-semibold">{certificate.phoneNumber}</span></div>
-
-            <div className="text-right">العنوان بالبطاقة : <span className="font-semibold">{certificate.idAddress}</span></div>
-            <div className="text-center">عنوان سكن الزوجية : <span className="font-semibold">{certificate.maritalAddress || "-"}</span></div>
-            <div></div>
-          </div>
-        </div>
-
-        {/* Section 2: Medical Examinations */}
-        <div className="mb-0.5">
-          <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">الفحوصات الطبية</h3>
-          <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
-            <div className="text-right">الطول(سم): <span className="font-semibold">{certificate.height}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '10px' }}>الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
-            <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
-              <span className="font-semibold">{certificate.bmi}</span>
-              <span>:BMI</span>
-            </div>
-
-            <div className="text-right">فصيلة الدم : <span className="font-semibold">{certificate.bloodType}{certificate.rh === "+" ? "+" : certificate.rh === "-" ? "-" : ""}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '10px' }}>RH : <span className="font-semibold">{certificate.rh === "+" || certificate.rh === "إيجابي" ? "إيجابي" : certificate.rh === "-" || certificate.rh === "سالب" ? "سالب" : certificate.rh}</span></div>
-            <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
-              <span className="font-semibold">{certificate.hb}</span>
-              <span>:Hb</span>
-            </div>
-
-            <div className="text-right">HBs Ag : <span className="font-semibold">{certificate.hbsAg}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '10px' }}>Anti-HIV : <span className="font-semibold">{certificate.antiHiv}</span></div>
-            <div className="text-right pr-[7px]">Anti-HCV : <span className="font-semibold">{certificate.antiHcv}</span></div>
-
-            <div className="text-right">ضغط الدم : <span className="font-semibold">{certificate.bloodPressure}</span></div>
-            <div className="text-center" style={{ position: 'relative', left: '10px' }}>نتيجة فحص السكر(العشوائى) : <span className="font-semibold">{certificate.randomBloodSugar}</span></div>
-            <div></div>
-          </div>
-        </div>
-
-        {/* Section 3: Hb Electrophoresis */}
-        <div className="mb-0.5">
-          <h4 className="text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%]" dir="ltr">Hb Electrophoresis :</h4>
-          <div className="flex justify-between items-center text-center text-[12px] font-bold text-black max-w-[85%] mx-auto pl-[50px] pr-[28px]" dir="ltr">
-            <div>
-              <div>A : {certificate.hbA} %</div>
-              <div className="mt-0.5">Normal</div>
-            </div>
-            <div>
-              <div>F : {certificate.hbF} %</div>
-              <div className="mt-0.5">Normal</div>
-            </div>
-            <div>
-              <div>A2 : {certificate.hbA2} %</div>
-              <div className="mt-0.5">Normal</div>
-            </div>
-            <div>
-              <div>C : {certificate.hbC} %</div>
-              <div className="mt-0.5">Normal</div>
-            </div>
-            <div>
-              <div>S : {certificate.hbS} %</div>
-              <div className="mt-0.5">Normal</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Section 4: Declaration Block */}
-        <div className="mb-0.5">
-          <h3 className="text-[14px] font-bold text-black mb-0 text-right pr-[5%]">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
-          <p className="text-[9.5px] font-bold text-black mb-0.5 text-right pr-[5%] leading-none">
-            للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg
-          </p>
-
-          <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
-            <div className="flex-1 grid grid-cols-2 gap-y-0.5 text-[12px] font-bold">
-              <div className="text-right">اسم الممرض/الممرضة : <span className="font-normal text-gray-400">--------------</span></div>
-              <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
-
-              <div className="text-right">اسم الطبيب/الطبيبة : <span className="font-normal text-gray-400">-----------------</span></div>
-              <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
-
-              <div className="text-right">مدير الوحدة : <span className="font-normal text-gray-400">-------------------------</span></div>
-              <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
-            </div>
-
-            <div className="flex flex-col items-center ml-8">
-              <div className="w-[65px] h-[65px] rounded-full border border-black mb-1"></div>
-              <span className="text-[11.5px] font-bold">ختم شعار الجمهورية</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Section 5: Individual Consent Text */}
-        <div className="mb-0.5 max-w-[90%] mx-auto">
-          <div className="flex justify-between items-center text-[12.5px] font-bold text-black mb-0">
-            <div>أقر أنا الموقع/الموقعه أدناه : <span className="font-bold">{certificate.fullName}</span></div>
-            <div className="pl-16">رقم القومى : <span className="font-mono">{certificate.nationalId}</span></div>
-          </div>
-          <p className="text-[11px] font-bold text-black leading-snug text-justify tracking-tight" style={{ wordSpacing: "-0.4px" }}>
-            بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .
-          </p>
-        </div>
-
-        {/* Section 6: Thumbprint & Partner Info */}
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black mt-0.5 mb-0.5 max-w-[90%] mx-auto">
-          <div className="flex flex-col space-y-1.5 relative -top-[10px]">
-            <div>الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
-            <div>التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
-          </div>
-
-          <div className="flex flex-col items-center justify-center border-r-2 border-l-2 border-slate-300 px-6 py-1 h-full">
-            <div className="w-[55px] h-[55px] rounded-full border border-black mb-1"></div>
-            <span className="text-[11.5px] font-bold">بصمة الإبهام</span>
-          </div>
-
-          <div className="flex flex-col space-y-1.5 pr-6">
-            <div>اسم الطرف الاخر(رباعى) : <span className="font-bold">{certificate.partnerName || "---------------"}</span></div>
-            <div>توقيع الطرف الاخر : <span className="font-normal text-gray-400">--------------------</span></div>
-            <div>الرقم القومى للطرف الاخر : <span className={certificate.partnerNationalId ? "font-bold font-mono" : "font-normal text-gray-400"}>{certificate.partnerNationalId || "------------"}</span></div>
-          </div>
-        </div>
-
-        {/* Footer Block */}
-        <div className="flex justify-between items-end text-black pt-1 mt-1 max-w-[90%] mx-auto w-full">
-          <div className="text-[11.5px] font-bold text-black text-right pb-1 relative -top-[52px]">
-            *هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار
-          </div>
-          <div className="flex flex-col items-center ml-[88px]">
-            <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
-              {currentUrl ? (
-                <QRCodeSVG value={currentUrl} size={45} />
-              ) : (
-                <div className="h-[45px] w-[45px] bg-slate-100 flex items-center justify-center text-[10px] text-slate-400">
-                  QR
-                </div>
-              )}
-            </div>
-            <span className="mt-0.5 font-bold text-[11px]">
-              {certificate.qrCodeLabel || `2026-${certificate.certificateId}`}
+      {/* Main Preview Area */}
+      <div className="flex-grow flex flex-col items-center py-6 px-4 overflow-auto print:p-0 print:m-0 print:block">
+        {/* Admin Action Bar (Hidden during print) */}
+        <div className="no-print w-full max-w-[210mm] mb-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900 text-slate-100 p-4 rounded-xl border border-slate-800 shadow-md">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="h-5 w-5 text-teal-400" />
+            <span className="text-xs font-semibold">
+              معاينة الشهادة الطبية الرسمية قبل الطباعة. استخدم اللوحة الجانبية للتحكم الكامل.
             </span>
           </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800 py-1.5 px-4 text-xs font-semibold text-slate-200 hover:text-white transition"
+            >
+              <ArrowRight className="h-4 w-4" />
+              لوحة التحكم
+            </Link>
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-1.5 rounded-lg bg-teal-500 py-1.5 px-5 text-xs font-bold text-slate-950 hover:bg-teal-400 transition"
+            >
+              <Printer className="h-4 w-4" />
+              طباعة (Ctrl+P)
+            </button>
+          </div>
         </div>
 
-        {/* Spacer to push footer to bottom */}
-        <div className="flex-grow"></div>
+        {/* Official A4 Layout Replication */}
+        <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
+          {/* Topmost Row: Photo Box */}
+          <div className="flex justify-between items-center mb-1 mt-0.5">
+            <div></div>
+            {/* Left: Photo Box */}
+            <div className="flex flex-col items-center ml-[60px]">
+              <div className="border border-black flex items-center justify-center text-[12px] text-black font-bold mb-0.5" style={{ width: '19mm', height: '24mm' }}>
+                <span dir="ltr">4*6</span>
+              </div>
+              <span className="text-[11.5px] text-black font-bold">ختم شعار الجمهورية</span>
+            </div>
+          </div>
 
+          {/* Second Row: Header Information directly above Basic Info */}
+          <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black mb-0.5 max-w-[90%] mx-auto">
+            <div className="text-right flex items-center gap-1">
+              <span>تاريخ الإصدار : </span>
+              {isEditingText ? (
+                <input
+                  type="text"
+                  value={editedCert.issueDate}
+                  onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
+                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[12px] w-24"
+                />
+              ) : (
+                <span>{formatDate(editedCert.issueDate)}</span>
+              )}
+            </div>
+            <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
+              <span>اسم الوحدة: </span>
+              {renderEditableField("unitName", "text", "font-bold", "w-32")}
+            </div>
+            <div className="text-right pr-[7px] flex items-center justify-end gap-1" style={{ position: 'relative', left: '10px' }}>
+              <span>المحافظة: </span>
+              {renderEditableField("governorate", "text", "font-bold", "w-28")}
+            </div>
+          </div>
+
+          {/* Section 1: Basic Information */}
+          <div className="mb-0.5">
+            <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">البيانات الأساسية</h3>
+            <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
+              <div className="text-right flex items-center gap-1">
+                <span>الاسم : </span>
+                {renderEditableField("fullName", "text", "font-semibold", "w-40")}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1">
+                <span>الرقم القومى : </span>
+                {renderEditableField("nationalId", "text", "font-semibold", "w-36")}
+              </div>
+              <div className="text-right pr-[7px] flex items-center justify-end gap-1" style={{ position: 'relative', right: '30px' }}>
+                <span>النوع : </span>
+                {renderEditableField("gender", "text", "font-semibold", "w-20")}
+              </div>
+
+              <div className="text-right flex items-center gap-1">
+                <span>الجنسية : </span>
+                {renderEditableField("nationality", "text", "font-semibold", "w-28")}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1">
+                <span>السن : </span>
+                {renderEditableField("age", "number", "font-semibold", "w-16")}
+              </div>
+              <div className="text-right pr-[7px] flex items-center justify-end gap-1" style={{ position: 'relative', right: '30px' }}>
+                <span>رقم الهاتف : </span>
+                {renderEditableField("phoneNumber", "text", "font-semibold", "w-32")}
+              </div>
+
+              <div className="text-right flex items-center gap-1">
+                <span>العنوان بالبطاقة : </span>
+                {renderEditableField("idAddress", "text", "font-semibold", "w-44")}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1">
+                <span>عنوان سكن الزوجية : </span>
+                {renderEditableField("maritalAddress", "text", "font-semibold", "w-44")}
+              </div>
+              <div></div>
+            </div>
+          </div>
+
+          {/* Section 2: Medical Examinations */}
+          <div className="mb-0.5">
+            <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">الفحوصات الطبية</h3>
+            <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
+              <div className="text-right flex items-center gap-1">
+                <span>الطول(سم): </span>
+                {renderEditableField("height", "number", "font-semibold", "w-16")}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
+                <span>الوزن(كجم): </span>
+                {renderEditableField("weight", "number", "font-semibold", "w-16")}
+              </div>
+              <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
+                {isEditingText ? (
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={editedCert.bmi}
+                    onChange={(e) => setEditedCert({ ...editedCert, bmi: parseFloat(e.target.value) || 0 })}
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] w-16"
+                  />
+                ) : (
+                  <span className="font-semibold">{editedCert.bmi}</span>
+                )}
+                <span>:BMI</span>
+              </div>
+
+              <div className="text-right flex items-center gap-1">
+                <span>فصيلة الدم : </span>
+                {isEditingText ? (
+                  <>
+                    {renderEditableField("bloodType", "text", "font-semibold", "w-12")}
+                    {renderEditableField("rh", "text", "font-semibold", "w-12")}
+                  </>
+                ) : (
+                  <span className="font-semibold">
+                    {editedCert.bloodType}
+                    {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
+                  </span>
+                )}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
+                <span>RH : </span>
+                {isEditingText ? (
+                  renderEditableField("rh", "text", "font-semibold", "w-16")
+                ) : (
+                  <span className="font-semibold">
+                    {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
+                  </span>
+                )}
+              </div>
+              <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
+                {renderEditableField("hb", "number", "font-semibold", "w-16")}
+                <span>:Hb</span>
+              </div>
+
+              <div className="text-right flex items-center gap-1">
+                <span>HBs Ag : </span>
+                {renderEditableField("hbsAg", "text", "font-semibold", "w-24")}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
+                <span>Anti-HIV : </span>
+                {renderEditableField("antiHiv", "text", "font-semibold", "w-24")}
+              </div>
+              <div className="text-right pr-[7px] flex items-center justify-end gap-1">
+                <span>Anti-HCV : </span>
+                {renderEditableField("antiHcv", "text", "font-semibold", "w-24")}
+              </div>
+
+              <div className="text-right flex items-center gap-1">
+                <span>ضغط الدم : </span>
+                {renderEditableField("bloodPressure", "text", "font-semibold", "w-24")}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
+                <span>نتيجة فحص السكر(العشوائى) : </span>
+                {renderEditableField("randomBloodSugar", "number", "font-semibold", "w-16")}
+              </div>
+              <div></div>
+            </div>
+          </div>
+
+          {/* Section 3: Hb Electrophoresis */}
+          <div className="mb-0.5">
+            <h4 className="text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%]" dir="ltr">Hb Electrophoresis :</h4>
+            <div className="flex justify-between items-center text-center text-[12px] font-bold text-black max-w-[85%] mx-auto pl-[50px] pr-[28px]" dir="ltr">
+              <div>
+                <div className="flex items-center justify-center gap-1">
+                  <span>A : </span>
+                  {renderEditableField("hbA", "number", "font-semibold", "w-12")}
+                  <span> %</span>
+                </div>
+                <div className="mt-0.5">Normal</div>
+              </div>
+              <div>
+                <div className="flex items-center justify-center gap-1">
+                  <span>F : </span>
+                  {renderEditableField("hbF", "number", "font-semibold", "w-12")}
+                  <span> %</span>
+                </div>
+                <div className="mt-0.5">Normal</div>
+              </div>
+              <div>
+                <div className="flex items-center justify-center gap-1">
+                  <span>A2 : </span>
+                  {renderEditableField("hbA2", "number", "font-semibold", "w-12")}
+                  <span> %</span>
+                </div>
+                <div className="mt-0.5">Normal</div>
+              </div>
+              <div>
+                <div className="flex items-center justify-center gap-1">
+                  <span>C : </span>
+                  {renderEditableField("hbC", "number", "font-semibold", "w-12")}
+                  <span> %</span>
+                </div>
+                <div className="mt-0.5">Normal</div>
+              </div>
+              <div>
+                <div className="flex items-center justify-center gap-1">
+                  <span>S : </span>
+                  {renderEditableField("hbS", "number", "font-semibold", "w-12")}
+                  <span> %</span>
+                </div>
+                <div className="mt-0.5">Normal</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 4: Declaration Block */}
+          <div className="mb-0.5">
+            <h3 className="text-[14px] font-bold text-black mb-0 text-right pr-[5%]">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
+            {isEditingText ? (
+              <textarea
+                value={hotlineText}
+                onChange={(e) => setHotlineText(e.target.value)}
+                className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-bold text-right text-[10px] w-[90%] mx-auto block h-10 resize-none focus:outline-none focus:bg-white mb-1"
+              />
+            ) : (
+              <p className="text-[9.5px] font-bold text-black mb-0.5 text-right pr-[5%] leading-none text-right">
+                {hotlineText}
+              </p>
+            )}
+
+            <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
+              <div className="flex-1 grid grid-cols-2 gap-y-0.5 text-[12px] font-bold">
+                <div className="text-right font-bold">اسم الممرض/الممرضة : <span className="font-normal text-gray-400">--------------</span></div>
+                <div className="text-right pr-[10px] font-bold">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+
+                <div className="text-right font-bold">اسم الطبيب/الطبيبة : <span className="font-normal text-gray-400">-----------------</span></div>
+                <div className="text-right pr-[10px] font-bold">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+
+                <div className="text-right font-bold">مدير الوحدة : <span className="font-normal text-gray-400">-------------------------</span></div>
+                <div className="text-right pr-[10px] font-bold">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
+              </div>
+
+              <div className="flex flex-col items-center ml-8">
+                <div className="w-[65px] h-[65px] rounded-full border border-black mb-1"></div>
+                <span className="text-[11.5px] font-bold">ختم شعار الجمهورية</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 5: Individual Consent Text */}
+          <div className="mb-0.5 max-w-[90%] mx-auto">
+            <div className="flex justify-between items-center text-[12.5px] font-bold text-black mb-0">
+              <div className="flex items-center gap-1">
+                <span>أقر أنا الموقع/الموقعه أدناه : </span>
+                {renderEditableField("fullName", "text", "font-bold", "w-40")}
+              </div>
+              <div className="pl-16 flex items-center gap-1">
+                <span>رقم القومى : </span>
+                {renderEditableField("nationalId", "text", "font-mono font-bold", "w-36")}
+              </div>
+            </div>
+            {isEditingText ? (
+              <textarea
+                value={consentText}
+                onChange={(e) => setConsentText(e.target.value)}
+                className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-bold text-justify text-[11px] w-full h-16 resize-none focus:outline-none focus:bg-white"
+                dir="rtl"
+              />
+            ) : (
+              <p className="text-[11px] font-bold text-black leading-snug text-justify tracking-tight" style={{ wordSpacing: "-0.4px" }}>
+                {consentText}
+              </p>
+            )}
+          </div>
+
+          {/* Section 6: Thumbprint & Partner Info */}
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black mt-0.5 mb-0.5 max-w-[90%] mx-auto">
+            <div className="flex flex-col space-y-1.5 relative -top-[10px]">
+              <div className="font-bold">الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
+              <div className="font-bold">التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center border-r-2 border-l-2 border-slate-300 px-6 py-1 h-full">
+              <div className="w-[55px] h-[55px] rounded-full border border-black mb-1"></div>
+              <span className="text-[11.5px] font-bold">بصمة الإبهام</span>
+            </div>
+
+            <div className="flex flex-col space-y-1.5 pr-6">
+              <div className="flex items-center gap-1 font-bold">
+                <span>اسم الطرف الاخر(رباعى) : </span>
+                {renderEditableField("partnerName", "text", "font-bold", "w-36")}
+              </div>
+              <div className="font-bold">توقيع الطرف الاخر : <span className="font-normal text-gray-400">--------------------</span></div>
+              <div className="flex items-center gap-1 font-bold">
+                <span>الرقم القومى للطرف الاخر : </span>
+                {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-36")}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Block */}
+          <div className="flex justify-between items-end text-black pt-1 mt-1 max-w-[90%] mx-auto w-full">
+            <div className="text-[11.5px] font-bold text-black text-right pb-1 relative" style={{ top: `-${qrSize + 7}px` }}>
+              {isEditingText ? (
+                <input
+                  type="text"
+                  value={validityText}
+                  onChange={(e) => setValidityText(e.target.value)}
+                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-right focus:outline-none focus:bg-white text-[11px] w-80"
+                />
+              ) : (
+                <span>{validityText}</span>
+              )}
+            </div>
+            <div className="flex flex-col items-center ml-[88px]">
+              <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
+                {currentUrl ? (
+                  <QRCodeSVG value={currentUrl} size={qrSize} />
+                ) : (
+                  <div className="bg-slate-100 flex items-center justify-center text-[10px] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
+                    QR
+                  </div>
+                )}
+              </div>
+              <span className="mt-0.5 font-bold text-[11px] flex items-center gap-1">
+                {isEditingText ? (
+                  <input
+                    type="text"
+                    value={editedCert.qrCodeLabel || ""}
+                    onChange={(e) => setEditedCert({ ...editedCert, qrCodeLabel: e.target.value })}
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[11px] w-28"
+                  />
+                ) : (
+                  <span>{editedCert.qrCodeLabel || `2026-${editedCert.certificateId}`}</span>
+                )}
+              </span>
+            </div>
+          </div>
+
+          {/* Spacer to push footer to bottom */}
+          <div className="flex-grow"></div>
+
+        </div>
       </div>
     </div>
   );
