@@ -50,6 +50,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [isEditingText, setIsEditingText] = useState(false);
   const [fontSize, setFontSize] = useState(12.5);
   const [lineHeight, setLineHeight] = useState(1.2);
+  const [letterSpacing, setLetterSpacing] = useState(0);
+  const [fontWeight, setFontWeight] = useState(700);
   const [paddingX, setPaddingX] = useState(12);
   const [paddingY, setPaddingY] = useState(6);
   const [qrSize, setQrSize] = useState(45);
@@ -182,6 +184,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           color: #000000 !important;
           font-size: ${fontSize}px;
           line-height: ${lineHeight};
+          letter-spacing: ${letterSpacing}px;
+          font-weight: ${fontWeight};
           overflow: hidden;
         }
 
@@ -276,6 +280,40 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               step="0.5"
               value={fontSize}
               onChange={(e) => setFontSize(parseFloat(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Font Weight */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">سماكة الخط (Bold)</span>
+              <span className="text-teal-400 font-mono">{fontWeight}</span>
+            </div>
+            <input
+              type="range"
+              min="400"
+              max="900"
+              step="100"
+              value={fontWeight}
+              onChange={(e) => setFontWeight(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Letter Spacing */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">تباعد الأحرف</span>
+              <span className="text-teal-400 font-mono">{letterSpacing}px</span>
+            </div>
+            <input
+              type="range"
+              min="-2"
+              max="5"
+              step="0.1"
+              value={letterSpacing}
+              onChange={(e) => setLetterSpacing(parseFloat(e.target.value))}
               className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
           </div>
@@ -417,6 +455,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             onClick={() => {
               setFontSize(12.5);
               setLineHeight(1.2);
+              setLetterSpacing(0);
+              setFontWeight(700);
               setPaddingX(12);
               setPaddingY(6);
               setQrSize(45);
@@ -466,7 +506,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         </div>
 
         {/* Official A4 Layout Replication */}
-        <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
+        <div
+          className="print-page bg-white text-black shadow-xl flex flex-col"
+          dir="rtl"
+          onClick={() => { if (!isEditingText) setIsEditingText(true); }}
+          title={!isEditingText ? "انقر للبدء في التعديل" : undefined}
+          style={{ cursor: isEditingText ? "default" : "text" }}
+        >
           {/* Topmost Row: Photo Box */}
           <div className="flex justify-between items-center section-block mt-0.5">
             <div></div>
@@ -576,10 +622,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <div className="text-right flex items-center gap-1">
                 <span>فصيلة الدم : </span>
                 {isEditingText ? (
-                  <>
-                    {renderEditableField("bloodType", "text", "font-semibold", "w-12")}
-                    {renderEditableField("rh", "text", "font-semibold", "w-12")}
-                  </>
+                  <input
+                    type="text"
+                    value={editedCert.bloodType ?? ""}
+                    onChange={(e) => setEditedCert({ ...editedCert, bloodType: e.target.value })}
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] inline-block w-12"
+                    dir="ltr"
+                    autoFocus
+                  />
                 ) : (
                   <span className="font-semibold">
                     {editedCert.bloodType}
@@ -590,7 +640,17 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
                 <span>RH : </span>
                 {isEditingText ? (
-                  renderEditableField("rh", "text", "font-semibold", "w-16")
+                  <select
+                    value={editedCert.rh}
+                    onChange={(e) => setEditedCert({ ...editedCert, rh: e.target.value })}
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold focus:outline-none focus:bg-white text-[12px] inline-block"
+                    dir="rtl"
+                  >
+                    <option value="إيجابي">إيجابي</option>
+                    <option value="سالب">سالب</option>
+                    <option value="+">+ (إيجابي)</option>
+                    <option value="-">- (سالب)</option>
+                  </select>
                 ) : (
                   <span className="font-semibold">
                     {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
