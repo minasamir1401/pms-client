@@ -85,11 +85,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         .print-page {
           width: 210mm;
           height: 295mm; /* slightly less than 297mm to prevent overflow */
-          padding: 8mm 15mm;
+          padding: 6mm 12mm;
           box-sizing: border-box;
           background-color: #ffffff;
           color: #000000 !important;
-          font-size: 14px;
+          font-size: 12.5px;
+          line-height: 1.2;
           overflow: hidden;
         }
 
@@ -112,7 +113,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             box-shadow: none !important;
             border: none !important;
             margin: 0 !important;
-            padding: 8mm 15mm !important;
+            padding: 6mm 12mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
@@ -158,28 +159,28 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       {/* Official A4 Layout Replication */}
       <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
         {/* Topmost Row: Photo Box */}
-        <div className="flex justify-between items-center mb-2 mt-1">
+        <div className="flex justify-between items-center mb-1 mt-0.5">
           <div></div>
           {/* Left: Photo Box */}
           <div className="flex flex-col items-center ml-[60px]">
-            <div className="border border-black flex items-center justify-center text-[13.5px] text-black font-bold mb-1" style={{ width: '21mm', height: '26mm' }}>
+            <div className="border border-black flex items-center justify-center text-[12px] text-black font-bold mb-0.5" style={{ width: '19mm', height: '24mm' }}>
               <span dir="ltr">4*6</span>
             </div>
-            <span className="text-[13px] text-black font-bold">ختم شعار الجمهورية</span>
+            <span className="text-[11.5px] text-black font-bold">ختم شعار الجمهورية</span>
           </div>
         </div>
 
         {/* Second Row: Header Information directly above Basic Info */}
-        <div className="grid grid-cols-3 gap-2 text-[14px] font-bold text-black mb-1 max-w-[90%] mx-auto">
+        <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black mb-0.5 max-w-[90%] mx-auto">
           <div className="text-right">تاريخ الإصدار : {formatDate(certificate.issueDate)}</div>
           <div className="text-center" style={{ position: 'relative', left: '10px' }}>اسم الوحدة: {certificate.unitName}</div>
           <div className="text-right pr-[7px]" style={{ position: 'relative', left: '10px' }}>المحافظة: {certificate.governorate}</div>
         </div>
 
         {/* Section 1: Basic Information */}
-        <div className="mb-1">
-          <h3 className="text-[17px] font-bold text-black mb-0.5 pr-[5%]">البيانات الأساسية</h3>
-          <div className="grid grid-cols-3 gap-y-0.5 text-[14.5px] font-bold text-black max-w-[90%] mx-auto">
+        <div className="mb-0.5">
+          <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">البيانات الأساسية</h3>
+          <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
             <div className="text-right">الاسم : <span className="font-semibold">{certificate.fullName}</span></div>
             <div className="text-center">الرقم القومى : <span className="font-semibold">{certificate.nationalId}</span></div>
             <div className="text-right pr-[7px]" style={{ position: 'relative', right: '30px' }}>النوع : <span className="font-semibold">{certificate.gender}</span></div>
@@ -195,9 +196,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         </div>
 
         {/* Section 2: Medical Examinations */}
-        <div className="mb-1">
-          <h3 className="text-[17px] font-bold text-black mb-0.5 pr-[5%]">الفحوصات الطبية</h3>
-          <div className="grid grid-cols-3 gap-y-0.5 text-[14.5px] font-bold text-black max-w-[90%] mx-auto">
+        <div className="mb-0.5">
+          <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">الفحوصات الطبية</h3>
+          <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
             <div className="text-right">الطول(سم): <span className="font-semibold">{certificate.height}</span></div>
             <div className="text-center" style={{ position: 'relative', left: '10px' }}>الوزن(كجم): <span className="font-semibold">{certificate.weight}</span></div>
             <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
@@ -223,41 +224,41 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         </div>
 
         {/* Section 3: Hb Electrophoresis */}
-        <div className="mb-1">
-          <h4 className="text-[14.5px] font-bold text-black mb-0.5 text-left underline underline-offset-2 pl-[7.5%]" dir="ltr">Hb Electrophoresis :</h4>
-          <div className="flex justify-between items-center text-center text-[14px] font-bold text-black max-w-[85%] mx-auto pl-[50px] pr-[28px]" dir="ltr">
+        <div className="mb-0.5">
+          <h4 className="text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%]" dir="ltr">Hb Electrophoresis :</h4>
+          <div className="flex justify-between items-center text-center text-[12px] font-bold text-black max-w-[85%] mx-auto pl-[50px] pr-[28px]" dir="ltr">
             <div>
               <div>A : {certificate.hbA} %</div>
-              <div className="mt-1">Normal</div>
+              <div className="mt-0.5">Normal</div>
             </div>
             <div>
               <div>F : {certificate.hbF} %</div>
-              <div className="mt-1">Normal</div>
+              <div className="mt-0.5">Normal</div>
             </div>
             <div>
               <div>A2 : {certificate.hbA2} %</div>
-              <div className="mt-1">Normal</div>
+              <div className="mt-0.5">Normal</div>
             </div>
             <div>
               <div>C : {certificate.hbC} %</div>
-              <div className="mt-1">Normal</div>
+              <div className="mt-0.5">Normal</div>
             </div>
             <div>
               <div>S : {certificate.hbS} %</div>
-              <div className="mt-1">Normal</div>
+              <div className="mt-0.5">Normal</div>
             </div>
           </div>
         </div>
 
         {/* Section 4: Declaration Block */}
-        <div className="mb-1">
-          <h3 className="text-[16px] font-bold text-black mb-0.5 text-right pr-[5%]">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
-          <p className="text-[11px] font-bold text-black mb-1.5 text-right pr-[5%] leading-none">
+        <div className="mb-0.5">
+          <h3 className="text-[14px] font-bold text-black mb-0 text-right pr-[5%]">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
+          <p className="text-[9.5px] font-bold text-black mb-0.5 text-right pr-[5%] leading-none">
             للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg
           </p>
 
           <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
-            <div className="flex-1 grid grid-cols-2 gap-y-0.5 text-[14px] font-bold">
+            <div className="flex-1 grid grid-cols-2 gap-y-0.5 text-[12px] font-bold">
               <div className="text-right">اسم الممرض/الممرضة : <span className="font-normal text-gray-400">--------------</span></div>
               <div className="text-right pr-[10px]">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
 
@@ -269,36 +270,36 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
 
             <div className="flex flex-col items-center ml-8">
-              <div className="w-[80px] h-[80px] rounded-full border border-black mb-1"></div>
-              <span className="text-[13px] font-bold">ختم شعار الجمهورية</span>
+              <div className="w-[65px] h-[65px] rounded-full border border-black mb-1"></div>
+              <span className="text-[11.5px] font-bold">ختم شعار الجمهورية</span>
             </div>
           </div>
         </div>
 
         {/* Section 5: Individual Consent Text */}
-        <div className="mb-1 max-w-[90%] mx-auto">
-          <div className="flex justify-between items-center text-[14.5px] font-bold text-black mb-0.5">
+        <div className="mb-0.5 max-w-[90%] mx-auto">
+          <div className="flex justify-between items-center text-[12.5px] font-bold text-black mb-0">
             <div>أقر أنا الموقع/الموقعه أدناه : <span className="font-bold">{certificate.fullName}</span></div>
             <div className="pl-16">رقم القومى : <span className="font-mono">{certificate.nationalId}</span></div>
           </div>
-          <p className="text-[12.5px] font-bold text-black leading-snug text-justify tracking-tight" style={{ wordSpacing: "-0.4px" }}>
+          <p className="text-[11px] font-bold text-black leading-snug text-justify tracking-tight" style={{ wordSpacing: "-0.4px" }}>
             بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .
           </p>
         </div>
 
         {/* Section 6: Thumbprint & Partner Info */}
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[14px] font-bold text-black mt-1 mb-0.5 max-w-[90%] mx-auto">
-          <div className="flex flex-col space-y-2 relative -top-[15px]">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black mt-0.5 mb-0.5 max-w-[90%] mx-auto">
+          <div className="flex flex-col space-y-1.5 relative -top-[10px]">
             <div>الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
             <div>التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
           </div>
 
           <div className="flex flex-col items-center justify-center border-r-2 border-l-2 border-slate-300 px-6 py-1 h-full">
-            <div className="w-[70px] h-[70px] rounded-full border border-black mb-1"></div>
-            <span className="text-[13px] font-bold">بصمة الإبهام</span>
+            <div className="w-[55px] h-[55px] rounded-full border border-black mb-1"></div>
+            <span className="text-[11.5px] font-bold">بصمة الإبهام</span>
           </div>
 
-          <div className="flex flex-col space-y-2 pr-6">
+          <div className="flex flex-col space-y-1.5 pr-6">
             <div>اسم الطرف الاخر(رباعى) : <span className="font-bold">{certificate.partnerName || "---------------"}</span></div>
             <div>توقيع الطرف الاخر : <span className="font-normal text-gray-400">--------------------</span></div>
             <div>الرقم القومى للطرف الاخر : <span className={certificate.partnerNationalId ? "font-bold font-mono" : "font-normal text-gray-400"}>{certificate.partnerNationalId || "------------"}</span></div>
@@ -306,21 +307,21 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         </div>
 
         {/* Footer Block */}
-        <div className="flex justify-between items-end text-black pt-2 mt-2 max-w-[90%] mx-auto w-full">
-          <div className="text-[13.5px] font-bold text-black text-right pb-1 relative -top-[85px]">
+        <div className="flex justify-between items-end text-black pt-1 mt-1 max-w-[90%] mx-auto w-full">
+          <div className="text-[11.5px] font-bold text-black text-right pb-1 relative -top-[52px]">
             *هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار
           </div>
           <div className="flex flex-col items-center ml-[88px]">
             <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
               {currentUrl ? (
-                <QRCodeSVG value={currentUrl} size={70} />
+                <QRCodeSVG value={currentUrl} size={45} />
               ) : (
-                <div className="h-[70px] w-[70px] bg-slate-100 flex items-center justify-center text-[10px] text-slate-400">
+                <div className="h-[45px] w-[45px] bg-slate-100 flex items-center justify-center text-[10px] text-slate-400">
                   QR
                 </div>
               )}
             </div>
-            <span className="mt-1 font-bold text-[12.5px]">
+            <span className="mt-0.5 font-bold text-[11px]">
               {certificate.qrCodeLabel || `2026-${certificate.certificateId}`}
             </span>
           </div>
