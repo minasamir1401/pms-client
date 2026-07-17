@@ -202,6 +202,16 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           letter-spacing: ${letterSpacing}px !important;
         }
 
+        .print-page {
+          font-size: ${fontSize}px !important;
+        }
+
+        .print-page .text-\[14\.5px\] {
+          font-size: ${fontSize * 1.16}px !important;
+        }
+        .print-page .text-\[14px\] {
+          font-size: ${fontSize * 1.12}px !important;
+        }
         .print-page .text-\[12\.5px\] {
           font-size: ${fontSize}px !important;
         }
@@ -214,14 +224,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         .print-page .text-\[11px\] {
           font-size: ${fontSize * 0.88}px !important;
         }
+        .print-page .text-\[10px\] {
+          font-size: ${fontSize * 0.80}px !important;
+        }
         .print-page .text-\[9\.5px\] {
           font-size: ${fontSize * 0.76}px !important;
-        }
-        .print-page .text-\[14\.5px\] {
-          font-size: ${fontSize * 1.16}px !important;
-        }
-        .print-page .text-\[14px\] {
-          font-size: ${fontSize * 1.12}px !important;
         }
 
         .print-page .section-block {
@@ -655,26 +662,26 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               </div>
 
               <div className="text-right flex items-center gap-1">
-                <span>فصيلة الدم : </span>
+                <span>RH : </span>
                 {isEditingText ? (
-                  <>
-                    {renderEditableField("bloodType", "text", "font-semibold", "w-12")}
-                    {renderEditableField("rh", "text", "font-semibold", "w-12")}
-                  </>
+                  renderEditableField("rh", "text", "font-bold", "w-16")
                 ) : (
-                  <span className="font-semibold">
-                    {editedCert.bloodType}
-                    {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
+                  <span className="font-bold">
+                    {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
                   </span>
                 )}
               </div>
               <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
-                <span>RH : </span>
+                <span>فصيلة الدم : </span>
                 {isEditingText ? (
-                  renderEditableField("rh", "text", "font-semibold", "w-16")
+                  <>
+                    {renderEditableField("bloodType", "text", "font-bold", "w-12")}
+                    {renderEditableField("rh", "text", "font-bold", "w-12")}
+                  </>
                 ) : (
-                  <span className="font-semibold">
-                    {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
+                  <span className="font-bold">
+                    {editedCert.bloodType}
+                    {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
                   </span>
                 )}
               </div>
