@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { Printer, ArrowRight, CheckCircle } from "lucide-react";
+import { Printer, ArrowRight, CheckCircle, Save, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import API_URL from "@/config";
 
 interface Certificate {
   certificateId: string;
@@ -52,6 +53,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [paddingX, setPaddingX] = useState(12);
   const [paddingY, setPaddingY] = useState(6);
   const [qrSize, setQrSize] = useState(45);
+  const [sectionGap, setSectionGap] = useState(3);
+  const [gridGap, setGridGap] = useState(2);
+
+  // Persistence status
+  const [saveLoading, setSaveLoading] = useState(false);
+  const [saveMessage, setSaveMessage] = useState({ type: "", text: "" });
 
   const [consentText, setConsentText] = useState(
     "بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها ."
@@ -88,6 +95,44 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       return `${day}-${month}-${year}`;
     } catch (e) {
       return dateStr;
+    }
+  };
+
+  const handleSave = async () => {
+    setSaveLoading(true);
+    setSaveMessage({ type: "", text: "" });
+
+    try {
+      const res = await fetch(`${API_URL}/api/certificates/${editedCert.certificateId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          ...editedCert,
+          age: parseInt(editedCert.age as any, 10),
+          height: parseFloat(editedCert.height as any),
+          weight: parseFloat(editedCert.weight as any),
+          randomBloodSugar: parseFloat(editedCert.randomBloodSugar as any),
+          bmi: parseFloat(editedCert.bmi as any) || 0,
+          hb: parseFloat(editedCert.hb as any),
+          hbA: parseFloat(editedCert.hbA as any) || 0,
+          hbF: parseFloat(editedCert.hbF as any) || 0,
+          hbA2: parseFloat(editedCert.hbA2 as any) || 0,
+          hbC: parseFloat(editedCert.hbC as any) || 0,
+          hbS: parseFloat(editedCert.hbS as any) || 0,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSaveMessage({ type: "success", text: "تم حفظ التعديلات في قاعدة البيانات بنجاح!" });
+      } else {
+        setSaveMessage({ type: "error", text: data.error || "حدث خطأ أثناء حفظ التعديلات" });
+      }
+    } catch (err) {
+      setSaveMessage({ type: "error", text: "تعذر الاتصال بالخادم، يرجى التحقق من الشبكة" });
+    } finally {
+      setSaveLoading(false);
     }
   };
 
@@ -138,6 +183,15 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           font-size: ${fontSize}px;
           line-height: ${lineHeight};
           overflow: hidden;
+        }
+
+        .print-page .section-block {
+          margin-bottom: ${sectionGap}px !important;
+        }
+
+        .print-page .grid-gap-dynamic {
+          row-gap: ${gridGap}px !important;
+          column-gap: 8px !important;
         }
 
         @media print {
@@ -206,7 +260,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         </div>
 
         {/* Sliders */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 overflow-y-auto max-h-[50vh] pr-1">
           <h3 className="text-xs font-bold text-slate-400 tracking-wider uppercase">أبعاد وحجم الخطوط</h3>
           
           {/* Font Size */}
@@ -277,6 +331,40 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             />
           </div>
 
+          {/* Section Gap (تباعد الأقسام) */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">تباعد الأقسام الرئيسية</span>
+              <span className="text-teal-400 font-mono">{sectionGap}px</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="15"
+              step="1"
+              value={sectionGap}
+              onChange={(e) => setSectionGap(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Grid Gap (تباعد السطور في الجداول) */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">تباعد السطور في الجداول</span>
+              <span className="text-teal-400 font-mono">{gridGap}px</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              step="0.5"
+              value={gridGap}
+              onChange={(e) => setGridGap(parseFloat(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
           {/* QR Size */}
           <div className="flex flex-col gap-1.5">
             <div className="flex justify-between text-xs font-semibold">
@@ -297,8 +385,34 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
         <hr className="border-slate-800" />
 
+        {/* Persistence Messages */}
+        {saveMessage.text && (
+          <div className={`text-xs p-3 rounded-lg border ${
+            saveMessage.type === "success" 
+              ? "bg-teal-950/40 border-teal-800 text-teal-400" 
+              : "bg-red-950/40 border-red-900 text-red-400"
+          }`}>
+            {saveMessage.text}
+          </div>
+        )}
+
         {/* Action Buttons */}
         <div className="flex flex-col gap-2 mt-auto">
+          {/* Save Button */}
+          <button
+            onClick={handleSave}
+            disabled={saveLoading}
+            className="w-full py-2 px-4 rounded-lg bg-teal-500 hover:bg-teal-400 disabled:opacity-50 text-xs font-bold text-slate-950 transition flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            {saveLoading ? (
+              <div className="h-3 w-3 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
+            ) : (
+              <Save className="h-3.5 w-3.5" />
+            )}
+            حفظ التعديلات في قاعدة البيانات
+          </button>
+
+          {/* Reset Button */}
           <button
             onClick={() => {
               setFontSize(12.5);
@@ -306,14 +420,18 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setPaddingX(12);
               setPaddingY(6);
               setQrSize(45);
+              setSectionGap(3);
+              setGridGap(2);
               setIsEditingText(false);
               setEditedCert(certificate);
               setConsentText("بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .");
               setHotlineText("للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg");
               setValidityText("*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار");
+              setSaveMessage({ type: "", text: "" });
             }}
-            className="w-full py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition text-center"
+            className="w-full py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5 cursor-pointer"
           >
+            <RotateCcw className="h-3.5 w-3.5" />
             إعادة ضبط القيم الافتراضية
           </button>
         </div>
@@ -350,7 +468,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {/* Official A4 Layout Replication */}
         <div className="print-page bg-white text-black shadow-xl flex flex-col" dir="rtl">
           {/* Topmost Row: Photo Box */}
-          <div className="flex justify-between items-center mb-1 mt-0.5">
+          <div className="flex justify-between items-center section-block mt-0.5">
             <div></div>
             {/* Left: Photo Box */}
             <div className="flex flex-col items-center ml-[60px]">
@@ -362,7 +480,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Second Row: Header Information directly above Basic Info */}
-          <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black mb-0.5 max-w-[90%] mx-auto">
+          <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black section-block max-w-[90%] mx-auto">
             <div className="text-right flex items-center gap-1">
               <span>تاريخ الإصدار : </span>
               {isEditingText ? (
@@ -387,9 +505,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 1: Basic Information */}
-          <div className="mb-0.5">
+          <div className="section-block">
             <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">البيانات الأساسية</h3>
-            <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
+            <div className="grid grid-cols-3 grid-gap-dynamic text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
               <div className="text-right flex items-center gap-1">
                 <span>الاسم : </span>
                 {renderEditableField("fullName", "text", "font-semibold", "w-40")}
@@ -429,9 +547,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 2: Medical Examinations */}
-          <div className="mb-0.5">
+          <div className="section-block">
             <h3 className="text-[14.5px] font-bold text-black mb-0 pr-[5%]">الفحوصات الطبية</h3>
-            <div className="grid grid-cols-3 gap-y-0.5 text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
+            <div className="grid grid-cols-3 grid-gap-dynamic text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
               <div className="text-right flex items-center gap-1">
                 <span>الطول(سم): </span>
                 {renderEditableField("height", "number", "font-semibold", "w-16")}
@@ -510,7 +628,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 3: Hb Electrophoresis */}
-          <div className="mb-0.5">
+          <div className="section-block">
             <h4 className="text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%]" dir="ltr">Hb Electrophoresis :</h4>
             <div className="flex justify-between items-center text-center text-[12px] font-bold text-black max-w-[85%] mx-auto pl-[50px] pr-[28px]" dir="ltr">
               <div>
@@ -557,7 +675,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 4: Declaration Block */}
-          <div className="mb-0.5">
+          <div className="section-block">
             <h3 className="text-[14px] font-bold text-black mb-0 text-right pr-[5%]">إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب</h3>
             {isEditingText ? (
               <textarea
@@ -572,7 +690,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             )}
 
             <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
-              <div className="flex-1 grid grid-cols-2 gap-y-0.5 text-[12px] font-bold">
+              <div className="flex-1 grid grid-cols-2 grid-gap-dynamic text-[12px] font-bold">
                 <div className="text-right font-bold">اسم الممرض/الممرضة : <span className="font-normal text-gray-400">--------------</span></div>
                 <div className="text-right pr-[10px] font-bold">التوقيع : <span className="font-normal text-gray-400">----------------------</span></div>
 
@@ -591,7 +709,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 5: Individual Consent Text */}
-          <div className="mb-0.5 max-w-[90%] mx-auto">
+          <div className="section-block max-w-[90%] mx-auto">
             <div className="flex justify-between items-center text-[12.5px] font-bold text-black mb-0">
               <div className="flex items-center gap-1">
                 <span>أقر أنا الموقع/الموقعه أدناه : </span>
@@ -617,7 +735,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 6: Thumbprint & Partner Info */}
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black mt-0.5 mb-0.5 max-w-[90%] mx-auto">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black section-block max-w-[90%] mx-auto">
             <div className="flex flex-col space-y-1.5 relative -top-[10px]">
               <div className="font-bold">الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
               <div className="font-bold">التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
@@ -642,7 +760,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Footer Block */}
-          <div className="flex justify-between items-end text-black pt-1 mt-1 max-w-[90%] mx-auto w-full">
+          <div className="flex justify-between items-end text-black section-block max-w-[90%] mx-auto w-full">
             <div className="text-[11.5px] font-bold text-black text-right pb-1 relative" style={{ top: `-${qrSize + 7}px` }}>
               {isEditingText ? (
                 <input
