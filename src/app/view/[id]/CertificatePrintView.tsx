@@ -182,11 +182,46 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           box-sizing: border-box;
           background-color: #ffffff;
           color: #000000 !important;
-          font-size: ${fontSize}px;
-          line-height: ${lineHeight};
-          letter-spacing: ${letterSpacing}px;
-          font-weight: ${fontWeight};
+          font-size: ${fontSize}px !important;
+          line-height: ${lineHeight} !important;
+          letter-spacing: ${letterSpacing}px !important;
           overflow: hidden;
+        }
+
+        /* Override Tailwind classes inside the printed certificate for dynamic font size and weight scaling */
+        .print-page, 
+        .print-page span:not(.text-gray-400), 
+        .print-page p, 
+        .print-page div:not(.text-gray-400), 
+        .print-page h3, 
+        .print-page h4,
+        .print-page input,
+        .print-page select,
+        .print-page textarea {
+          font-weight: ${fontWeight} !important;
+          letter-spacing: ${letterSpacing}px !important;
+        }
+
+        .print-page .text-\[12\.5px\] {
+          font-size: ${fontSize}px !important;
+        }
+        .print-page .text-\[12px\] {
+          font-size: ${fontSize * 0.96}px !important;
+        }
+        .print-page .text-\[11\.5px\] {
+          font-size: ${fontSize * 0.92}px !important;
+        }
+        .print-page .text-\[11px\] {
+          font-size: ${fontSize * 0.88}px !important;
+        }
+        .print-page .text-\[9\.5px\] {
+          font-size: ${fontSize * 0.76}px !important;
+        }
+        .print-page .text-\[14\.5px\] {
+          font-size: ${fontSize * 1.16}px !important;
+        }
+        .print-page .text-\[14px\] {
+          font-size: ${fontSize * 1.12}px !important;
         }
 
         .print-page .section-block {
