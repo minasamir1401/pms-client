@@ -622,14 +622,10 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <div className="text-right flex items-center gap-1">
                 <span>فصيلة الدم : </span>
                 {isEditingText ? (
-                  <input
-                    type="text"
-                    value={editedCert.bloodType ?? ""}
-                    onChange={(e) => setEditedCert({ ...editedCert, bloodType: e.target.value })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] inline-block w-12"
-                    dir="ltr"
-                    autoFocus
-                  />
+                  <>
+                    {renderEditableField("bloodType", "text", "font-semibold", "w-12")}
+                    {renderEditableField("rh", "text", "font-semibold", "w-12")}
+                  </>
                 ) : (
                   <span className="font-semibold">
                     {editedCert.bloodType}
@@ -640,17 +636,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
                 <span>RH : </span>
                 {isEditingText ? (
-                  <select
-                    value={editedCert.rh}
-                    onChange={(e) => setEditedCert({ ...editedCert, rh: e.target.value })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold focus:outline-none focus:bg-white text-[12px] inline-block"
-                    dir="rtl"
-                  >
-                    <option value="إيجابي">إيجابي</option>
-                    <option value="سالب">سالب</option>
-                    <option value="+">+ (إيجابي)</option>
-                    <option value="-">- (سالب)</option>
-                  </select>
+                  renderEditableField("rh", "text", "font-semibold", "w-16")
                 ) : (
                   <span className="font-semibold">
                     {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
