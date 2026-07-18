@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { Printer, ArrowRight, CheckCircle, Save, RotateCcw } from "lucide-react";
+import { Printer, ArrowRight, CheckCircle, Save, RotateCcw, ArrowRightLeft } from "lucide-react";
 import Link from "next/link";
 import API_URL from "@/config";
 
@@ -57,6 +57,58 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(45);
   const [sectionGap, setSectionGap] = useState(3);
   const [gridGap, setGridGap] = useState(2);
+
+  // Layout states for Swapping
+  const [section1Layout, setSection1Layout] = useState([
+    "fullName", "nationalId", "gender",
+    "nationality", "age", "phoneNumber",
+    "idAddress", "maritalAddress", "empty1"
+  ]);
+  const [section2Layout, setSection2Layout] = useState([
+    "height", "weight", "bmi",
+    "rh", "bloodType", "hb",
+    "hbsAg", "antiHiv", "antiHcv",
+    "bloodPressure", "randomBloodSugar", "empty2"
+  ]);
+  const [swapSourceId, setSwapSourceId] = useState<string | null>(null);
+
+  const handleSwap = (id: string) => {
+    if (!isEditingText) return;
+    if (swapSourceId === null) {
+      setSwapSourceId(id);
+    } else {
+      if (swapSourceId !== id) {
+        let s1 = [...section1Layout];
+        let s2 = [...section2Layout];
+
+        const idx1InS1 = s1.indexOf(swapSourceId);
+        const idx1InS2 = s2.indexOf(swapSourceId);
+        const idx2InS1 = s1.indexOf(id);
+        const idx2InS2 = s2.indexOf(id);
+
+        if (idx1InS1 !== -1 && idx2InS1 !== -1) {
+          s1[idx1InS1] = id;
+          s1[idx2InS1] = swapSourceId;
+          setSection1Layout(s1);
+        } else if (idx1InS2 !== -1 && idx2InS2 !== -1) {
+          s2[idx1InS2] = id;
+          s2[idx2InS2] = swapSourceId;
+          setSection2Layout(s2);
+        } else if (idx1InS1 !== -1 && idx2InS2 !== -1) {
+          s1[idx1InS1] = id;
+          s2[idx2InS2] = swapSourceId;
+          setSection1Layout(s1);
+          setSection2Layout(s2);
+        } else if (idx1InS2 !== -1 && idx2InS1 !== -1) {
+          s2[idx1InS2] = id;
+          s1[idx2InS1] = swapSourceId;
+          setSection2Layout(s2);
+          setSection1Layout(s1);
+        }
+      }
+      setSwapSourceId(null);
+    }
+  };
 
   // Persistence status
   const [saveLoading, setSaveLoading] = useState(false);
@@ -177,6 +229,269 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {defaultText}
       </span>
     );
+  };
+
+  const renderSwapButton = (fieldId: string) => {
+    if (!isEditingText) return null;
+    const isSelected = swapSourceId === fieldId;
+    return (
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleSwap(fieldId);
+        }}
+        className={`ml-1 p-0.5 rounded transition-colors print:hidden ${isSelected ? 'bg-teal-500 text-white' : 'bg-slate-200 text-slate-500 hover:bg-slate-300'}`}
+        title="انقر هنا ثم انقر على حقل آخر للتبديل"
+      >
+        <ArrowRightLeft className="w-3 h-3" />
+      </button>
+    );
+  };
+
+  const renderSection1Field = (fieldId: string, index: number) => {
+    const colIndex = index % 3;
+    let containerClass = "";
+    let containerStyle: React.CSSProperties = {};
+
+    if (colIndex === 0) {
+      containerClass = "text-right flex items-center gap-1";
+    } else if (colIndex === 1) {
+      containerClass = "text-center flex items-center justify-center gap-1";
+    } else {
+      containerClass = "text-right pr-[7px] flex items-center justify-end gap-1";
+      if (fieldId !== "empty1") {
+        containerStyle = { position: 'relative', right: '30px' };
+      }
+    }
+
+    const isSwapSource = swapSourceId === fieldId;
+    const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
+
+    const wrapperProps = {
+      className: `${containerClass} ${activeSwapClasses}`,
+      style: containerStyle,
+    };
+
+    switch (fieldId) {
+      case "fullName":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("الاسم : ")}
+            {renderEditableField("fullName", "text", "font-semibold", "w-40")}
+          </div>
+        );
+      case "nationalId":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("الرقم القومى : ")}
+            {renderEditableField("nationalId", "text", "font-semibold", "w-36")}
+          </div>
+        );
+      case "gender":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("النوع : ")}
+            {renderEditableField("gender", "text", "font-semibold", "w-20")}
+          </div>
+        );
+      case "nationality":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("الجنسية : ")}
+            {renderEditableField("nationality", "text", "font-semibold", "w-28")}
+          </div>
+        );
+      case "age":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("السن : ")}
+            {renderEditableField("age", "number", "font-semibold", "w-16")}
+          </div>
+        );
+      case "phoneNumber":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("رقم الهاتف : ")}
+            {renderEditableField("phoneNumber", "text", "font-semibold", "w-32")}
+          </div>
+        );
+      case "idAddress":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("العنوان بالبطاقة : ")}
+            {renderEditableField("idAddress", "text", "font-semibold", "w-44")}
+          </div>
+        );
+      case "maritalAddress":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("عنوان سكن الزوجية : ")}
+            {renderEditableField("maritalAddress", "text", "font-semibold", "w-44")}
+          </div>
+        );
+      case "empty1":
+        return <div key={fieldId} {...wrapperProps}></div>;
+      default:
+        return null;
+    }
+  };
+
+  const renderSection2Field = (fieldId: string, index: number) => {
+    const colIndex = index % 3;
+    let containerClass = "";
+    let containerStyle: React.CSSProperties = {};
+    let dir: "rtl" | "ltr" | undefined = undefined;
+
+    if (colIndex === 0) {
+      containerClass = "text-right flex items-center gap-1";
+    } else if (colIndex === 1) {
+      containerClass = "text-center flex items-center justify-center gap-1";
+      containerStyle = { position: 'relative', left: '10px' };
+    } else {
+      containerClass = "text-right flex items-center justify-end gap-1 pr-[7px]";
+      if (fieldId === "bmi" || fieldId === "hb") {
+        dir = "ltr";
+      }
+    }
+
+    const isSwapSource = swapSourceId === fieldId;
+    const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
+
+    const wrapperProps = {
+      className: `${containerClass} ${activeSwapClasses}`,
+      style: containerStyle,
+      dir,
+    };
+
+    switch (fieldId) {
+      case "height":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("الطول(سم): ")}
+            {renderEditableField("height", "number", "font-semibold", "w-16")}
+          </div>
+        );
+      case "weight":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("الوزن(كجم): ")}
+            {renderEditableField("weight", "number", "font-semibold", "w-16")}
+          </div>
+        );
+      case "bmi":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {isEditingText ? (
+              <input
+                type="number"
+                step="0.1"
+                value={editedCert.bmi}
+                onChange={(e) => setEditedCert({ ...editedCert, bmi: parseFloat(e.target.value) || 0 })}
+                className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] w-16"
+              />
+            ) : (
+              <span className="font-semibold">{editedCert.bmi}</span>
+            )}
+            {renderLabel(":BMI")}
+            {renderSwapButton(fieldId)}
+          </div>
+        );
+      case "rh":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("RH : ")}
+            {isEditingText ? (
+              renderEditableField("rh", "text", "font-bold", "w-16")
+            ) : (
+              <span className="font-bold">
+                {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
+              </span>
+            )}
+          </div>
+        );
+      case "bloodType":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("فصيلة الدم : ")}
+            {isEditingText ? (
+              <>
+                {renderEditableField("bloodType", "text", "font-bold", "w-12")}
+                {renderEditableField("rh", "text", "font-bold", "w-12")}
+              </>
+            ) : (
+              <span className="font-bold">
+                {editedCert.bloodType}
+                {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
+              </span>
+            )}
+          </div>
+        );
+      case "hb":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderEditableField("hb", "number", "font-semibold", "w-16")}
+            {renderLabel(":Hb")}
+            {renderSwapButton(fieldId)}
+          </div>
+        );
+      case "hbsAg":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("HBs Ag : ")}
+            {renderEditableField("hbsAg", "text", "font-semibold", "w-24")}
+          </div>
+        );
+      case "antiHiv":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("Anti-HIV : ")}
+            {renderEditableField("antiHiv", "text", "font-semibold", "w-24")}
+          </div>
+        );
+      case "antiHcv":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("Anti-HCV : ")}
+            {renderEditableField("antiHcv", "text", "font-semibold", "w-24")}
+          </div>
+        );
+      case "bloodPressure":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("ضغط الدم : ")}
+            {renderEditableField("bloodPressure", "text", "font-semibold", "w-24")}
+          </div>
+        );
+      case "randomBloodSugar":
+        return (
+          <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("نتيجة فحص السكر(العشوائى) : ")}
+            {renderEditableField("randomBloodSugar", "number", "font-semibold", "w-16")}
+          </div>
+        );
+      case "empty2":
+        return <div key={fieldId} {...wrapperProps}></div>;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -518,6 +833,18 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setGridGap(2);
               setIsEditingText(false);
               setEditedCert(certificate);
+              setSection1Layout([
+                "fullName", "nationalId", "gender",
+                "nationality", "age", "phoneNumber",
+                "idAddress", "maritalAddress", "empty1"
+              ]);
+              setSection2Layout([
+                "height", "weight", "bmi",
+                "rh", "bloodType", "hb",
+                "hbsAg", "antiHiv", "antiHcv",
+                "bloodPressure", "randomBloodSugar", "empty2"
+              ]);
+              setSwapSourceId(null);
               setConsentText("بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .");
               setHotlineText("للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg");
               setValidityText("*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار");
@@ -613,41 +940,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               البيانات الأساسية
             </h3>
             <div className="grid grid-cols-3 grid-gap-dynamic text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("الاسم : ")}
-                {renderEditableField("fullName", "text", "font-semibold", "w-40")}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1">
-                {renderLabel("الرقم القومى : ")}
-                {renderEditableField("nationalId", "text", "font-semibold", "w-36")}
-              </div>
-              <div className="text-right pr-[7px] flex items-center justify-end gap-1" style={{ position: 'relative', right: '30px' }}>
-                {renderLabel("النوع : ")}
-                {renderEditableField("gender", "text", "font-semibold", "w-20")}
-              </div>
-
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("الجنسية : ")}
-                {renderEditableField("nationality", "text", "font-semibold", "w-28")}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1">
-                {renderLabel("السن : ")}
-                {renderEditableField("age", "number", "font-semibold", "w-16")}
-              </div>
-              <div className="text-right pr-[7px] flex items-center justify-end gap-1" style={{ position: 'relative', right: '30px' }}>
-                {renderLabel("رقم الهاتف : ")}
-                {renderEditableField("phoneNumber", "text", "font-semibold", "w-32")}
-              </div>
-
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("العنوان بالبطاقة : ")}
-                {renderEditableField("idAddress", "text", "font-semibold", "w-44")}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1">
-                {renderLabel("عنوان سكن الزوجية : ")}
-                {renderEditableField("maritalAddress", "text", "font-semibold", "w-44")}
-              </div>
-              <div></div>
+              {section1Layout.map((fieldId, index) => renderSection1Field(fieldId, index))}
             </div>
           </div>
 
@@ -660,80 +953,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               الفحوصات الطبية
             </h3>
             <div className="grid grid-cols-3 grid-gap-dynamic text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("الطول(سم): ")}
-                {renderEditableField("height", "number", "font-semibold", "w-16")}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
-                {renderLabel("الوزن(كجم): ")}
-                {renderEditableField("weight", "number", "font-semibold", "w-16")}
-              </div>
-              <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
-                {isEditingText ? (
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={editedCert.bmi}
-                    onChange={(e) => setEditedCert({ ...editedCert, bmi: parseFloat(e.target.value) || 0 })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] w-16"
-                  />
-                ) : (
-                  <span className="font-semibold">{editedCert.bmi}</span>
-                )}
-                {renderLabel(":BMI")}
-              </div>
-
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("RH : ")}
-                {isEditingText ? (
-                  renderEditableField("rh", "text", "font-bold", "w-16")
-                ) : (
-                  <span className="font-bold">
-                    {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
-                  </span>
-                )}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
-                {renderLabel("فصيلة الدم : ")}
-                {isEditingText ? (
-                  <>
-                    {renderEditableField("bloodType", "text", "font-bold", "w-12")}
-                    {renderEditableField("rh", "text", "font-bold", "w-12")}
-                  </>
-                ) : (
-                  <span className="font-bold">
-                    {editedCert.bloodType}
-                    {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
-                  </span>
-                )}
-              </div>
-              <div className="text-right flex items-center justify-end gap-1 pr-[7px]" dir="ltr">
-                {renderEditableField("hb", "number", "font-semibold", "w-16")}
-                {renderLabel(":Hb")}
-              </div>
-
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("HBs Ag : ")}
-                {renderEditableField("hbsAg", "text", "font-semibold", "w-24")}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
-                {renderLabel("Anti-HIV : ")}
-                {renderEditableField("antiHiv", "text", "font-semibold", "w-24")}
-              </div>
-              <div className="text-right pr-[7px] flex items-center justify-end gap-1">
-                {renderLabel("Anti-HCV : ")}
-                {renderEditableField("antiHcv", "text", "font-semibold", "w-24")}
-              </div>
-
-              <div className="text-right flex items-center gap-1">
-                {renderLabel("ضغط الدم : ")}
-                {renderEditableField("bloodPressure", "text", "font-semibold", "w-24")}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
-                {renderLabel("نتيجة فحص السكر(العشوائى) : ")}
-                {renderEditableField("randomBloodSugar", "number", "font-semibold", "w-16")}
-              </div>
-              <div></div>
+              {section2Layout.map((fieldId, index) => renderSection2Field(fieldId, index))}
             </div>
           </div>
 
