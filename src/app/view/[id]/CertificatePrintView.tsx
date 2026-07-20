@@ -224,7 +224,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       <span 
         contentEditable={isEditingText} 
         suppressContentEditableWarning 
-        className={isEditingText ? "border-b border-dashed border-teal-300 outline-none inline-block whitespace-pre" : ""}
+        className={`field-label ${isEditingText ? "border-b border-dashed border-teal-300 outline-none inline-block whitespace-pre" : ""}`}
       >
         {defaultText}
       </span>
@@ -251,19 +251,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   const renderSection1Field = (fieldId: string, index: number) => {
     const colIndex = index % 3;
-    let containerClass = "";
+    let containerClass = "text-right flex items-center gap-1";
     let containerStyle: React.CSSProperties = {};
-
-    if (colIndex === 0) {
-      containerClass = "text-right flex items-center gap-1";
-    } else if (colIndex === 1) {
-      containerClass = "text-center flex items-center justify-center gap-1";
-    } else {
-      containerClass = "text-right pr-[7px] flex items-center justify-end gap-1";
-      if (fieldId !== "empty1") {
-        containerStyle = { position: 'relative', right: '30px' };
-      }
-    }
 
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
@@ -347,21 +336,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   const renderSection2Field = (fieldId: string, index: number) => {
     const colIndex = index % 3;
-    let containerClass = "";
+    let containerClass = "text-right flex items-center gap-1";
     let containerStyle: React.CSSProperties = {};
     let dir: "rtl" | "ltr" | undefined = undefined;
-
-    if (colIndex === 0) {
-      containerClass = "text-right flex items-center gap-1";
-    } else if (colIndex === 1) {
-      containerClass = "text-center flex items-center justify-center gap-1";
-      containerStyle = { position: 'relative', left: '10px' };
-    } else {
-      containerClass = "text-right flex items-center justify-end gap-1 pr-[7px]";
-      if (fieldId === "bmi" || fieldId === "hb") {
-        dir = "ltr";
-      }
-    }
 
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
@@ -392,6 +369,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       case "bmi":
         return (
           <div key={fieldId} {...wrapperProps}>
+            {renderSwapButton(fieldId)}
+            {renderLabel("BMI : ")}
             {isEditingText ? (
               <input
                 type="number"
@@ -403,8 +382,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             ) : (
               <span className="font-semibold">{editedCert.bmi}</span>
             )}
-            {renderLabel(":BMI")}
-            {renderSwapButton(fieldId)}
           </div>
         );
       case "rh":
@@ -442,9 +419,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       case "hb":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderEditableField("hb", "number", "font-semibold", "w-16")}
-            {renderLabel(":Hb")}
             {renderSwapButton(fieldId)}
+            {renderLabel("Hb : ")}
+            {renderEditableField("hb", "number", "font-semibold", "w-16")}
           </div>
         );
       case "hbsAg":
@@ -517,9 +494,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
         /* Override Tailwind classes inside the printed certificate for dynamic font size and weight scaling */
         .print-page, 
-        .print-page span:not(.text-gray-400), 
-        .print-page p, 
-        .print-page div:not(.text-gray-400), 
+        .print-page span:not(.text-gray-400):not(.field-label), 
+        .print-page p:not(.field-label), 
+        .print-page div:not(.text-gray-400):not(.field-label), 
         .print-page h3, 
         .print-page h4,
         .print-page input,
@@ -527,6 +504,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         .print-page textarea {
           font-weight: ${fontWeight} !important;
           letter-spacing: ${letterSpacing}px !important;
+        }
+
+        .print-page .field-label {
+          font-weight: 400 !important;
+          font-size: calc(${fontSize}px * 0.88) !important;
+          color: #000000 !important;
         }
 
         .print-page {
@@ -962,6 +945,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <h4 
               className={`text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`} 
               dir="ltr"
+              style={{ position: 'relative', left: '-30px' }}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               Hb Electrophoresis :
@@ -1020,17 +1004,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             >
               إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب
             </h3>
-            {isEditingText ? (
-              <textarea
-                value={hotlineText}
-                onChange={(e) => setHotlineText(e.target.value)}
-                className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-bold text-right text-[10px] w-[90%] mx-auto block h-10 resize-none focus:outline-none focus:bg-white mb-1"
-              />
-            ) : (
-              <p className="text-[9.5px] font-bold text-black mb-0.5 text-right pr-[5%] leading-none text-right">
-                {hotlineText}
-              </p>
-            )}
+            {/* Hotline text removed by user request */}
 
             <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
               <div className="flex-1 grid grid-cols-2 grid-gap-dynamic text-[12px] font-bold">
@@ -1080,23 +1054,23 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 6: Thumbprint & Partner Info */}
           <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black section-block max-w-[90%] mx-auto">
             <div className="flex flex-col space-y-1.5 relative -top-[10px]">
-              <div className="font-bold">الاسم (رباعى) : <span className="font-normal text-gray-400">------------------</span></div>
-              <div className="font-bold">التوقيع : <span className="font-normal text-gray-400">-----------------------</span></div>
+              <div className="font-bold">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></div>
+              <div className="font-bold">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></div>
             </div>
 
             <div className="flex flex-col items-center justify-center border-r-2 border-l-2 border-slate-300 px-6 py-1 h-full">
               <div className="w-[55px] h-[55px] rounded-full border border-black mb-1"></div>
-              <span className="text-[11.5px] font-bold">بصمة الإبهام</span>
+              <span className="text-[11.5px] font-bold field-label">بصمة الإبهام</span>
             </div>
 
             <div className="flex flex-col space-y-1.5 pr-6">
               <div className="flex items-center gap-1 font-bold">
-                <span>اسم الطرف الاخر(رباعى) : </span>
+                {renderLabel("اسم الطرف الاخر(رباعى) : ")}
                 {renderEditableField("partnerName", "text", "font-bold", "w-36")}
               </div>
-              <div className="font-bold">توقيع الطرف الاخر : <span className="font-normal text-gray-400">--------------------</span></div>
+              <div className="font-bold">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></div>
               <div className="flex items-center gap-1 font-bold">
-                <span>الرقم القومى للطرف الاخر : </span>
+                {renderLabel("الرقم القومى للطرف الاخر : ")}
                 {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-36")}
               </div>
             </div>
