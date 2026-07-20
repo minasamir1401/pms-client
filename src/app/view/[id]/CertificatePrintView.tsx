@@ -221,9 +221,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   const renderLabel = (defaultText: string) => {
     return (
-      <span 
-        contentEditable={isEditingText} 
-        suppressContentEditableWarning 
+      <span
+        contentEditable={isEditingText}
+        suppressContentEditableWarning
         className={`field-label ${isEditingText ? "border-b border-dashed border-teal-300 outline-none inline-block whitespace-pre" : ""}`}
       >
         {defaultText}
@@ -256,6 +256,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
+
+    if (fieldId === "age" || fieldId === "nationalId" || fieldId === "maritalAddress") {
+      containerStyle.position = 'relative';
+      containerStyle.right = '20px';
+    }
 
     const wrapperProps = {
       className: `${containerClass} ${activeSwapClasses}`,
@@ -603,14 +608,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <span className="text-xs font-semibold text-slate-300">تعديل نصوص الشهادة</span>
           <button
             onClick={() => setIsEditingText(!isEditingText)}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${
-              isEditingText ? "bg-teal-500" : "bg-slate-700"
-            }`}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${isEditingText ? "bg-teal-500" : "bg-slate-700"
+              }`}
           >
             <span
-              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${
-                isEditingText ? "-translate-x-6" : "-translate-x-1"
-              }`}
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ${isEditingText ? "-translate-x-6" : "-translate-x-1"
+                }`}
             />
           </button>
         </div>
@@ -618,7 +621,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         {/* Sliders */}
         <div className="flex flex-col gap-4 overflow-y-auto max-h-[50vh] pr-1">
           <h3 className="text-xs font-bold text-slate-400 tracking-wider uppercase">أبعاد وحجم الخطوط</h3>
-          
+
           {/* Font Size */}
           <div className="flex flex-col gap-1.5">
             <div className="flex justify-between text-xs font-semibold">
@@ -777,11 +780,10 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
         {/* Persistence Messages */}
         {saveMessage.text && (
-          <div className={`text-xs p-3 rounded-lg border ${
-            saveMessage.type === "success" 
-              ? "bg-teal-950/40 border-teal-800 text-teal-400" 
+          <div className={`text-xs p-3 rounded-lg border ${saveMessage.type === "success"
+              ? "bg-teal-950/40 border-teal-800 text-teal-400"
               : "bg-red-950/40 border-red-900 text-red-400"
-          }`}>
+            }`}>
             {saveMessage.text}
           </div>
         )}
@@ -889,34 +891,32 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
           </div>
 
-          {/* Second Row: Header Information directly above Basic Info */}
-          <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black section-block max-w-[90%] mx-auto">
-            <div className="text-right flex items-center gap-1">
-              {renderLabel("تاريخ الإصدار : ")}
-              {isEditingText ? (
-                <input
-                  type="text"
-                  value={editedCert.issueDate}
-                  onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
-                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[12px] w-24"
-                />
-              ) : (
-                <span>{formatDate(editedCert.issueDate)}</span>
-              )}
-            </div>
-            <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '10px' }}>
-              {renderLabel("اسم الوحدة: ")}
-              {renderEditableField("unitName", "text", "font-bold", "w-32")}
-            </div>
-            <div className="text-right pr-[7px] flex items-center justify-end gap-1" style={{ position: 'relative', left: '10px' }}>
-              {renderLabel("المحافظة: ")}
-              {renderEditableField("governorate", "text", "font-bold", "w-28")}
-            </div>
-          </div>
-
           {/* Section 1: Basic Information */}
           <div className="section-block">
-            <h3 
+            <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black max-w-[90%] mx-auto mb-2 mt-1">
+              <div className="text-right flex items-center gap-1">
+                {renderLabel("تاريخ الإصدار : ")}
+                {isEditingText ? (
+                  <input
+                    type="text"
+                    value={editedCert.issueDate}
+                    onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[12px] w-24"
+                  />
+                ) : (
+                  <span>{formatDate(editedCert.issueDate)}</span>
+                )}
+              </div>
+              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '90px' }}>
+                {renderLabel("اسم الوحدة: ")}
+                {renderEditableField("unitName", "text", "font-bold", "w-32")}
+              </div>
+              <div className="text-left flex items-center justify-end gap-1" style={{ position: 'relative', left: '200px' }}>
+                {renderLabel("المحافظة: ")}
+                {renderEditableField("governorate", "text", "font-bold", "w-28")}
+              </div>
+            </div>
+            <h3
               className={`text-[14.5px] font-bold text-black mb-0 pr-[5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
@@ -929,7 +929,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
           {/* Section 2: Medical Examinations */}
           <div className="section-block">
-            <h3 
+            <h3
               className={`text-[14.5px] font-bold text-black mb-0 pr-[5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
@@ -942,10 +942,10 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
           {/* Section 3: Hb Electrophoresis */}
           <div className="section-block">
-            <h4 
-              className={`text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`} 
+            <h4
+              className={`text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               dir="ltr"
-              style={{ position: 'relative', left: '-30px' }}
+              style={{ position: 'relative', left: '-75px' }}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               Hb Electrophoresis :
@@ -998,7 +998,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
           {/* Section 4: Declaration Block */}
           <div className="section-block">
-            <h3 
+            <h3
               className={`text-[14px] font-bold text-black mb-0 text-right pr-[5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
