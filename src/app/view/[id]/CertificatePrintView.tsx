@@ -881,7 +881,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         >
           {/* Topmost Row: Photo Box */}
           <div className="flex justify-between items-center section-block mt-0.5">
-            <div></div>
+            {/* Right: Certificate Title */}
+            <div className="mr-[50px] flex items-center gap-4">
+              <div className="border border-black rounded-[8px] px-6 py-1.5 text-[16px] text-black font-bold">
+                شهادة صحية لراغبي الزواج
+              </div>
+              <img src="/images/Ministry of Health and population (5).png" alt="MOH Logo" className="w-[60px] h-auto object-contain" />
+            </div>
             {/* Left: Photo Box */}
             <div className="flex flex-col items-center ml-[60px]">
               <div className="border border-black flex items-center justify-center text-[12px] text-black font-bold mb-0.5" style={{ width: '19mm', height: '24mm' }}>
