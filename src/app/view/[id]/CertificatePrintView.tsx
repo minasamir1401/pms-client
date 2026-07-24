@@ -884,7 +884,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <div></div>
             {/* Center: Certificate Title */}
             <div className="absolute left-1/2 -translate-x-1/2">
-              <div className="border border-black rounded-[8px] px-6 py-1.5 text-[16px] text-black font-bold">
+              <div className="border border-black rounded-[4px] px-6 py-1.5 text-[16px] text-black font-bold">
                 شهادة صحية لراغبي الزواج
               </div>
             </div>
