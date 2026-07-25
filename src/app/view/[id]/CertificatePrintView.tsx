@@ -624,8 +624,82 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </button>
         </div>
 
+        <hr className="border-slate-800" />
+
+        {/* Persistence Messages */}
+        {saveMessage.text && (
+          <div className={`text-xs p-3 rounded-lg border ${saveMessage.type === "success"
+              ? "bg-teal-950/40 border-teal-800 text-teal-400"
+              : "bg-red-950/40 border-red-900 text-red-400"
+            }`}>
+            {saveMessage.text}
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-2">
+          {/* Save Button */}
+          <button
+            onClick={handleSave}
+            disabled={saveLoading}
+            className="w-full py-2 px-4 rounded-lg bg-teal-500 hover:bg-teal-400 disabled:opacity-50 text-xs font-bold text-slate-950 transition flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            {saveLoading ? (
+              <div className="h-3 w-3 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
+            ) : (
+              <Save className="h-3.5 w-3.5" />
+            )}
+            حفظ التعديلات في قاعدة البيانات
+          </button>
+
+          {/* Reset Button */}
+          <button
+            onClick={() => {
+              setFontSize(12.5);
+              setLineHeight(1.2);
+              setLetterSpacing(0);
+              setFontWeight(700);
+              setPaddingX(12);
+              setPaddingY(6);
+              setQrSize(45);
+              setSectionGap(3);
+              setGridGap(2);
+              setTitleWidth(350);
+              setTitleHeight(45);
+              setTitleFontSize(24);
+              setTitleY(0);
+              setTitleX(0);
+              setTitleText("شهادة صحية لراغبي الزواج");
+              setIsEditingText(false);
+              setEditedCert(certificate);
+              setSection1Layout([
+                "fullName", "nationalId", "gender",
+                "nationality", "age", "phoneNumber",
+                "idAddress", "maritalAddress", "empty1"
+              ]);
+              setSection2Layout([
+                "height", "weight", "bmi",
+                "rh", "bloodType", "hb",
+                "hbsAg", "antiHiv", "antiHcv",
+                "bloodPressure", "randomBloodSugar", "empty2"
+              ]);
+              setSwapSourceId(null);
+              setConsentText("بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .");
+              setHotlineText("للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg");
+              setValidityText("*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار");
+              setSaveMessage({ type: "", text: "" });
+            }}
+            className="w-full py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <RotateCcw className="h-3.5 w-3.5" />
+            إعادة ضبط القيم الافتراضية
+          </button>
+        </div>
+
+        <hr className="border-slate-800" />
+
         {/* Sliders */}
-        <div className="flex flex-col gap-4 overflow-y-auto max-h-[50vh] pr-1">
+        <div className="flex flex-col gap-4 overflow-y-auto max-h-[50vh] pr-1 mt-auto">
           <h3 className="text-xs font-bold text-slate-400 tracking-wider uppercase">أبعاد وحجم الخطوط</h3>
 
           {/* Font Size */}
@@ -869,76 +943,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
         </div>
 
-        <hr className="border-slate-800" />
-
-        {/* Persistence Messages */}
-        {saveMessage.text && (
-          <div className={`text-xs p-3 rounded-lg border ${saveMessage.type === "success"
-              ? "bg-teal-950/40 border-teal-800 text-teal-400"
-              : "bg-red-950/40 border-red-900 text-red-400"
-            }`}>
-            {saveMessage.text}
-          </div>
-        )}
-
-        {/* Action Buttons */}
-        <div className="flex flex-col gap-2 mt-auto">
-          {/* Save Button */}
-          <button
-            onClick={handleSave}
-            disabled={saveLoading}
-            className="w-full py-2 px-4 rounded-lg bg-teal-500 hover:bg-teal-400 disabled:opacity-50 text-xs font-bold text-slate-950 transition flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            {saveLoading ? (
-              <div className="h-3 w-3 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
-            ) : (
-              <Save className="h-3.5 w-3.5" />
-            )}
-            حفظ التعديلات في قاعدة البيانات
-          </button>
-
-          {/* Reset Button */}
-          <button
-            onClick={() => {
-              setFontSize(12.5);
-              setLineHeight(1.2);
-              setLetterSpacing(0);
-              setFontWeight(700);
-              setPaddingX(12);
-              setPaddingY(6);
-              setQrSize(45);
-              setSectionGap(3);
-              setGridGap(2);
-              setTitleWidth(350);
-              setTitleHeight(45);
-              setTitleFontSize(24);
-              setTitleY(0);
-              setTitleX(0);
-              setTitleText("شهادة صحية لراغبي الزواج");
-              setIsEditingText(false);
-              setEditedCert(certificate);
-              setSection1Layout([
-                "fullName", "nationalId", "gender",
-                "nationality", "age", "phoneNumber",
-                "idAddress", "maritalAddress", "empty1"
-              ]);
-              setSection2Layout([
-                "height", "weight", "bmi",
-                "rh", "bloodType", "hb",
-                "hbsAg", "antiHiv", "antiHcv",
-                "bloodPressure", "randomBloodSugar", "empty2"
-              ]);
-              setSwapSourceId(null);
-              setConsentText("بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .");
-              setHotlineText("للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg");
-              setValidityText("*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار");
-              setSaveMessage({ type: "", text: "" });
-            }}
-            className="w-full py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            <RotateCcw className="h-3.5 w-3.5" />
-            إعادة ضبط القيم الافتراضية
-          </button>
         </div>
       </div>
 
