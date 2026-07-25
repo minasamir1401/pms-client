@@ -60,6 +60,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [titleWidth, setTitleWidth] = useState(350);
   const [titleHeight, setTitleHeight] = useState(45);
   const [titleFontSize, setTitleFontSize] = useState(24);
+  const [titleY, setTitleY] = useState(0);
+  const [titleX, setTitleX] = useState(0);
+  const [titleText, setTitleText] = useState("شهادة صحية لراغبي الزواج");
 
   // Layout states for Swapping
   const [section1Layout, setSection1Layout] = useState([
@@ -830,6 +833,40 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
           </div>
+
+          {/* Title Vertical Offset */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">موقع العنوان (أعلى/أسفل)</span>
+              <span className="text-teal-400 font-mono">{titleY}px</span>
+            </div>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={titleY}
+              onChange={(e) => setTitleY(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Title Horizontal Offset */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">موقع العنوان (يمين/يسار)</span>
+              <span className="text-teal-400 font-mono">{titleX}px</span>
+            </div>
+            <input
+              type="range"
+              min="-100"
+              max="100"
+              step="1"
+              value={titleX}
+              onChange={(e) => setTitleX(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
         </div>
 
         <hr className="border-slate-800" />
@@ -875,6 +912,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setTitleWidth(350);
               setTitleHeight(45);
               setTitleFontSize(24);
+              setTitleY(0);
+              setTitleX(0);
+              setTitleText("شهادة صحية لراغبي الزواج");
               setIsEditingText(false);
               setEditedCert(certificate);
               setSection1Layout([
@@ -942,16 +982,32 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <div className="flex justify-between items-center section-block mt-0.5 relative">
             <div></div>
             {/* Center: Certificate Title */}
-            <div className="absolute left-1/2 -translate-x-1/2">
+            <div 
+              className="absolute left-1/2"
+              style={{
+                top: `${titleY}px`,
+                transform: `translateX(calc(-50% + ${titleX}px))`
+              }}
+            >
               <div 
-                className="border border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none"
+                className={`border border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
                 style={{
                   width: `${titleWidth}px`,
                   height: `${titleHeight}px`,
                   fontSize: `${titleFontSize}px`
                 }}
               >
-                شهادة صحية لراغبي الزواج
+                {isEditingText ? (
+                  <input
+                    type="text"
+                    value={titleText}
+                    onChange={(e) => setTitleText(e.target.value)}
+                    className="bg-transparent text-center focus:outline-none w-full"
+                    dir="rtl"
+                  />
+                ) : (
+                  titleText
+                )}
               </div>
             </div>
             {/* Left: Photo Box */}
