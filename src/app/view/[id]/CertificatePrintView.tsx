@@ -928,8 +928,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="-100"
-              max="100"
+              min="-300"
+              max="300"
               step="1"
               value={titleY}
               onChange={(e) => setTitleY(parseInt(e.target.value))}
@@ -945,8 +945,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="-100"
-              max="100"
+              min="-300"
+              max="300"
               step="1"
               value={titleX}
               onChange={(e) => setTitleX(parseInt(e.target.value))}
