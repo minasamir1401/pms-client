@@ -649,19 +649,19 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         )}
 
         {/* Action Buttons */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2">
           {/* Save Button */}
           <button
             onClick={handleSave}
             disabled={saveLoading}
-            className="w-full py-2 px-4 rounded-lg bg-teal-500 hover:bg-teal-400 disabled:opacity-50 text-xs font-bold text-slate-950 transition flex items-center justify-center gap-1.5 cursor-pointer"
+            className="flex-1 py-2 px-2 rounded-lg bg-teal-500 hover:bg-teal-400 disabled:opacity-50 text-xs font-bold text-slate-950 transition flex items-center justify-center gap-1.5 cursor-pointer text-center"
           >
             {saveLoading ? (
               <div className="h-3 w-3 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
             ) : (
-              <Save className="h-3.5 w-3.5" />
+              <Save className="h-3.5 w-3.5 shrink-0" />
             )}
-            حفظ التعديلات في قاعدة البيانات
+            حفظ التعديلات
           </button>
 
           {/* Reset Button */}
@@ -701,10 +701,10 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setValidityText("*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار");
               setSaveMessage({ type: "", text: "" });
             }}
-            className="w-full py-2 px-4 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5 cursor-pointer"
+            className="flex-1 py-2 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition flex items-center justify-center gap-1.5 cursor-pointer text-center"
           >
-            <RotateCcw className="h-3.5 w-3.5" />
-            إعادة ضبط القيم الافتراضية
+            <RotateCcw className="h-3.5 w-3.5 shrink-0" />
+            إعادة الضبط
           </button>
         </div>
 
