@@ -38,6 +38,12 @@ interface Certificate {
   hbS: number;
   partnerName: string | null;
   partnerNationalId: string | null;
+  titleWidth?: number | null;
+  titleHeight?: number | null;
+  titleFontSize?: number | null;
+  titleY?: number | null;
+  titleX?: number | null;
+  titleText?: string | null;
 }
 
 interface CertificatePrintViewProps {
@@ -57,12 +63,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(45);
   const [sectionGap, setSectionGap] = useState(3);
   const [gridGap, setGridGap] = useState(2);
-  const [titleWidth, setTitleWidth] = useState(350);
-  const [titleHeight, setTitleHeight] = useState(45);
-  const [titleFontSize, setTitleFontSize] = useState(24);
-  const [titleY, setTitleY] = useState(0);
-  const [titleX, setTitleX] = useState(0);
-  const [titleText, setTitleText] = useState("شهادة صحية لراغبي الزواج");
+  const [titleWidth, setTitleWidth] = useState(certificate.titleWidth ?? 350);
+  const [titleHeight, setTitleHeight] = useState(certificate.titleHeight ?? 45);
+  const [titleFontSize, setTitleFontSize] = useState(certificate.titleFontSize ?? 24);
+  const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
+  const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
+  const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
 
   // Layout states for Swapping
   const [section1Layout, setSection1Layout] = useState([
@@ -180,6 +186,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           hbA2: parseFloat(editedCert.hbA2 as any) || 0,
           hbC: parseFloat(editedCert.hbC as any) || 0,
           hbS: parseFloat(editedCert.hbS as any) || 0,
+          titleWidth,
+          titleHeight,
+          titleFontSize,
+          titleY,
+          titleX,
+          titleText,
         }),
       });
 
@@ -941,8 +953,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
           </div>
-        </div>
-
         </div>
       </div>
 
