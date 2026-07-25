@@ -877,7 +877,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="150"
+              min="50"
               max="600"
               step="5"
               value={titleWidth}
