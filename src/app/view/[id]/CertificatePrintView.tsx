@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { Printer, ArrowRight, CheckCircle, Save, RotateCcw, ArrowRightLeft } from "lucide-react";
 import Link from "next/link";
@@ -51,6 +52,8 @@ interface CertificatePrintViewProps {
 }
 
 export default function CertificatePrintView({ certificate }: CertificatePrintViewProps) {
+  const searchParams = useSearchParams();
+  const isAdmin = searchParams.get("admin") === "true";
   const [currentUrl, setCurrentUrl] = useState("");
   const [editedCert, setEditedCert] = useState(certificate);
   const [isEditingText, setIsEditingText] = useState(false);
@@ -139,6 +142,39 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   useEffect(() => {
     if (typeof window !== "undefined") {
       setCurrentUrl(`${window.location.origin}/view/${certificate.certificateId}`);
+      
+      const fetchSettings = async () => {
+        try {
+          const res = await fetch(`${API_URL}/api/settings`);
+          if (res.ok) {
+            const parsed = await res.json();
+            if (parsed.fontSize) setFontSize(parsed.fontSize);
+            if (parsed.lineHeight) setLineHeight(parsed.lineHeight);
+            if (parsed.letterSpacing !== undefined) setLetterSpacing(parsed.letterSpacing);
+            if (parsed.fontWeight) setFontWeight(parsed.fontWeight);
+            if (parsed.paddingX) setPaddingX(parsed.paddingX);
+            if (parsed.paddingY) setPaddingY(parsed.paddingY);
+            if (parsed.qrSize) setQrSize(parsed.qrSize);
+            if (parsed.sectionGap !== undefined) setSectionGap(parsed.sectionGap);
+            if (parsed.gridGap !== undefined) setGridGap(parsed.gridGap);
+            if (parsed.titleWidth) setTitleWidth(parsed.titleWidth);
+            if (parsed.titleHeight) setTitleHeight(parsed.titleHeight);
+            if (parsed.titleFontSize) setTitleFontSize(parsed.titleFontSize);
+            if (parsed.titleY !== undefined) setTitleY(parsed.titleY);
+            if (parsed.titleX !== undefined) setTitleX(parsed.titleX);
+            if (parsed.titleText) setTitleText(parsed.titleText);
+            if (parsed.consentText) setConsentText(parsed.consentText);
+            if (parsed.hotlineText) setHotlineText(parsed.hotlineText);
+            if (parsed.validityText) setValidityText(parsed.validityText);
+            if (parsed.section1Layout) setSection1Layout(parsed.section1Layout);
+            if (parsed.section2Layout) setSection2Layout(parsed.section2Layout);
+          }
+        } catch (e) {
+          console.error("Failed to fetch settings", e);
+        }
+      };
+      
+      fetchSettings();
     }
   }, [certificate.certificateId]);
 
@@ -168,7 +204,39 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     setSaveLoading(true);
     setSaveMessage({ type: "", text: "" });
 
+    const currentSettings = {
+      fontSize,
+      lineHeight,
+      letterSpacing,
+      fontWeight,
+      paddingX,
+      paddingY,
+      qrSize,
+      sectionGap,
+      gridGap,
+      titleWidth,
+      titleHeight,
+      titleFontSize,
+      titleY,
+      titleX,
+      titleText,
+      consentText,
+      hotlineText,
+      validityText,
+      section1Layout,
+      section2Layout,
+    };
+
     try {
+      // Save global settings
+      await fetch(`${API_URL}/api/settings`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(currentSettings),
+      });
+
+      // Save certificate data
       const res = await fetch(`${API_URL}/api/certificates/${editedCert.certificateId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -610,6 +678,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       `}</style>
 
       {/* Control Panel Sidebar (Hidden during print) */}
+      {isAdmin && (
       <div className="no-print w-full lg:w-80 bg-slate-900 text-slate-100 border-b lg:border-r border-slate-800 p-6 flex flex-col gap-5 shrink-0 select-none font-sans" dir="rtl">
         <div>
           <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-1">
@@ -955,10 +1024,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
         </div>
       </div>
+      )}
 
       {/* Main Preview Area */}
       <div className="flex-grow flex flex-col items-center py-6 px-4 overflow-auto print:p-0 print:m-0 print:block">
         {/* Admin Action Bar (Hidden during print) */}
+        {isAdmin && (
         <div className="no-print w-full max-w-[210mm] mb-4 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900 text-slate-100 p-4 rounded-xl border border-slate-800 shadow-md">
           <div className="flex items-center gap-2">
             <CheckCircle className="h-5 w-5 text-teal-400" />
@@ -983,14 +1054,15 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </button>
           </div>
         </div>
+        )}
 
         {/* Official A4 Layout Replication */}
         <div
           className="print-page bg-white text-black shadow-xl flex flex-col"
           dir="rtl"
-          onClick={() => { if (!isEditingText) setIsEditingText(true); }}
-          title={!isEditingText ? "انقر للبدء في التعديل" : undefined}
-          style={{ cursor: isEditingText ? "default" : "text" }}
+          onClick={() => { if (isAdmin && !isEditingText) setIsEditingText(true); }}
+          title={!isEditingText && isAdmin ? "انقر للبدء في التعديل" : undefined}
+          style={{ cursor: (isEditingText || !isAdmin) ? "default" : "text" }}
         >
           {/* Topmost Row: Photo Box */}
           <div className="flex justify-between items-center section-block mt-0.5 relative">

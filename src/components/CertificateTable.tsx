@@ -169,7 +169,7 @@ export default function CertificateTable({ certificates, onEdit, onDelete }: Cer
                   <td className="py-3.5 px-4 whitespace-nowrap text-center">
                     <div className="flex items-center justify-center gap-2">
                       <Link
-                        href={`/view/${cert.certificateId}`}
+                        href={`/view/${cert.certificateId}?admin=true`}
                         target="_blank"
                         className="inline-flex items-center gap-1.5 rounded-lg border border-teal-200 bg-teal-50 py-1.5 px-3 text-xs font-bold text-teal-600 transition hover:bg-teal-600 hover:text-white cursor-pointer"
                       >
