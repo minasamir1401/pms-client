@@ -57,6 +57,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(45);
   const [sectionGap, setSectionGap] = useState(3);
   const [gridGap, setGridGap] = useState(2);
+  const [titleWidth, setTitleWidth] = useState(350);
+  const [titleHeight, setTitleHeight] = useState(45);
+  const [titleFontSize, setTitleFontSize] = useState(24);
 
   // Layout states for Swapping
   const [section1Layout, setSection1Layout] = useState([
@@ -774,6 +777,59 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
           </div>
+
+          <h3 className="text-xs font-bold text-slate-400 tracking-wider uppercase mt-2">عنوان الشهادة</h3>
+
+          {/* Title Width */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">عرض العنوان</span>
+              <span className="text-teal-400 font-mono">{titleWidth}px</span>
+            </div>
+            <input
+              type="range"
+              min="150"
+              max="600"
+              step="5"
+              value={titleWidth}
+              onChange={(e) => setTitleWidth(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Title Height */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">ارتفاع العنوان</span>
+              <span className="text-teal-400 font-mono">{titleHeight}px</span>
+            </div>
+            <input
+              type="range"
+              min="20"
+              max="100"
+              step="2"
+              value={titleHeight}
+              onChange={(e) => setTitleHeight(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
+
+          {/* Title Font Size */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex justify-between text-xs font-semibold">
+              <span className="text-slate-300">حجم خط العنوان</span>
+              <span className="text-teal-400 font-mono">{titleFontSize}px</span>
+            </div>
+            <input
+              type="range"
+              min="12"
+              max="48"
+              step="1"
+              value={titleFontSize}
+              onChange={(e) => setTitleFontSize(parseInt(e.target.value))}
+              className="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-500"
+            />
+          </div>
         </div>
 
         <hr className="border-slate-800" />
@@ -816,6 +872,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setQrSize(45);
               setSectionGap(3);
               setGridGap(2);
+              setTitleWidth(350);
+              setTitleHeight(45);
+              setTitleFontSize(24);
               setIsEditingText(false);
               setEditedCert(certificate);
               setSection1Layout([
@@ -884,7 +943,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <div></div>
             {/* Center: Certificate Title */}
             <div className="absolute left-1/2 -translate-x-1/2">
-              <div className="border border-black rounded-[4px] px-6 py-1.5 text-[16px] text-black font-bold">
+              <div 
+                className="border border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none"
+                style={{
+                  width: `${titleWidth}px`,
+                  height: `${titleHeight}px`,
+                  fontSize: `${titleFontSize}px`
+                }}
+              >
                 شهادة صحية لراغبي الزواج
               </div>
             </div>
