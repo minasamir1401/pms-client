@@ -872,7 +872,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Title Width */}
           <div className="flex flex-col gap-1.5">
             <div className="flex justify-between text-xs font-semibold">
-              <span className="text-slate-300">عرض العنوان</span>
+              <span className="text-slate-300">عرض مستطيل العنوان</span>
               <span className="text-teal-400 font-mono">{titleWidth}px</span>
             </div>
             <input
