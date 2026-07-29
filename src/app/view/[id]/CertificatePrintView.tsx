@@ -141,7 +141,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setCurrentUrl(`${window.location.origin}/view/${certificate.certificateId}`);
+      setCurrentUrl(window.location.origin);
       
       const fetchSettings = async () => {
         try {

@@ -462,14 +462,7 @@ export default function SearchPage() {
                   <p className="text-[9px] sm:text-[10px] text-teal-600/90 font-medium">الشهادة مسجلة بنجاح في قاعدة بيانات الفحص الطبي</p>
                 </div>
               </div>
-              <Link
-                href={`/view/${certificate.certificateId}`}
-                target="_blank"
-                className="w-full sm:w-auto text-center flex items-center justify-center gap-1.5 rounded-lg bg-teal-600 py-1.5 px-4 text-xs font-bold text-white hover:bg-teal-700 transition"
-              >
-                <FileText className="h-4 w-4" />
-                عرض نسخة الطباعة الرسمية A4
-              </Link>
+
             </div>
 
             {/* Content Sections */}
