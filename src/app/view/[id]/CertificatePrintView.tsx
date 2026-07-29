@@ -448,8 +448,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   const renderSection2Field = (fieldId: string, index: number) => {
     let colSpan = "col-span-4";
-    if (fieldId === "bloodPressure") colSpan = "col-span-5";
-    if (fieldId === "bloodSugar") colSpan = "col-span-7";
+    if (fieldId === "bloodSugar") colSpan = "col-span-8";
+    if (fieldId === "empty2") colSpan = "hidden";
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
 
