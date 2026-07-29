@@ -647,28 +647,28 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           font-size: ${fontSize}px !important;
         }
 
-        .print-page .text-\[14\.5px\] {
+        .print-page .text-\\[14\\.5px\\] {
           font-size: ${fontSize * 1.16}px !important;
         }
-        .print-page .text-\[14px\] {
+        .print-page .text-\\[14px\\] {
           font-size: ${fontSize * 1.12}px !important;
         }
-        .print-page .text-\[12\.5px\] {
+        .print-page .text-\\[12\\.5px\\] {
           font-size: ${fontSize}px !important;
         }
-        .print-page .text-\[12px\] {
+        .print-page .text-\\[12px\\] {
           font-size: ${fontSize * 0.96}px !important;
         }
-        .print-page .text-\[11\.5px\] {
+        .print-page .text-\\[11\\.5px\\] {
           font-size: ${fontSize * 0.92}px !important;
         }
-        .print-page .text-\[11px\] {
+        .print-page .text-\\[11px\\] {
           font-size: ${fontSize * 0.88}px !important;
         }
-        .print-page .text-\[10px\] {
+        .print-page .text-\\[10px\\] {
           font-size: ${fontSize * 0.80}px !important;
         }
-        .print-page .text-\[9\.5px\] {
+        .print-page .text-\\[9\\.5px\\] {
           font-size: ${fontSize * 0.76}px !important;
         }
 
@@ -831,7 +831,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="10"
+              min="5"
               max="18"
               step="0.5"
               value={fontSize}
@@ -848,7 +848,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="400"
+              min="100"
               max="900"
               step="100"
               value={fontWeight}
@@ -1003,7 +1003,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="20"
+              min="10"
               max="100"
               step="2"
               value={titleHeight}
@@ -1020,7 +1020,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <input
               type="range"
-              min="12"
+              min="8"
               max="48"
               step="1"
               value={titleFontSize}
