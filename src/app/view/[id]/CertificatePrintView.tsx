@@ -356,7 +356,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
 
-    const innerClass = "mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1 whitespace-nowrap";
+    const innerClass = "mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1";
 
     switch (fieldId) {
       case "fullName":
@@ -365,7 +365,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الاسم : ")}
-              {renderEditableField("fullName", "text", "font-bold whitespace-nowrap", "w-48")}
+              {renderEditableField("fullName", "text", "font-bold text-[12pt]", "w-48")}
             </p>
           </div>
         );
@@ -425,7 +425,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("العنوان بالبطاقة : ")}
-              {renderEditableField("idAddress", "text", "font-bold whitespace-nowrap", "w-64")}
+              {renderEditableField("idAddress", "text", "font-bold text-[12pt]", "w-64")}
             </p>
           </div>
         );
@@ -435,7 +435,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("عنوان سكن الزوجية : ")}
-              {renderEditableField("maritalAddress", "text", "font-bold whitespace-nowrap", "w-64")}
+              {renderEditableField("maritalAddress", "text", "font-bold text-[12pt]", "w-64")}
             </p>
           </div>
         );
@@ -454,7 +454,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     const wrapperProps = {
       className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
-    const innerClass = "mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1 whitespace-nowrap";
+    const innerClass = "mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1";
 
     switch (fieldId) {
       case "height":
@@ -1270,15 +1270,15 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             
             <div className="bg-white w-full">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-4 flex flex-col gap-1">
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
+                    <div className="col-span-4 flex flex-col gap-3">
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
                     </div>
-                    <div className="col-span-4 flex flex-col gap-1">
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                    <div className="col-span-4 flex flex-col gap-3">
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                     </div>
                     <div className="col-span-3 flex flex-col items-center">
                         <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
@@ -1318,8 +1318,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1">
                     <div className="col-span-4 border-l border-black flex flex-col gap-1">
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
                     </div>
                     <div className="col-span-3 border-l border-black flex flex-col items-center">
                         <div className="w-[60px] h-[60px] rounded-full border border-black mb-1"></div>
@@ -1330,7 +1330,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                           {renderLabel("اسم الطرف الاخر(رباعى) : ")}
                           {renderEditableField("partnerName", "text", "font-bold text-[12pt]", "w-40")}
                         </p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1 whitespace-nowrap">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></p>
+                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></p>
                         <p className="mr-3 text-[12pt] font-semibold flex items-center gap-1 m-0">
                           {renderLabel("الرقم القومى للطرف الاخر : ")}
                           {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-40")}
