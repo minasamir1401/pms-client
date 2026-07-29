@@ -1203,7 +1203,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     Hb Electrophoresis :
                 </p>
             </div>
-            <div className="flex w-full justify-between pr-8 pl-8" style={{ direction: 'ltr' }}>
+            <div className="flex w-full justify-center gap-[60px]" style={{ direction: 'ltr', paddingLeft: '50px' }}>
               <div className="flex flex-col mb-3">
                   <label className="font-bold flex items-center gap-1">
                       {renderLabel("A : ")}
@@ -1255,23 +1255,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   </div>
               </div>
             </div>
-          </div>
-
-          <div className="w-full my-4">
-              <p className="mr-3 text-[14px] font-cairo m-0">
-                  <span className="font-bold">
-                    {isEditingText ? (
-                      <input
-                        type="text"
-                        value={hotlineText}
-                        onChange={(e) => setHotlineText(e.target.value)}
-                        className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold focus:outline-none focus:bg-white w-full"
-                      />
-                    ) : (
-                      hotlineText
-                    )}
-                  </span>
-              </p>
           </div>
 
           {/* Section 4: Declaration Block */}
