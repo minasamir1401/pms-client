@@ -57,7 +57,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [currentUrl, setCurrentUrl] = useState("");
   const [editedCert, setEditedCert] = useState(certificate);
   const [isEditingText, setIsEditingText] = useState(false);
-  const [fontSize, setFontSize] = useState(12.5);
+  const [fontSize, setFontSize] = useState(14);
   const [lineHeight, setLineHeight] = useState(1.2);
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [fontWeight, setFontWeight] = useState(700);
@@ -336,86 +336,107 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   };
 
   const renderSection1Field = (fieldId: string, index: number) => {
-    const colIndex = index % 3;
-    let containerClass = "text-right flex items-center gap-1";
-    let containerStyle: React.CSSProperties = {};
+    let colSpan = "col-span-4";
+    switch (fieldId) {
+      case "fullName": colSpan = "col-span-5"; break;
+      case "nationalId": colSpan = "col-span-4"; break;
+      case "gender": colSpan = "col-span-3"; break;
+      case "nationality": colSpan = "col-span-5"; break;
+      case "age": colSpan = "col-span-4"; break;
+      case "phoneNumber": colSpan = "col-span-3"; break;
+      case "idAddress": colSpan = "col-span-5"; break;
+      case "maritalAddress": colSpan = "col-span-7"; break;
+      case "empty1": colSpan = "col-span-12"; break;
+    }
 
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
 
-    if (fieldId === "age" || fieldId === "nationalId" || fieldId === "maritalAddress") {
-      containerStyle.position = 'relative';
-      containerStyle.right = '20px';
-    }
-
     const wrapperProps = {
-      className: `${containerClass} ${activeSwapClasses}`,
-      style: containerStyle,
+      className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
+
+    const innerClass = "mr-3 text-[14px] font-cairo m-0 flex items-center gap-1 font-bold";
 
     switch (fieldId) {
       case "fullName":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("الاسم : ")}
-            {renderEditableField("fullName", "text", "font-semibold", "w-40")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("الاسم : ")}
+              {renderEditableField("fullName", "text", "font-bold", "w-48")}
+            </p>
           </div>
         );
       case "nationalId":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("الرقم القومى : ")}
-            {renderEditableField("nationalId", "text", "font-semibold", "w-36")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("الرقم القومى : ")}
+              {renderEditableField("nationalId", "text", "font-bold font-mono", "w-40")}
+            </p>
           </div>
         );
       case "gender":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("النوع : ")}
-            {renderEditableField("gender", "text", "font-semibold", "w-20")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("النوع : ")}
+              {renderEditableField("gender", "text", "font-bold", "w-24")}
+            </p>
           </div>
         );
       case "nationality":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("الجنسية : ")}
-            {renderEditableField("nationality", "text", "font-semibold", "w-28")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("الجنسية : ")}
+              {renderEditableField("nationality", "text", "font-bold", "w-32")}
+            </p>
           </div>
         );
       case "age":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("السن : ")}
-            {renderEditableField("age", "number", "font-semibold", "w-16")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("السن : ")}
+              {renderEditableField("age", "number", "font-bold", "w-16")}
+            </p>
           </div>
         );
       case "phoneNumber":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("رقم الهاتف : ")}
-            {renderEditableField("phoneNumber", "text", "font-semibold", "w-32")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("رقم الهاتف : ")}
+              {renderEditableField("phoneNumber", "text", "font-bold font-mono", "w-32")}
+            </p>
           </div>
         );
       case "idAddress":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("العنوان بالبطاقة : ")}
-            {renderEditableField("idAddress", "text", "font-semibold", "w-44")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("العنوان بالبطاقة : ")}
+              {renderEditableField("idAddress", "text", "font-bold", "w-48")}
+            </p>
           </div>
         );
       case "maritalAddress":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("عنوان سكن الزوجية : ")}
-            {renderEditableField("maritalAddress", "text", "font-semibold", "w-44")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("عنوان سكن الزوجية : ")}
+              {renderEditableField("maritalAddress", "text", "font-bold", "w-48")}
+            </p>
           </div>
         );
       case "empty1":
@@ -426,133 +447,150 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   };
 
   const renderSection2Field = (fieldId: string, index: number) => {
-    const colIndex = index % 3;
-    let containerClass = "text-right flex items-center gap-1";
-    let containerStyle: React.CSSProperties = {};
-    let dir: "rtl" | "ltr" | undefined = undefined;
-
+    let colSpan = "col-span-4";
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
 
     const wrapperProps = {
-      className: `${containerClass} ${activeSwapClasses}`,
-      style: containerStyle,
-      dir,
+      className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
+    const innerClass = "mr-3 text-[14px] font-cairo m-0 flex items-center gap-1 font-bold";
 
     switch (fieldId) {
       case "height":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("الطول(سم): ")}
-            {renderEditableField("height", "number", "font-semibold", "w-16")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("الطول(سم) : ")}
+              {renderEditableField("height", "number", "font-bold", "w-16")}
+            </p>
           </div>
         );
       case "weight":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("الوزن(كجم): ")}
-            {renderEditableField("weight", "number", "font-semibold", "w-16")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("الوزن(كجم) : ")}
+              {renderEditableField("weight", "number", "font-bold", "w-16")}
+            </p>
           </div>
         );
       case "bmi":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("BMI : ")}
-            {isEditingText ? (
-              <input
-                type="number"
-                step="0.1"
-                value={editedCert.bmi}
-                onChange={(e) => setEditedCert({ ...editedCert, bmi: parseFloat(e.target.value) || 0 })}
-                className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12px] w-16"
-              />
-            ) : (
-              <span className="font-semibold">{editedCert.bmi}</span>
-            )}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("BMI : ")}
+              {isEditingText ? (
+                <input
+                  type="number"
+                  step="0.1"
+                  value={editedCert.bmi}
+                  onChange={(e) => setEditedCert({ ...editedCert, bmi: parseFloat(e.target.value) || 0 })}
+                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[14px] w-16"
+                />
+              ) : (
+                <span className="font-bold">{editedCert.bmi}</span>
+              )}
+            </p>
           </div>
         );
       case "rh":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("RH : ")}
-            {isEditingText ? (
-              renderEditableField("rh", "text", "font-bold", "w-16")
-            ) : (
-              <span className="font-bold">
-                {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
-              </span>
-            )}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("RH : ")}
+              {isEditingText ? (
+                renderEditableField("rh", "text", "font-bold", "w-16")
+              ) : (
+                <span className="font-bold">
+                  {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
+                </span>
+              )}
+            </p>
           </div>
         );
       case "bloodType":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("فصيلة الدم : ")}
-            {isEditingText ? (
-              <>
-                {renderEditableField("bloodType", "text", "font-bold", "w-12")}
-                {renderEditableField("rh", "text", "font-bold", "w-12")}
-              </>
-            ) : (
-              <span className="font-bold">
-                {editedCert.bloodType}
-                {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
-              </span>
-            )}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("فصيلة الدم : ")}
+              {isEditingText ? (
+                <>
+                  {renderEditableField("bloodType", "text", "font-bold", "w-12")}
+                  {renderEditableField("rh", "text", "font-bold", "w-12")}
+                </>
+              ) : (
+                <span className="font-bold">
+                  {editedCert.bloodType}
+                  {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
+                </span>
+              )}
+            </p>
           </div>
         );
       case "hb":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("Hb : ")}
-            {renderEditableField("hb", "number", "font-semibold", "w-16")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("Hb : ")}
+              {renderEditableField("hb", "number", "font-bold", "w-16")}
+            </p>
           </div>
         );
       case "hbsAg":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("HBs Ag : ")}
-            {renderEditableField("hbsAg", "text", "font-semibold", "w-24")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("HBs Ag : ")}
+              {renderEditableField("hbsAg", "text", "font-bold", "w-24")}
+            </p>
           </div>
         );
       case "antiHiv":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("Anti-HIV : ")}
-            {renderEditableField("antiHiv", "text", "font-semibold", "w-24")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("Anti-HIV : ")}
+              {renderEditableField("antiHiv", "text", "font-bold", "w-24")}
+            </p>
           </div>
         );
       case "antiHcv":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("Anti-HCV : ")}
-            {renderEditableField("antiHcv", "text", "font-semibold", "w-24")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("Anti-HCV : ")}
+              {renderEditableField("antiHcv", "text", "font-bold", "w-24")}
+            </p>
           </div>
         );
       case "bloodPressure":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("ضغط الدم : ")}
-            {renderEditableField("bloodPressure", "text", "font-semibold", "w-24")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("ضغط الدم : ")}
+              {renderEditableField("bloodPressure", "text", "font-bold", "w-24")}
+            </p>
           </div>
         );
       case "randomBloodSugar":
         return (
           <div key={fieldId} {...wrapperProps}>
-            {renderSwapButton(fieldId)}
-            {renderLabel("نتيجة فحص السكر(العشوائى) : ")}
-            {renderEditableField("randomBloodSugar", "number", "font-semibold", "w-16")}
+            <p className={innerClass}>
+              {renderSwapButton(fieldId)}
+              {renderLabel("نتيجة فحص السكر(العشوائى) : ")}
+              {renderEditableField("randomBloodSugar", "number", "font-bold", "w-16")}
+            </p>
           </div>
         );
       case "empty2":
@@ -565,8 +603,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col lg:flex-row print:bg-white print:text-black print:p-0 print:m-0 w-full">
       <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
         body, html {
-          font-family: Arial, 'Segoe UI', Tahoma, sans-serif !important;
+          font-family: 'Cairo', Arial, 'Segoe UI', Tahoma, sans-serif !important;
           color: #000000 !important;
         }
 
@@ -736,7 +775,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Reset Button */}
           <button
             onClick={() => {
-              setFontSize(12.5);
+              setFontSize(14);
               setLineHeight(1.2);
               setLetterSpacing(0);
               setFontWeight(700);
@@ -1064,8 +1103,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           title={!isEditingText && isAdmin ? "انقر للبدء في التعديل" : undefined}
           style={{ cursor: (isEditingText || !isAdmin) ? "default" : "text" }}
         >
-          {/* Topmost Row: Photo Box */}
-          <div className="flex justify-between items-center section-block mt-0.5 relative">
+          {/* Header Row */}
+          <div className="flex justify-between items-start section-block relative mt-4">
             <div></div>
             {/* Center: Certificate Title */}
             <div 
@@ -1097,235 +1136,269 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               </div>
             </div>
             {/* Left: Photo Box */}
-            <div className="flex flex-col items-center ml-[60px]">
-              <div className="border border-black flex items-center justify-center text-[12px] text-black font-bold mb-0.5" style={{ width: '19mm', height: '24mm' }}>
+            <div className="flex flex-col items-center w-1/4" style={{ direction: 'ltr', marginRight: 'auto' }}>
+              <div className="border border-black bg-white flex items-center justify-center text-[12px] font-bold" style={{ width: '100px', height: '100px' }}>
                 <span dir="ltr">4*6</span>
               </div>
-              <span className="text-[11.5px] text-black font-bold">ختم شعار الجمهورية</span>
+              <span className="font-bold mt-1 text-[14px]">ختم شعار الجمهورية</span>
             </div>
           </div>
 
-          {/* Section 1: Basic Information */}
-          <div className="section-block">
-            <div className="grid grid-cols-3 gap-2 text-[12px] font-bold text-black max-w-[90%] mx-auto mb-2 mt-1">
-              <div className="text-right flex items-center gap-1">
+          <div className="grid grid-cols-10 gap-2 mb-4" style={{ paddingTop: '40px' }}>
+            <div className="col-span-3 font-bold flex items-center gap-1">
                 {renderLabel("تاريخ الإصدار : ")}
                 {isEditingText ? (
                   <input
                     type="text"
                     value={editedCert.issueDate}
                     onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[12px] w-24"
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[14px] w-28"
                   />
                 ) : (
-                  <span>{formatDate(editedCert.issueDate)}</span>
+                  <span className="text-[14px]">{formatDate(editedCert.issueDate)}</span>
                 )}
-              </div>
-              <div className="text-center flex items-center justify-center gap-1" style={{ position: 'relative', left: '90px' }}>
-                {renderLabel("اسم الوحدة: ")}
-                {renderEditableField("unitName", "text", "font-bold", "w-32")}
-              </div>
-              <div className="text-left flex items-center justify-end gap-1" style={{ position: 'relative', left: '200px' }}>
-                {renderLabel("المحافظة: ")}
-                {renderEditableField("governorate", "text", "font-bold", "w-28")}
-              </div>
             </div>
-            <h3
-              className={`text-[14.5px] font-bold text-black mb-0 pr-[5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+            <div className="col-span-4 font-bold flex items-center gap-1">
+                {renderLabel("اسم الوحدة: ")}
+                {renderEditableField("unitName", "text", "font-bold text-[14px]", "w-48")}
+            </div>
+            <div className="col-span-3 font-bold flex items-center gap-1">
+                {renderLabel("المحافظة: ")}
+                {renderEditableField("governorate", "text", "font-bold text-[14px]", "w-32")}
+            </div>
+          </div>
+
+          {/* Section 1: Basic Information */}
+          <div className="section-block w-full">
+            <h2
+              className={`text-2xl font-bold text-black mb-2 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               البيانات الأساسية
-            </h3>
-            <div className="grid grid-cols-3 grid-gap-dynamic text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
+            </h2>
+            <div className="bg-white grid grid-cols-12 grid-gap-dynamic w-full">
               {section1Layout.map((fieldId, index) => renderSection1Field(fieldId, index))}
             </div>
           </div>
 
+          <br />
+
           {/* Section 2: Medical Examinations */}
-          <div className="section-block">
-            <h3
-              className={`text-[14.5px] font-bold text-black mb-0 pr-[5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+          <div className="section-block w-full">
+            <h2
+              className={`text-2xl font-bold text-black mb-2 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               الفحوصات الطبية
-            </h3>
-            <div className="grid grid-cols-3 grid-gap-dynamic text-[12.5px] font-bold text-black max-w-[90%] mx-auto">
+            </h2>
+            <div className="bg-white grid grid-cols-12 grid-gap-dynamic w-full">
               {section2Layout.map((fieldId, index) => renderSection2Field(fieldId, index))}
             </div>
           </div>
 
           {/* Section 3: Hb Electrophoresis */}
-          <div className="section-block">
-            <h4
-              className={`text-[12.5px] font-bold text-black mb-0 text-left underline underline-offset-2 pl-[7.5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
-              dir="ltr"
-              style={{ position: 'relative', left: '-75px' }}
-              contentEditable={isEditingText} suppressContentEditableWarning
-            >
-              Hb Electrophoresis :
-            </h4>
-            <div className="flex justify-between items-center text-center text-[12px] font-bold text-black max-w-[85%] mx-auto pl-[50px] pr-[28px]" dir="ltr">
-              <div>
-                <div className="flex items-center justify-center gap-1">
-                  {renderLabel("A : ")}
-                  {renderEditableField("hbA", "number", "font-semibold", "w-12")}
-                  {renderLabel(" %")}
-                </div>
-                <div className="mt-0.5">
-                  {renderLabel("Normal")}
-                </div>
+          <div className="section-block mt-4 w-full">
+            <div className="w-full mb-2">
+                <p style={{ direction: 'ltr', fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', width: '100%', display: 'block', textAlign: 'left', margin: 0 }}>
+                    Hb Electrophoresis :
+                </p>
+            </div>
+            <div className="flex w-full justify-between pr-8 pl-8" style={{ direction: 'ltr' }}>
+              <div className="flex flex-col mb-3">
+                  <label className="font-bold flex items-center gap-1">
+                      {renderLabel("A : ")}
+                      {renderEditableField("hbA", "number", "font-bold", "w-12")}
+                      {renderLabel(" %")}
+                  </label>
+                  <div>
+                      <label className="font-bold text-[14px]"><b>Normal</b></label>
+                  </div>
               </div>
-              <div>
-                <div className="flex items-center justify-center gap-1">
-                  {renderLabel("F : ")}
-                  {renderEditableField("hbF", "number", "font-semibold", "w-12")}
-                  {renderLabel(" %")}
-                </div>
-                <div className="mt-0.5">{renderLabel("Normal")}</div>
+              <div className="flex flex-col mb-3">
+                  <label className="font-bold flex items-center gap-1">
+                      {renderLabel("F : ")}
+                      {renderEditableField("hbF", "number", "font-bold", "w-12")}
+                      {renderLabel(" %")}
+                  </label>
+                  <div>
+                      <label className="font-bold text-[14px]"><b>Normal</b></label>
+                  </div>
               </div>
-              <div>
-                <div className="flex items-center justify-center gap-1">
-                  {renderLabel("A2 : ")}
-                  {renderEditableField("hbA2", "number", "font-semibold", "w-12")}
-                  {renderLabel(" %")}
-                </div>
-                <div className="mt-0.5">{renderLabel("Normal")}</div>
+              <div className="flex flex-col mb-3">
+                  <label className="font-bold flex items-center gap-1">
+                      {renderLabel("A2 : ")}
+                      {renderEditableField("hbA2", "number", "font-bold", "w-12")}
+                      {renderLabel(" %")}
+                  </label>
+                  <div>
+                      <label className="font-bold text-[14px]"><b>Normal</b></label>
+                  </div>
               </div>
-              <div>
-                <div className="flex items-center justify-center gap-1">
-                  {renderLabel("C : ")}
-                  {renderEditableField("hbC", "number", "font-semibold", "w-12")}
-                  {renderLabel(" %")}
-                </div>
-                <div className="mt-0.5">{renderLabel("Normal")}</div>
+              <div className="flex flex-col mb-3">
+                  <label className="font-bold flex items-center gap-1">
+                      {renderLabel("C : ")}
+                      {renderEditableField("hbC", "number", "font-bold", "w-12")}
+                      {renderLabel(" %")}
+                  </label>
+                  <div>
+                      <label className="font-bold text-[14px]"><b>Normal</b></label>
+                  </div>
               </div>
-              <div>
-                <div className="flex items-center justify-center gap-1">
-                  {renderLabel("S : ")}
-                  {renderEditableField("hbS", "number", "font-semibold", "w-12")}
-                  {renderLabel(" %")}
-                </div>
-                <div className="mt-0.5">{renderLabel("Normal")}</div>
+              <div className="flex flex-col mb-3">
+                  <label className="font-bold flex items-center gap-1">
+                      {renderLabel("S : ")}
+                      {renderEditableField("hbS", "number", "font-bold", "w-12")}
+                      {renderLabel(" %")}
+                  </label>
+                  <div>
+                      <label className="font-bold text-[14px]"><b>Normal</b></label>
+                  </div>
               </div>
             </div>
+          </div>
+
+          <div className="w-full my-4">
+              <p className="mr-3 text-[14px] font-cairo m-0">
+                  <span className="font-bold">
+                    {isEditingText ? (
+                      <input
+                        type="text"
+                        value={hotlineText}
+                        onChange={(e) => setHotlineText(e.target.value)}
+                        className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold focus:outline-none focus:bg-white w-full"
+                      />
+                    ) : (
+                      hotlineText
+                    )}
+                  </span>
+              </p>
           </div>
 
           {/* Section 4: Declaration Block */}
-          <div className="section-block">
-            <h3
-              className={`text-[14px] font-bold text-black mb-0 text-right pr-[5%] ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+          <div className="section-block w-full">
+            <h2
+              className={`text-2xl font-bold text-black mb-2 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب
-            </h3>
-            {/* Hotline text removed by user request */}
+            </h2>
+            
+            <div className="bg-white w-full">
+                <div className="grid grid-cols-12 pt-2">
+                    <div className="col-span-4 pt-4 flex flex-col gap-2">
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
+                    </div>
+                    <div className="col-span-4 pt-4 flex flex-col gap-2">
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                    </div>
+                    <div className="col-span-3 flex flex-col items-center">
+                        <div className="w-[100px] h-[100px] rounded-full border border-black"></div>
+                        <p className="pt-[2px] pr-[45px] font-bold text-[14px] m-0">ختم شعار الجمهورية</p>
+                    </div>
+                </div>
 
-            <div className="flex justify-between items-center text-black max-w-[90%] mx-auto">
-              <div className="flex-1 grid grid-cols-2 grid-gap-dynamic text-[12px] font-bold">
-                <div className="text-right font-bold">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></div>
-                <div className="text-right pr-[10px] font-bold">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></div>
+                <div className="grid grid-cols-12 pt-2 mt-4">
+                    <div className="col-span-6">
+                        <p className="mr-3 text-[14px] font-cairo m-0 flex items-center gap-1 font-bold">
+                            {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
+                            <span className="font-bold">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
+                        </p>
+                    </div>
+                    <div className="col-span-4">
+                        <p className="mr-3 text-[14px] font-cairo m-0 flex items-center gap-1 font-bold">
+                            {renderLabel("رقم القومى : ")}
+                            <span className="font-bold">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
+                        </p>
+                    </div>
+                </div>
 
-                <div className="text-right font-bold">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></div>
-                <div className="text-right pr-[10px] font-bold">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></div>
+                <div className="mt-2">
+                    {isEditingText ? (
+                      <textarea
+                        value={consentText}
+                        onChange={(e) => setConsentText(e.target.value)}
+                        className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-bold text-justify text-[14px] w-full h-24 resize-none focus:outline-none focus:bg-white"
+                        dir="rtl"
+                      />
+                    ) : (
+                      <p className="mr-3 text-[14px] font-cairo font-bold leading-relaxed text-justify">
+                        {consentText}
+                      </p>
+                    )}
+                </div>
 
-                <div className="text-right font-bold">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></div>
-                <div className="text-right pr-[10px] font-bold">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></div>
-              </div>
+                <div className="grid grid-cols-12 mt-6">
+                    <div className="col-span-4 border-l border-black flex flex-col gap-2">
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
+                    </div>
+                    <div className="col-span-3 border-l border-black flex flex-col items-center">
+                        <div className="w-[80px] h-[80px] rounded-full border border-black mb-1"></div>
+                        <p className="pt-[2px] text-center font-bold text-[14px] m-0">بصمة الإبهام</p>
+                    </div>
+                    <div className="col-span-5 flex flex-col gap-2 pr-3">
+                        <p className="mr-3 text-[14px] font-bold flex items-center gap-1 m-0">
+                          {renderLabel("اسم الطرف الاخر(رباعى) : ")}
+                          {renderEditableField("partnerName", "text", "font-bold", "w-40")}
+                        </p>
+                        <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></p>
+                        <p className="mr-3 text-[14px] font-bold flex items-center gap-1 m-0">
+                          {renderLabel("الرقم القومى للطرف الاخر : ")}
+                          {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-40")}
+                        </p>
+                    </div>
+                </div>
 
-              <div className="flex flex-col items-center ml-8">
-                <div className="w-[65px] h-[65px] rounded-full border border-black mb-1"></div>
-                {renderLabel("ختم شعار الجمهورية")}
-              </div>
-            </div>
-          </div>
+                <div className="grid grid-cols-12 mt-4 items-center">
+                    <div className="col-span-5 pt-3">
+                        <p className="mr-3 text-[14px] text-red-600 font-bold m-0">
+                          {isEditingText ? (
+                            <input
+                              type="text"
+                              value={validityText}
+                              onChange={(e) => setValidityText(e.target.value)}
+                              className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-red-600 font-bold focus:outline-none focus:bg-white w-full"
+                            />
+                          ) : (
+                            validityText
+                          )}
+                        </p>
+                    </div>
+                    <div className="col-span-3"></div>
+                    <div className="col-span-4 flex flex-col items-end">
+                        <div className="bg-white p-1 border border-black w-fit">
+                            {currentUrl ? (
+                              <QRCodeSVG value={currentUrl} size={qrSize} />
+                            ) : (
+                              <div className="bg-slate-100 flex items-center justify-center text-[10px] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
+                                QR
+                              </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
 
-          {/* Section 5: Individual Consent Text */}
-          <div className="section-block max-w-[90%] mx-auto">
-            <div className="flex justify-between items-center text-[12.5px] font-bold text-black mb-0">
-              <div className="flex items-center gap-1">
-                {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
-                <span className="font-bold">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
-              </div>
-              <div className="pl-16 flex items-center gap-1">
-                {renderLabel("رقم القومى : ")}
-                <span className="font-mono font-bold">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
-              </div>
-            </div>
-            {isEditingText ? (
-              <textarea
-                value={consentText}
-                onChange={(e) => setConsentText(e.target.value)}
-                className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-bold text-justify text-[11px] w-full h-16 resize-none focus:outline-none focus:bg-white"
-                dir="rtl"
-              />
-            ) : (
-              <p className="text-[11px] font-bold text-black leading-snug text-justify tracking-tight" style={{ wordSpacing: "-0.4px" }}>
-                {consentText}
-              </p>
-            )}
-          </div>
-
-          {/* Section 6: Thumbprint & Partner Info */}
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center text-[12.5px] font-bold text-black section-block max-w-[90%] mx-auto">
-            <div className="flex flex-col space-y-1.5 relative -top-[10px]">
-              <div className="font-bold">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></div>
-              <div className="font-bold">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></div>
-            </div>
-
-            <div className="flex flex-col items-center justify-center border-r-2 border-l-2 border-slate-300 px-6 py-1 h-full">
-              <div className="w-[55px] h-[55px] rounded-full border border-black mb-1"></div>
-              <span className="text-[11.5px] font-bold field-label">بصمة الإبهام</span>
-            </div>
-
-            <div className="flex flex-col space-y-1.5 pr-6">
-              <div className="flex items-center gap-1 font-bold">
-                {renderLabel("اسم الطرف الاخر(رباعى) : ")}
-                {renderEditableField("partnerName", "text", "font-bold", "w-36")}
-              </div>
-              <div className="font-bold">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></div>
-              <div className="flex items-center gap-1 font-bold">
-                {renderLabel("الرقم القومى للطرف الاخر : ")}
-                {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-36")}
-              </div>
-            </div>
-          </div>
-
-          {/* Footer Block */}
-          <div className="flex justify-between items-end text-black section-block max-w-[90%] mx-auto w-full">
-            <div className="text-[11.5px] font-bold text-black text-right pb-1 relative" style={{ top: `-${qrSize + 7}px` }}>
-              {isEditingText ? (
-                <input
-                  type="text"
-                  value={validityText}
-                  onChange={(e) => setValidityText(e.target.value)}
-                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-right focus:outline-none focus:bg-white text-[11px] w-80"
-                />
-              ) : (
-                <span>{validityText}</span>
-              )}
-            </div>
-            <div className="flex flex-col items-center ml-[88px]">
-              <div className="bg-white p-1" style={{ border: '1px dotted black' }}>
-                {currentUrl ? (
-                  <QRCodeSVG value={currentUrl} size={qrSize} />
-                ) : (
-                  <div className="bg-slate-100 flex items-center justify-center text-[10px] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
-                    QR
-                  </div>
-                )}
-              </div>
-              <span className="mt-0.5 font-bold text-[11px] flex items-center gap-1">
-                {isEditingText ? (
-                  <input
-                    type="text"
-                    value={editedCert.qrCodeLabel || ""}
-                    onChange={(e) => setEditedCert({ ...editedCert, qrCodeLabel: e.target.value })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[11px] w-28"
-                  />
-                ) : (
-                  <span>{editedCert.qrCodeLabel || `2026-${editedCert.certificateId}`}</span>
-                )}
-              </span>
+                <div className="grid grid-cols-12 mt-2">
+                    <div className="col-span-8"></div>
+                    <div className="col-span-4 flex justify-end">
+                        <p className="font-bold text-[14px] m-0 mb-1 flex items-center gap-1 text-black">
+                          {isEditingText ? (
+                            <input
+                              type="text"
+                              value={editedCert.qrCodeLabel || ""}
+                              onChange={(e) => setEditedCert({ ...editedCert, qrCodeLabel: e.target.value })}
+                              className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white w-28"
+                            />
+                          ) : (
+                            <span>{editedCert.qrCodeLabel || `2026-${editedCert.certificateId}`}</span>
+                          )}
+                        </p>
+                    </div>
+                </div>
             </div>
           </div>
 
