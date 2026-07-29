@@ -1172,7 +1172,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 1: Basic Information */}
           <div className="section-block w-full">
             <h2
-              className={`text-2xl font-bold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-lg font-bold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               البيانات الأساسية
@@ -1185,7 +1185,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 2: Medical Examinations */}
           <div className="section-block w-full">
             <h2
-              className={`text-2xl font-bold text-black mb-2 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-lg font-bold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               الفحوصات الطبية
@@ -1259,7 +1259,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 4: Declaration Block */}
           <div className="section-block w-full">
             <h2
-              className={`text-2xl font-bold text-black mb-2 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-lg font-bold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب
