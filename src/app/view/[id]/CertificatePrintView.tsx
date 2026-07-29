@@ -1288,17 +1288,17 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     </div>
                 </div>
 
-                <div className="grid grid-cols-12 mt-1">
-                    <div className="col-span-6">
-                        <p className="mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                <div className="grid grid-cols-12 mt-1 gap-x-4">
+                    <div className="col-span-8">
+                        <p className="mr-3 text-[11.5pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
-                            <span className="font-bold text-[12pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
+                            <span className="font-bold text-[11.5pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                         </p>
                     </div>
                     <div className="col-span-4">
-                        <p className="mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        <p className="text-[11.5pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("رقم القومى : ")}
-                            <span className="font-bold text-[12pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
+                            <span className="font-bold text-[11.5pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
                         </p>
                     </div>
                 </div>
