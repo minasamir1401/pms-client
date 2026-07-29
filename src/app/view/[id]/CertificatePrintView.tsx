@@ -136,7 +136,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     "للاستشارات والدعم النفسي يرجى التواصل على الخط الساخن 16328 أو زيارة الموقع الإلكتروني https://mentalhealth.mohp.gov.eg"
   );
   const [validityText, setValidityText] = useState(
-    "*هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار"
+    "هذه الوثيقة صالحة لمدة ستة اشهر من تاريخ الإصدار"
   );
 
   useEffect(() => {
@@ -1307,7 +1307,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         dir="rtl"
                       />
                     ) : (
-                      <p className="mr-3 text-[14px] font-cairo font-bold leading-relaxed text-justify">
+                      <p className="mr-3 text-[10px] font-cairo leading-relaxed text-justify">
                         {consentText}
                       </p>
                     )}
@@ -1337,7 +1337,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1 items-center">
                     <div className="col-span-5 pt-1">
-                        <p className="mr-3 text-[14px] text-red-600 font-bold m-0">
+                        <p className="mr-3 text-[10px] text-red-600 font-bold m-0 whitespace-nowrap">
                           {isEditingText ? (
                             <input
                               type="text"
