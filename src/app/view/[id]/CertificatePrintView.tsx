@@ -60,7 +60,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [fontSize, setFontSize] = useState(10);
   const [lineHeight, setLineHeight] = useState(1.2);
   const [letterSpacing, setLetterSpacing] = useState(0);
-  const [fontWeight, setFontWeight] = useState(600);
+  const [fontWeight, setFontWeight] = useState(400);
   const [paddingX, setPaddingX] = useState(12);
   const [paddingY, setPaddingY] = useState(6);
   const [qrSize, setQrSize] = useState(45);
