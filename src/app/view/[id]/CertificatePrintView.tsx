@@ -1279,7 +1279,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     </div>
                     <div className="col-span-3 flex flex-col items-center">
                         <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
-                        <p className="pt-[2px] pr-[45px] font-bold text-[14px] m-0">ختم شعار الجمهورية</p>
+                        <p className="pt-[2px] text-center font-bold text-[10px] m-0">ختم شعار الجمهورية</p>
                     </div>
                 </div>
 
@@ -1320,7 +1320,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     </div>
                     <div className="col-span-3 border-l border-black flex flex-col items-center">
                         <div className="w-[60px] h-[60px] rounded-full border border-black mb-1"></div>
-                        <p className="pt-[2px] text-center font-bold text-[14px] m-0">بصمة الإبهام</p>
+                        <p className="pt-[2px] text-center font-bold text-[10px] m-0">بصمة الإبهام</p>
                     </div>
                     <div className="col-span-5 flex flex-col gap-1 pr-3">
                         <p className="mr-3 text-[14px] font-bold flex items-center gap-1 m-0">
