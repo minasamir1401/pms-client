@@ -365,7 +365,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الاسم : ")}
-              {renderEditableField("fullName", "text", "font-bold", "w-48")}
+              {renderEditableField("fullName", "text", "font-normal whitespace-nowrap", "w-48")}
             </p>
           </div>
         );
@@ -425,7 +425,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("العنوان بالبطاقة : ")}
-              {renderEditableField("idAddress", "text", "font-bold", "w-48")}
+              {renderEditableField("idAddress", "text", "font-normal whitespace-nowrap", "w-64")}
             </p>
           </div>
         );
@@ -435,7 +435,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("عنوان سكن الزوجية : ")}
-              {renderEditableField("maritalAddress", "text", "font-bold", "w-48")}
+              {renderEditableField("maritalAddress", "text", "font-normal whitespace-nowrap", "w-64")}
             </p>
           </div>
         );
@@ -1161,11 +1161,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
             <div className="col-span-4 font-bold flex items-center gap-1">
                 {renderLabel("اسم الوحدة: ")}
-                {renderEditableField("unitName", "text", "font-bold text-[14px]", "w-48")}
+                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[10px]", "w-48")}
             </div>
             <div className="col-span-3 font-bold flex items-center gap-1">
                 {renderLabel("المحافظة: ")}
-                {renderEditableField("governorate", "text", "font-bold text-[14px]", "w-32")}
+                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[10px]", "w-32")}
             </div>
           </div>
 
