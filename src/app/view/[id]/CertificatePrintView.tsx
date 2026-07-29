@@ -448,6 +448,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
   const renderSection2Field = (fieldId: string, index: number) => {
     let colSpan = "col-span-4";
+    if (fieldId === "bloodPressure") colSpan = "col-span-5";
+    if (fieldId === "bloodSugar") colSpan = "col-span-7";
     const isSwapSource = swapSourceId === fieldId;
     const activeSwapClasses = isSwapSource ? "ring-2 ring-teal-400 bg-teal-50 rounded print:ring-0 print:bg-transparent" : "";
 
@@ -1270,12 +1272,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             
             <div className="bg-white w-full">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-4 flex flex-col gap-3">
+                    <div className="col-span-5 flex flex-col gap-3 pt-[3px]">
                         <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
                         <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
                         <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
                     </div>
-                    <div className="col-span-4 flex flex-col gap-3">
+                    <div className="col-span-4 flex flex-col gap-3 pt-[3px]">
                         <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                         <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                         <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
