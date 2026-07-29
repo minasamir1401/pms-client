@@ -57,7 +57,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [currentUrl, setCurrentUrl] = useState("");
   const [editedCert, setEditedCert] = useState(certificate);
   const [isEditingText, setIsEditingText] = useState(false);
-  const [fontSize, setFontSize] = useState(14);
+  const [fontSize, setFontSize] = useState(12);
   const [lineHeight, setLineHeight] = useState(1.2);
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [fontWeight, setFontWeight] = useState(700);
@@ -613,6 +613,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           width: 210mm;
           height: 295mm; /* slightly less than 297mm to prevent overflow */
           padding: ${paddingY}mm ${paddingX}mm;
+          padding-bottom: 200px !important;
           box-sizing: border-box;
           background-color: #ffffff;
           color: #000000 !important;
@@ -1144,7 +1145,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
           </div>
 
-          <div className="grid grid-cols-10 gap-2 mb-4" style={{ paddingTop: '40px' }}>
+          <div className="grid grid-cols-10 gap-2 mb-4" style={{ paddingTop: '20px' }}>
             <div className="col-span-3 font-bold flex items-center gap-1">
                 {renderLabel("تاريخ الإصدار : ")}
                 {isEditingText ? (
@@ -1180,8 +1181,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               {section1Layout.map((fieldId, index) => renderSection1Field(fieldId, index))}
             </div>
           </div>
-
-          <br />
 
           {/* Section 2: Medical Examinations */}
           <div className="section-block w-full">
