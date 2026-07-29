@@ -679,7 +679,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           margin-bottom: ${sectionGap}px !important;
         }
 
-        .print-page .gap-y-[10px] gap-x-1 {
+        .print-page .gap-y-[15px] gap-x-1 {
           row-gap: ${gridGap}px !important;
           column-gap: 8px !important;
         }
@@ -1180,7 +1180,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             >
               البيانات الأساسية
             </h2>
-            <div className="bg-white grid grid-cols-12 gap-y-[10px] gap-x-1 w-full">
+            <div className="bg-white grid grid-cols-12 gap-y-[15px] gap-x-1 w-full">
               {section1Layout.map((fieldId, index) => renderSection1Field(fieldId, index))}
             </div>
           </div>
@@ -1193,7 +1193,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             >
               الفحوصات الطبية
             </h2>
-            <div className="bg-white grid grid-cols-12 gap-y-[10px] gap-x-1 w-full">
+            <div className="bg-white grid grid-cols-12 gap-y-[15px] gap-x-1 w-full">
               {section2Layout.map((fieldId, index) => renderSection2Field(fieldId, index))}
             </div>
           </div>
