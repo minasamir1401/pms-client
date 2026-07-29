@@ -1352,33 +1352,29 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     </div>
                     <div className="col-span-3"></div>
                     <div className="col-span-4 flex flex-col items-end">
-                        <div className="bg-white p-1 border border-black w-fit">
-                            {currentUrl ? (
-                              <QRCodeSVG value={currentUrl} size={qrSize} />
-                            ) : (
-                              <div className="bg-slate-100 flex items-center justify-center text-[10px] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
-                                QR
-                              </div>
-                            )}
+                        <div className="flex flex-col items-center" style={{ transform: 'translateX(40px)' }}>
+                            <div className="bg-white p-1 border border-black w-fit">
+                                {currentUrl ? (
+                                  <QRCodeSVG value={currentUrl} size={qrSize} />
+                                ) : (
+                                  <div className="bg-slate-100 flex items-center justify-center text-[10px] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
+                                    QR
+                                  </div>
+                                )}
+                            </div>
+                            <p className="font-bold text-[10px] m-0 mt-1 flex items-center justify-center text-black text-center w-full">
+                              {isEditingText ? (
+                                <input
+                                  type="text"
+                                  value={editedCert.qrCodeLabel || ""}
+                                  onChange={(e) => setEditedCert({ ...editedCert, qrCodeLabel: e.target.value })}
+                                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white w-20"
+                                />
+                              ) : (
+                                <span>{editedCert.qrCodeLabel || `2026-${editedCert.certificateId}`}</span>
+                              )}
+                            </p>
                         </div>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-12 mt-2">
-                    <div className="col-span-8"></div>
-                    <div className="col-span-4 flex justify-end">
-                        <p className="font-bold text-[14px] m-0 mb-1 flex items-center gap-1 text-black">
-                          {isEditingText ? (
-                            <input
-                              type="text"
-                              value={editedCert.qrCodeLabel || ""}
-                              onChange={(e) => setEditedCert({ ...editedCert, qrCodeLabel: e.target.value })}
-                              className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white w-28"
-                            />
-                          ) : (
-                            <span>{editedCert.qrCodeLabel || `2026-${editedCert.certificateId}`}</span>
-                          )}
-                        </p>
                     </div>
                 </div>
             </div>
