@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Search, ShieldCheck, AlertCircle, FileText, User, Heart, Activity, Upload, QrCode } from "lucide-react";
+import { Search, ShieldCheck, AlertCircle, FileText, User, Heart, Activity, Upload, QrCode, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import API_URL from "@/config";
 
@@ -327,7 +327,9 @@ export default function SearchPage() {
       <main className="relative z-10 flex-1 flex flex-col items-center justify-start py-6 sm:py-10 px-2.5 sm:px-4 max-w-4xl w-full mx-auto space-y-6 sm:space-y-8">
         
         {/* Intro */}
-        <div className="text-center max-w-xl space-y-3">
+        {!certificate && (
+          <>
+            <div className="text-center max-w-xl space-y-3">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
             استعلام عن نتيجة الفحص الطبي
           </h2>
@@ -448,11 +450,20 @@ export default function SearchPage() {
             </div>
           )}
         </div>
+          </>
+        )}
 
         {/* Search Results Display */}
         {certificate && (
           <div className="w-full bg-white rounded-2xl border border-slate-200 p-3.5 min-[340px]:p-6 sm:p-8 shadow-xl space-y-6 animate-fadeIn">
             
+            <div className="flex justify-start mb-2">
+               <button onClick={() => { setCertificate(null); setCertCode(""); setSuccessMessage(""); }} className="text-sm font-bold text-teal-600 flex items-center gap-1 hover:text-teal-700 bg-teal-50 px-3 py-1.5 rounded-lg border border-teal-100 transition-colors">
+                  <ArrowRight className="h-4.5 w-4.5" />
+                  بحث جديد
+               </button>
+            </div>
+
             {/* Header Validation Ribbon */}
             <div className="rounded-xl bg-teal-50 border border-teal-100 p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-teal-800">
               <div className="flex flex-col sm:flex-row items-center gap-2.5 text-center sm:text-right">
