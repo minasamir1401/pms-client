@@ -1172,7 +1172,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 1: Basic Information */}
           <div className="section-block w-full">
             <h2
-              className={`text-2xl font-bold text-black mb-2 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-2xl font-bold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               البيانات الأساسية
@@ -1196,7 +1196,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 3: Hb Electrophoresis */}
-          <div className="section-block mt-4 w-full">
+          <div className="section-block mt-1 w-full">
             <div className="w-full mb-2">
                 <p style={{ direction: 'ltr', fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', width: '100%', display: 'block', textAlign: 'left', margin: 0 }}>
                     Hb Electrophoresis :
@@ -1266,24 +1266,24 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </h2>
             
             <div className="bg-white w-full">
-                <div className="grid grid-cols-12 pt-2">
-                    <div className="col-span-4 pt-4 flex flex-col gap-2">
+                <div className="grid grid-cols-12">
+                    <div className="col-span-4 pt-1 flex flex-col gap-1">
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
                     </div>
-                    <div className="col-span-4 pt-4 flex flex-col gap-2">
+                    <div className="col-span-4 pt-1 flex flex-col gap-1">
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                     </div>
                     <div className="col-span-3 flex flex-col items-center">
-                        <div className="w-[100px] h-[100px] rounded-full border border-black"></div>
+                        <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
                         <p className="pt-[2px] pr-[45px] font-bold text-[14px] m-0">ختم شعار الجمهورية</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-12 pt-2 mt-4">
+                <div className="grid grid-cols-12 mt-2">
                     <div className="col-span-6">
                         <p className="mr-3 text-[14px] font-cairo m-0 flex items-center gap-1 font-bold">
                             {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
@@ -1313,16 +1313,16 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     )}
                 </div>
 
-                <div className="grid grid-cols-12 mt-6">
-                    <div className="col-span-4 border-l border-black flex flex-col gap-2">
+                <div className="grid grid-cols-12 mt-2">
+                    <div className="col-span-4 border-l border-black flex flex-col gap-1">
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
                         <p className="mr-3 text-[14px] font-bold m-0">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
                     </div>
                     <div className="col-span-3 border-l border-black flex flex-col items-center">
-                        <div className="w-[80px] h-[80px] rounded-full border border-black mb-1"></div>
+                        <div className="w-[60px] h-[60px] rounded-full border border-black mb-1"></div>
                         <p className="pt-[2px] text-center font-bold text-[14px] m-0">بصمة الإبهام</p>
                     </div>
-                    <div className="col-span-5 flex flex-col gap-2 pr-3">
+                    <div className="col-span-5 flex flex-col gap-1 pr-3">
                         <p className="mr-3 text-[14px] font-bold flex items-center gap-1 m-0">
                           {renderLabel("اسم الطرف الاخر(رباعى) : ")}
                           {renderEditableField("partnerName", "text", "font-bold", "w-40")}
@@ -1335,8 +1335,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     </div>
                 </div>
 
-                <div className="grid grid-cols-12 mt-4 items-center">
-                    <div className="col-span-5 pt-3">
+                <div className="grid grid-cols-12 mt-1 items-center">
+                    <div className="col-span-5 pt-1">
                         <p className="mr-3 text-[14px] text-red-600 font-bold m-0">
                           {isEditingText ? (
                             <input
