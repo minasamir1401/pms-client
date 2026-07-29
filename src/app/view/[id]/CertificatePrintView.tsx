@@ -68,7 +68,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [gridGap, setGridGap] = useState(2);
   const [titleWidth, setTitleWidth] = useState(certificate.titleWidth ?? 350);
   const [titleHeight, setTitleHeight] = useState(certificate.titleHeight ?? 45);
-  const [titleFontSize, setTitleFontSize] = useState(certificate.titleFontSize ?? 24);
+  const [titleFontSize, setTitleFontSize] = useState(certificate.titleFontSize ?? 18);
   const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
   const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
   const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
@@ -1116,7 +1116,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               }}
             >
               <div 
-                className={`border border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
+                className={`border border-black rounded-[4px] text-black flex items-center justify-center leading-none ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
                 style={{
                   width: `${titleWidth}px`,
                   height: `${titleHeight}px`,
