@@ -1338,7 +1338,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1 items-center">
                     <div className="col-span-7 pt-1">
-                        <p className="mr-3 text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap" style={{ wordSpacing: '6px' }}>
+                        <p className="mr-3 mt-[-20px] text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap" style={{ wordSpacing: '6px' }}>
                           {isEditingText ? (
                             <input
                               type="text"
