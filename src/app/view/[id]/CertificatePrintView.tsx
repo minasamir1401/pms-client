@@ -697,7 +697,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             box-shadow: none !important;
             border: none !important;
             margin: 0 auto !important;
-            padding: 10mm 14mm 6mm 14mm !important;
+            padding: 8mm 12mm 4mm 12mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
@@ -706,6 +706,37 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             overflow: hidden !important;
             page-break-after: avoid;
             page-break-before: avoid;
+            line-height: 1.1 !important;
+            letter-spacing: 0px !important;
+          }
+          .print-page .cert-grid {
+            row-gap: 2px !important;
+            column-gap: 4px !important;
+          }
+          .print-page h2 {
+            margin-bottom: 2px !important;
+            margin-top: 3px !important;
+          }
+          .print-page .gap-3 {
+            gap: 4px !important;
+          }
+          .print-page .mt-4 {
+            margin-top: 6px !important;
+          }
+          .print-page .mt-1 {
+            margin-top: 3px !important;
+          }
+          .print-page .mb-2 {
+            margin-bottom: 3px !important;
+          }
+          .print-page .mb-1 {
+            margin-bottom: 2px !important;
+          }
+          .print-page .gap-\[40px\] {
+            gap: 24px !important;
+          }
+          .print-page p {
+            margin: 0 !important;
           }
         }
         @page {
