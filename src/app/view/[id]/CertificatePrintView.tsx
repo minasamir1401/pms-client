@@ -1288,19 +1288,15 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     </div>
                 </div>
 
-                <div className="grid grid-cols-12 mt-1 gap-x-4">
-                    <div className="col-span-9">
-                        <p className="mr-3 text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
-                            {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
-                            <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
-                        </p>
-                    </div>
-                    <div className="col-span-3 flex justify-start">
-                        <p className="text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
-                            {renderLabel("رقم القومى : ")}
-                            <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
-                        </p>
-                    </div>
+                <div className="flex mt-1 items-center">
+                    <p className="mr-3 text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
+                        <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
+                    </p>
+                    <p className="mr-[200px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        {renderLabel("رقم القومى : ")}
+                        <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
+                    </p>
                 </div>
 
                 <div className="mt-1">
