@@ -365,7 +365,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الاسم : ")}
-              {renderEditableField("fullName", "text", "font-bold text-[9pt]", "w-48")}
+              {renderEditableField("fullName", "text", "font-black text-[10.5pt]", "w-48")}
             </p>
           </div>
         );
@@ -395,7 +395,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الجنسية : ")}
-              {renderEditableField("nationality", "text", "font-bold text-[9pt]", "w-32")}
+              {renderEditableField("nationality", "text", "font-black text-[10.5pt]", "w-32")}
             </p>
           </div>
         );
@@ -425,7 +425,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("العنوان بالبطاقة : ")}
-              {renderEditableField("idAddress", "text", "font-bold text-[9pt]", "w-64")}
+              {renderEditableField("idAddress", "text", "font-black text-[10.5pt]", "w-64")}
             </p>
           </div>
         );
