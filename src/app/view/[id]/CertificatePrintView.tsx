@@ -1276,15 +1276,15 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     <div className="col-span-9 flex flex-col gap-3 pt-[3px]">
                         <div className="flex items-center gap-8">
                             <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1 min-w-[250px]">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">........................</span></p>
-                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1 mr-[-60px]">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                         </div>
                         <div className="flex items-center gap-8">
                             <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1 min-w-[250px]">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">........................</span></p>
-                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1 mr-[-60px]">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                         </div>
                         <div className="flex items-center gap-8">
                             <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1 min-w-[250px]">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">........................</span></p>
-                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1 mr-[-60px]">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                         </div>
                     </div>
                     <div className="col-span-3 flex flex-col items-center mr-[-70px]">
