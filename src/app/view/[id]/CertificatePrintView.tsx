@@ -1110,48 +1110,29 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               }}
             >
               <div 
-                className={`relative flex items-center justify-center ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
+                className={`border border-black rounded-[4px] text-black flex items-center justify-center leading-none px-6 ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
                 style={{
                   width: `${titleWidth}px`,
                   height: `${titleHeight}px`,
-                  background: 'black',
-                  clipPath: 'polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px)'
+                  fontSize: `${titleFontSize}px`,
+                  fontWeight: '900',
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                  letterSpacing: '0px',
+                  whiteSpace: 'nowrap'
                 }}
               >
-                {/* Inner white background to create the border effect */}
-                <div
-                  className="absolute"
-                  style={{
-                    inset: '1px', // 1px border thickness
-                    background: 'white',
-                    clipPath: 'polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px)'
-                  }}
-                />
-                
-                {/* Text Container */}
-                <div 
-                  className="relative z-10 text-black flex items-center justify-center w-full h-full"
-                  style={{
-                    fontSize: `${titleFontSize}px`,
-                    fontWeight: '900',
-                    fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                    letterSpacing: '0px',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  {isEditingText ? (
-                    <input
-                      type="text"
-                      value={titleText}
-                      onChange={(e) => setTitleText(e.target.value)}
-                      className="bg-transparent text-center focus:outline-none w-full font-bold"
-                      style={{ whiteSpace: 'nowrap' }}
-                      dir="rtl"
-                    />
-                  ) : (
-                    titleText
-                  )}
-                </div>
+                {isEditingText ? (
+                  <input
+                    type="text"
+                    value={titleText}
+                    onChange={(e) => setTitleText(e.target.value)}
+                    className="bg-transparent text-center focus:outline-none w-full"
+                    style={{ whiteSpace: 'nowrap', fontWeight: '900' }}
+                    dir="rtl"
+                  />
+                ) : (
+                  titleText
+                )}
               </div>
             </div>
 
