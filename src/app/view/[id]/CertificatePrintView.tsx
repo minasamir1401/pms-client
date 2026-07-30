@@ -1284,13 +1284,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 </div>
 
                 <div className="grid grid-cols-12 mt-1 gap-x-4">
-                    <div className="col-span-8">
+                    <div className="col-span-9">
                         <p className="mr-3 text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
                             <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                         </p>
                     </div>
-                    <div className="col-span-4">
+                    <div className="col-span-3 flex justify-center">
                         <p className="text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("رقم القومى : ")}
                             <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
@@ -1336,7 +1336,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 </div>
 
                 <div className="grid grid-cols-12 mt-1 items-center">
-                    <div className="col-span-5 pt-1">
+                    <div className="col-span-7 pt-1">
                         <p className="mr-3 text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap">
                           {isEditingText ? (
                             <input
@@ -1350,9 +1350,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                           )}
                         </p>
                     </div>
-                    <div className="col-span-3"></div>
-                    <div className="col-span-4 flex flex-col items-end">
-                        <div className="flex flex-col items-center" style={{ transform: 'translateX(40px)' }}>
+                    <div className="col-span-5 flex flex-col items-start pr-3">
+                        <div className="flex flex-col items-center">
                             <div className="bg-white p-1 border border-black w-fit">
                                 {currentUrl ? (
                                   <QRCodeSVG value={currentUrl} size={qrSize} />
