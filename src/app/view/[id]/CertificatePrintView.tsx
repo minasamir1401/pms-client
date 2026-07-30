@@ -66,9 +66,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(35);
   const [sectionGap, setSectionGap] = useState(1);
   const [gridGap, setGridGap] = useState(0.5);
-  const [titleWidth, setTitleWidth] = useState(200);
-  const [titleHeight, setTitleHeight] = useState(28);
-  const [titleFontSize, setTitleFontSize] = useState(16);
+  const [titleWidth, setTitleWidth] = useState(260);
+  const [titleHeight, setTitleHeight] = useState(38);
+  const [titleFontSize, setTitleFontSize] = useState(18);
   const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
   const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
   const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
@@ -279,7 +279,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const renderEditableField = (
     key: keyof Certificate,
     type: "text" | "number" = "text",
-    className = "font-bold text-[12pt]",
+    className = "font-bold text-[9pt]",
     widthClass = "w-full max-w-[140px]"
   ) => {
     const val = editedCert[key];
@@ -299,7 +299,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           }
           setEditedCert({ ...editedCert, [key]: value });
         }}
-        className={`bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12pt] inline-block ${widthClass}`}
+        className={`bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[9pt] inline-block ${widthClass}`}
         dir="rtl"
       />
     );
@@ -356,7 +356,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
 
-    const innerClass = "mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1";
+    const innerClass = "mr-3 text-[9pt] font-cairo m-0 flex items-center gap-1";
 
     switch (fieldId) {
       case "fullName":
@@ -365,7 +365,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الاسم : ")}
-              {renderEditableField("fullName", "text", "font-bold text-[12pt]", "w-48")}
+              {renderEditableField("fullName", "text", "font-bold text-[9pt]", "w-48")}
             </p>
           </div>
         );
@@ -385,7 +385,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("النوع : ")}
-              {renderEditableField("gender", "text", "font-bold text-[12pt]", "w-24")}
+              {renderEditableField("gender", "text", "font-bold text-[9pt]", "w-24")}
             </p>
           </div>
         );
@@ -395,7 +395,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الجنسية : ")}
-              {renderEditableField("nationality", "text", "font-bold text-[12pt]", "w-32")}
+              {renderEditableField("nationality", "text", "font-bold text-[9pt]", "w-32")}
             </p>
           </div>
         );
@@ -405,7 +405,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("السن : ")}
-              {renderEditableField("age", "number", "font-bold text-[12pt]", "w-16")}
+              {renderEditableField("age", "number", "font-bold text-[9pt]", "w-16")}
             </p>
           </div>
         );
@@ -425,7 +425,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("العنوان بالبطاقة : ")}
-              {renderEditableField("idAddress", "text", "font-bold text-[12pt]", "w-64")}
+              {renderEditableField("idAddress", "text", "font-bold text-[9pt]", "w-64")}
             </p>
           </div>
         );
@@ -435,7 +435,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("عنوان سكن الزوجية : ")}
-              {renderEditableField("maritalAddress", "text", "font-bold text-[12pt]", "w-64")}
+              {renderEditableField("maritalAddress", "text", "font-bold text-[9pt]", "w-64")}
             </p>
           </div>
         );
@@ -456,7 +456,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     const wrapperProps = {
       className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
-    const innerClass = "mr-3 text-[12pt] font-cairo m-0 flex items-center gap-1";
+    const innerClass = "mr-3 text-[9pt] font-cairo m-0 flex items-center gap-1";
 
     switch (fieldId) {
       case "height":
@@ -465,7 +465,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الطول(سم) : ")}
-              {renderEditableField("height", "number", "font-bold text-[12pt]", "w-16")}
+              {renderEditableField("height", "number", "font-bold text-[9pt]", "w-16")}
             </p>
           </div>
         );
@@ -475,7 +475,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("الوزن(كجم) : ")}
-              {renderEditableField("weight", "number", "font-bold text-[12pt]", "w-16")}
+              {renderEditableField("weight", "number", "font-bold text-[9pt]", "w-16")}
             </p>
           </div>
         );
@@ -491,10 +491,10 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   step="0.1"
                   value={editedCert.bmi}
                   onChange={(e) => setEditedCert({ ...editedCert, bmi: parseFloat(e.target.value) || 0 })}
-                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12pt] w-16"
+                  className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[9pt] w-16"
                 />
               ) : (
-                <span className="font-bold text-[12pt]">{editedCert.bmi}</span>
+                <span className="font-bold text-[9pt]">{editedCert.bmi}</span>
               )}
             </p>
           </div>
@@ -506,9 +506,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               {renderSwapButton(fieldId)}
               {renderLabel("RH : ")}
               {isEditingText ? (
-                renderEditableField("rh", "text", "font-bold text-[12pt]", "w-16")
+                renderEditableField("rh", "text", "font-bold text-[9pt]", "w-16")
               ) : (
-                <span className="font-bold text-[12pt]">
+                <span className="font-bold text-[9pt]">
                   {editedCert.rh === "+" || editedCert.rh === "إيجابي" ? "إيجابي" : editedCert.rh === "-" || editedCert.rh === "سالب" ? "سالب" : editedCert.rh}
                 </span>
               )}
@@ -523,11 +523,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               {renderLabel("فصيلة الدم : ")}
               {isEditingText ? (
                 <>
-                  {renderEditableField("bloodType", "text", "font-bold text-[12pt]", "w-12")}
-                  {renderEditableField("rh", "text", "font-bold text-[12pt]", "w-12")}
+                  {renderEditableField("bloodType", "text", "font-bold text-[9pt]", "w-12")}
+                  {renderEditableField("rh", "text", "font-bold text-[9pt]", "w-12")}
                 </>
               ) : (
-                <span className="font-bold text-[12pt]">
+                <span className="font-bold text-[9pt]">
                   {editedCert.bloodType}
                   {editedCert.rh === "+" ? "+" : editedCert.rh === "-" ? "-" : ""}
                 </span>
@@ -541,7 +541,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("Hb : ")}
-              {renderEditableField("hb", "number", "font-bold text-[12pt]", "w-16")}
+              {renderEditableField("hb", "number", "font-bold text-[9pt]", "w-16")}
             </p>
           </div>
         );
@@ -551,7 +551,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("HBs Ag : ")}
-              {renderEditableField("hbsAg", "text", "font-bold text-[12pt]", "w-24")}
+              {renderEditableField("hbsAg", "text", "font-bold text-[9pt]", "w-24")}
             </p>
           </div>
         );
@@ -561,7 +561,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("Anti-HIV : ")}
-              {renderEditableField("antiHiv", "text", "font-bold text-[12pt]", "w-24")}
+              {renderEditableField("antiHiv", "text", "font-bold text-[9pt]", "w-24")}
             </p>
           </div>
         );
@@ -571,7 +571,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("Anti-HCV : ")}
-              {renderEditableField("antiHcv", "text", "font-bold text-[12pt]", "w-24")}
+              {renderEditableField("antiHcv", "text", "font-bold text-[9pt]", "w-24")}
             </p>
           </div>
         );
@@ -581,7 +581,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("ضغط الدم : ")}
-              {renderEditableField("bloodPressure", "text", "font-bold text-[12pt]", "w-24")}
+              {renderEditableField("bloodPressure", "text", "font-bold text-[9pt]", "w-24")}
             </p>
           </div>
         );
@@ -591,7 +591,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <p className={innerClass}>
               {renderSwapButton(fieldId)}
               {renderLabel("نتيجة فحص السكر(العشوائى) : ")}
-              {renderEditableField("randomBloodSugar", "number", "font-bold text-[12pt]", "w-16")}
+              {renderEditableField("randomBloodSugar", "number", "font-bold text-[9pt]", "w-16")}
             </p>
           </div>
         );
@@ -642,9 +642,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         .print-page .field-label {
           white-space: nowrap !important;
           font-weight: 400 !important;
-          font-size: 12pt !important;
-          /* font-weight removed */
-          /* font-size removed */
+          font-size: 9pt !important;
           color: #000000 !important;
         }
 
@@ -705,15 +703,19 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             box-shadow: none !important;
             border: none !important;
             margin: 0 !important;
-            padding: 10mm 15mm !important;
+            padding: 0 !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
-            height: 297mm;
-            max-height: 297mm;
+            width: 210mm !important;
+            height: 297mm !important;
+            max-height: 297mm !important;
             overflow: hidden;
             page-break-after: avoid;
             page-break-before: avoid;
+            /* Scale down by 30% to fix oversized print */
+            transform: scale(0.7) !important;
+            transform-origin: top center !important;
           }
         }
         @page {
@@ -726,7 +728,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       {isAdmin && (
       <div className="no-print w-full lg:w-80 bg-slate-900 text-slate-100 border-b lg:border-r border-slate-800 p-6 flex flex-col gap-5 shrink-0 select-none font-sans" dir="rtl">
         <div>
-          <h2 className="text-[13.5pt] font-semibold text-white flex items-center gap-2 mb-1">
+          <h2 className="text-[10.5pt] font-semibold text-white flex items-center gap-2 mb-1">
             <span className="p-1.5 bg-teal-500/10 text-teal-400 rounded-lg">⚙️</span>
             لوحة تحكم الطباعة
           </h2>
@@ -790,9 +792,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setQrSize(35);
               setSectionGap(1);
               setGridGap(0.5);
-              setTitleWidth(200);
-              setTitleHeight(28);
-              setTitleFontSize(16);
+              setTitleWidth(260);
+              setTitleHeight(38);
+              setTitleFontSize(18);
               setTitleY(0);
               setTitleX(0);
               setTitleText("شهادة صحية لراغبي الزواج");
@@ -1111,17 +1113,24 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         >
           {/* Header Row */}
           <div className="flex justify-between items-start relative pt-2">
-            <div></div>
+            {/* Right: Government seal placeholder */}
+            <div className="flex flex-col items-center" style={{ direction: 'ltr', minWidth: '90px' }}>
+              <div className="border border-black bg-white flex items-center justify-center text-[8.5pt] font-semibold" style={{ width: '80px', height: '80px' }}>
+                <span dir="ltr" className="text-[9pt]">4%</span>
+              </div>
+              <span className="font-semibold mt-1 text-[9pt]">ختم شعار الجمهورية</span>
+            </div>
+
             {/* Center: Certificate Title */}
             <div 
-              className="hidden absolute left-1/2"
+              className="absolute left-1/2"
               style={{
                 top: `${titleY}px`,
                 transform: `translateX(calc(-50% + ${titleX}px))`
               }}
             >
               <div 
-                className={`border border-black rounded-[4px] text-black font-semibold flex items-center justify-center leading-none ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
+                className={`border-2 border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none px-4 ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
                 style={{
                   width: `${titleWidth}px`,
                   height: `${titleHeight}px`,
@@ -1133,7 +1142,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     type="text"
                     value={titleText}
                     onChange={(e) => setTitleText(e.target.value)}
-                    className="bg-transparent text-center focus:outline-none w-full"
+                    className="bg-transparent text-center focus:outline-none w-full font-bold"
                     dir="rtl"
                   />
                 ) : (
@@ -1141,12 +1150,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 )}
               </div>
             </div>
-            {/* Left: Photo Box */}
-            <div className="flex flex-col items-center w-1/4" style={{ direction: 'ltr', marginRight: 'auto' }}>
-              <div className="border border-black bg-white flex items-center justify-center text-[12pt] font-semibold" style={{ width: '100px', height: '100px' }}>
-                <span dir="ltr">4*6</span>
-              </div>
-              <span className="font-semibold mt-1 text-[12pt]">ختم شعار الجمهورية</span>
+
+            {/* Left: Ministry Logo */}
+            <div className="flex flex-col items-center" style={{ direction: 'ltr', minWidth: '90px' }}>
+              <img 
+                src="/images/logo-ar-black.png" 
+                alt="شعار وزارة الصحة" 
+                style={{ width: '85px', height: 'auto', objectFit: 'contain' }} 
+              />
             </div>
           </div>
 
@@ -1158,26 +1169,26 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     type="text"
                     value={editedCert.issueDate}
                     onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[12pt] w-28"
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-semibold text-center focus:outline-none focus:bg-white text-[9pt] w-28"
                   />
                 ) : (
-                  <span className="text-[12pt]">{formatDate(editedCert.issueDate)}</span>
+                  <span className="text-[9pt]">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
             <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("اسم الوحدة: ")}
-                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[12pt]", "w-48")}
+                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
             </div>
             <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("المحافظة: ")}
-                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[12pt]", "w-32")}
+                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[9pt]", "w-32")}
             </div>
           </div>
 
           {/* Section 1: Basic Information */}
           <div className="w-full">
             <h2
-              className={`text-[13.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-[10.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               البيانات الأساسية
@@ -1190,7 +1201,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 2: Medical Examinations */}
           <div className="w-full">
             <h2
-              className={`text-[13.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-[10.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               الفحوصات الطبية
@@ -1211,51 +1222,51 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("A : ")}
-                      {renderEditableField("hbA", "number", "font-bold text-[12pt]", "w-12")}
+                      {renderEditableField("hbA", "number", "font-bold text-[9pt]", "w-12")}
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-semibold text-[13.5pt]"><b>Normal</b></label>
+                      <label className="font-semibold text-[10.5pt]"><b>Normal</b></label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("F : ")}
-                      {renderEditableField("hbF", "number", "font-bold text-[12pt]", "w-12")}
+                      {renderEditableField("hbF", "number", "font-bold text-[9pt]", "w-12")}
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-semibold text-[13.5pt]"><b>Normal</b></label>
+                      <label className="font-semibold text-[10.5pt]"><b>Normal</b></label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("A2 : ")}
-                      {renderEditableField("hbA2", "number", "font-bold text-[12pt]", "w-12")}
+                      {renderEditableField("hbA2", "number", "font-bold text-[9pt]", "w-12")}
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-semibold text-[13.5pt]"><b>Normal</b></label>
+                      <label className="font-semibold text-[10.5pt]"><b>Normal</b></label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("C : ")}
-                      {renderEditableField("hbC", "number", "font-bold text-[12pt]", "w-12")}
+                      {renderEditableField("hbC", "number", "font-bold text-[9pt]", "w-12")}
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-semibold text-[13.5pt]"><b>Normal</b></label>
+                      <label className="font-semibold text-[10.5pt]"><b>Normal</b></label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("S : ")}
-                      {renderEditableField("hbS", "number", "font-bold text-[12pt]", "w-12")}
+                      {renderEditableField("hbS", "number", "font-bold text-[9pt]", "w-12")}
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-semibold text-[13.5pt]"><b>Normal</b></label>
+                      <label className="font-semibold text-[10.5pt]"><b>Normal</b></label>
                   </div>
               </div>
             </div>
@@ -1264,7 +1275,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 4: Declaration Block */}
           <div className="w-full">
             <h2
-              className={`text-[13.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-[10.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب
@@ -1273,32 +1284,32 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <div className="bg-white w-full">
                 <div className="grid grid-cols-12">
                     <div className="col-span-5 flex flex-col gap-3 pt-[3px]">
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
                     </div>
                     <div className="col-span-4 flex flex-col gap-3 pt-[3px]">
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
                     </div>
                     <div className="col-span-3 flex flex-col items-center">
                         <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
-                        <p className="pt-[2px] text-center font-semibold text-[12pt] m-0">ختم شعار الجمهورية</p>
+                        <p className="pt-[2px] text-center font-semibold text-[9pt] m-0">ختم شعار الجمهورية</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-12 mt-1 gap-x-4">
                     <div className="col-span-8">
-                        <p className="mr-3 text-[11.5pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        <p className="mr-3 text-[9pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
-                            <span className="font-bold text-[11.5pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
+                            <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                         </p>
                     </div>
                     <div className="col-span-4">
-                        <p className="text-[11.5pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        <p className="text-[9pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("رقم القومى : ")}
-                            <span className="font-bold text-[11.5pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
+                            <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
                         </p>
                     </div>
                 </div>
@@ -1308,11 +1319,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                       <textarea
                         value={consentText}
                         onChange={(e) => setConsentText(e.target.value)}
-                        className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-semibold text-justify text-[12pt] w-full h-24 resize-none focus:outline-none focus:bg-white"
+                        className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-semibold text-justify text-[9pt] w-full h-24 resize-none focus:outline-none focus:bg-white"
                         dir="rtl"
                       />
                     ) : (
-                      <p className="mr-3 text-[12pt] font-cairo leading-relaxed text-justify">
+                      <p className="mr-3 text-[9pt] font-cairo leading-relaxed text-justify">
                         {consentText}
                       </p>
                     )}
@@ -1320,20 +1331,20 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1">
                     <div className="col-span-4 border-l border-black flex flex-col gap-1">
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
                     </div>
                     <div className="col-span-3 border-l border-black flex flex-col items-center">
                         <div className="w-[60px] h-[60px] rounded-full border border-black mb-1"></div>
-                        <p className="pt-[2px] text-center font-semibold text-[12pt] m-0">بصمة الإبهام</p>
+                        <p className="pt-[2px] text-center font-semibold text-[9pt] m-0">بصمة الإبهام</p>
                     </div>
                     <div className="col-span-5 flex flex-col gap-1 pr-3">
-                        <p className="mr-3 text-[12pt] font-semibold flex items-center gap-1 m-0">
+                        <p className="mr-3 text-[9pt] font-semibold flex items-center gap-1 m-0">
                           {renderLabel("اسم الطرف الاخر(رباعى) : ")}
-                          {renderEditableField("partnerName", "text", "font-bold text-[12pt]", "w-40")}
+                          {renderEditableField("partnerName", "text", "font-bold text-[9pt]", "w-40")}
                         </p>
-                        <p className="mr-3 text-[12pt] font-semibold m-0 flex items-center gap-1">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></p>
-                        <p className="mr-3 text-[12pt] font-semibold flex items-center gap-1 m-0">
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold flex items-center gap-1 m-0">
                           {renderLabel("الرقم القومى للطرف الاخر : ")}
                           {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-40")}
                         </p>
@@ -1342,7 +1353,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1 items-center">
                     <div className="col-span-5 pt-1">
-                        <p className="mr-3 text-[12pt] text-red-600 font-semibold m-0 whitespace-nowrap">
+                        <p className="mr-3 text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap">
                           {isEditingText ? (
                             <input
                               type="text"
@@ -1362,12 +1373,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                                 {currentUrl ? (
                                   <QRCodeSVG value={currentUrl} size={qrSize} />
                                 ) : (
-                                  <div className="bg-slate-100 flex items-center justify-center text-[12pt] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
+                                  <div className="bg-slate-100 flex items-center justify-center text-[9pt] text-slate-400" style={{ width: `${qrSize}px`, height: `${qrSize}px` }}>
                                     QR
                                   </div>
                                 )}
                             </div>
-                            <p className="font-semibold text-[12pt] m-0 mt-1 flex items-center justify-center text-black text-center w-full">
+                            <p className="font-semibold text-[9pt] m-0 mt-1 flex items-center justify-center text-black text-center w-full">
                               {isEditingText ? (
                                 <input
                                   type="text"
