@@ -643,6 +643,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           color: #000000 !important;
         }
 
+        .print-page .header-label-bold {
+          font-weight: 900 !important;
+          font-size: 12pt !important;
+        }
+
         .print-page {
           /* font-size removed */
         }
@@ -1147,7 +1152,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
           <div className="grid grid-cols-10 gap-2 mb-1 mt-0">
             <div className="col-span-3 font-bold text-[12pt] flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("تاريخ الإصدار : ", "!font-bold !text-[12pt]")}
+                {renderLabel("تاريخ الإصدار : ", "header-label-bold")}
                 {isEditingText ? (
                   <input
                     type="text"
@@ -1156,16 +1161,16 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[12pt] w-28"
                   />
                 ) : (
-                  <span className="text-[12pt] font-bold">{formatDate(editedCert.issueDate)}</span>
+                  <span className="text-[12pt] font-bold header-label-bold">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
             <div className="col-span-4 font-bold text-[12pt] flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: "'Simplified Arabic', 'Traditional Arabic', 'Times New Roman', Arial, sans-serif" }}>
-                {renderLabel("اسم الوحدة: ", "!font-bold !text-[12pt]")}
-                {renderEditableField("unitName", "text", "!font-bold whitespace-nowrap !text-[12pt]", "w-48")}
+                {renderLabel("اسم الوحدة: ", "header-label-bold")}
+                {renderEditableField("unitName", "text", "header-label-bold whitespace-nowrap", "w-48")}
             </div>
             <div className="col-span-3 font-bold text-[12pt] flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("المحافظة: ", "!font-bold !text-[12pt]")}
-                {renderEditableField("governorate", "text", "!font-bold whitespace-nowrap !text-[12pt]", "w-32")}
+                {renderLabel("المحافظة: ", "header-label-bold")}
+                {renderEditableField("governorate", "text", "header-label-bold whitespace-nowrap", "w-32")}
             </div>
           </div>
 
