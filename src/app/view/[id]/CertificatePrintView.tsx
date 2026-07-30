@@ -1287,7 +1287,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                             <p className="text-[9pt] font-semibold m-0 flex items-center gap-1 mr-[-60px]">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                         </div>
                     </div>
-                    <div className="col-span-3 flex flex-col items-center mr-[-70px]">
+                    <div className="col-span-3 flex flex-col items-center mr-[-90px]">
                         <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
                         <p className="pt-[2px] text-center font-semibold text-[9pt] m-0">ختم شعار الجمهورية</p>
                     </div>
