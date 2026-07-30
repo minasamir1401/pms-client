@@ -644,8 +644,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         }
 
         .print-page .header-label-bold {
-          font-weight: 900 !important;
-          font-size: 12pt !important;
+          font-weight: 700 !important;
+          font-size: 10.5pt !important;
         }
 
         .print-page {
@@ -1151,24 +1151,24 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           <div className="grid grid-cols-10 gap-2 mb-1 mt-0">
-            <div className="col-span-3 font-bold text-[12pt] flex items-center gap-1 whitespace-nowrap">
+            <div className="col-span-3 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("تاريخ الإصدار : ", "header-label-bold")}
                 {isEditingText ? (
                   <input
                     type="text"
                     value={editedCert.issueDate}
                     onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
-                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[12pt] w-28"
+                    className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[11pt] w-28"
                   />
                 ) : (
-                  <span className="text-[12pt] font-bold header-label-bold">{formatDate(editedCert.issueDate)}</span>
+                  <span className="text-[11pt] font-bold header-label-bold">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
-            <div className="col-span-4 font-bold text-[12pt] flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: "'Simplified Arabic', 'Traditional Arabic', 'Times New Roman', Arial, sans-serif" }}>
+            <div className="col-span-4 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: "'Simplified Arabic', 'Traditional Arabic', 'Times New Roman', Arial, sans-serif" }}>
                 {renderLabel("اسم الوحدة: ", "header-label-bold")}
                 {renderEditableField("unitName", "text", "header-label-bold whitespace-nowrap", "w-48")}
             </div>
-            <div className="col-span-3 font-bold text-[12pt] flex items-center gap-1 whitespace-nowrap">
+            <div className="col-span-3 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("المحافظة: ", "header-label-bold")}
                 {renderEditableField("governorate", "text", "header-label-bold whitespace-nowrap", "w-32")}
             </div>
