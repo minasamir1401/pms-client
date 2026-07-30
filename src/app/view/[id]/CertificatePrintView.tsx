@@ -697,19 +697,16 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           .print-page {
             box-shadow: none !important;
             border: none !important;
-            margin: 0 !important;
-            padding: 8mm 12mm !important;
+            margin: 0 auto !important;
+            padding: 10mm 14mm 6mm 14mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
             width: 210mm !important;
-            min-height: 0 !important;
-            height: auto !important;
-            overflow: visible !important;
+            height: 297mm !important;
+            overflow: hidden !important;
             page-break-after: avoid;
             page-break-before: avoid;
-            /* zoom shrinks content AND layout - no empty space at bottom */
-            zoom: 0.78;
           }
         }
         @page {
@@ -1119,11 +1116,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               }}
             >
               <div 
-                className={`border-2 border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none px-4 ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
+                className={`border-2 border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none px-6 ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
                 style={{
                   width: `${titleWidth}px`,
                   height: `${titleHeight}px`,
-                  fontSize: `${titleFontSize}px`
+                  fontSize: `${titleFontSize}px`,
+                  whiteSpace: 'nowrap'
                 }}
               >
                 {isEditingText ? (
@@ -1132,6 +1130,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     value={titleText}
                     onChange={(e) => setTitleText(e.target.value)}
                     className="bg-transparent text-center focus:outline-none w-full font-bold"
+                    style={{ whiteSpace: 'nowrap' }}
                     dir="rtl"
                   />
                 ) : (
