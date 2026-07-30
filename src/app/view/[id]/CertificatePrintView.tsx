@@ -1312,8 +1312,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         className="bg-teal-50/70 border border-teal-300 rounded px-2 py-1 text-black font-semibold text-justify text-[9pt] w-full h-24 resize-none focus:outline-none focus:bg-white"
                         dir="rtl"
                       />
+                    ) : consentText === "بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها ." ? (
+                      <div className="mr-3 text-[9pt] leading-relaxed w-full font-normal">
+                        <div style={{ textAlignLast: 'justify', textAlign: 'justify' }}>بأنه قد تم إعلامى بنتيجة الفحص الطبى والتوصيات الطبية المذكورة سابقا وقد تلقيت المشورة الخاصة بحالتى الصحية وألتزم بإعلام طرف الزواج</div>
+                        <div style={{ textAlignLast: 'justify', textAlign: 'justify' }}>الأخر قبل إجراءات الزواج وأصبحت بذلك مسئول عما يترتب على ذلك دون أدنى مسئولية على المنشأة الصحية والفريق الطبى الذى يمثلها .</div>
+                      </div>
                     ) : (
-                      <p className="mr-3 text-[9pt] font-semibold leading-tight text-justify">
+                      <p className="mr-3 text-[9pt] font-normal leading-relaxed text-justify" style={{ textAlignLast: 'justify' }}>
                         {consentText}
                       </p>
                     )}
