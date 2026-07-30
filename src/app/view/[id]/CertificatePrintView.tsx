@@ -66,9 +66,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(35);
   const [sectionGap, setSectionGap] = useState(1);
   const [gridGap, setGridGap] = useState(0.5);
-  const [titleWidth, setTitleWidth] = useState(380);
-  const [titleHeight, setTitleHeight] = useState(58);
-  const [titleFontSize, setTitleFontSize] = useState(26);
+  const [titleWidth, setTitleWidth] = useState(330);
+  const [titleHeight, setTitleHeight] = useState(48);
+  const [titleFontSize, setTitleFontSize] = useState(23);
   const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
   const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
   const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
@@ -783,9 +783,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setQrSize(35);
               setSectionGap(1);
               setGridGap(0.5);
-              setTitleWidth(380);
-              setTitleHeight(58);
-              setTitleFontSize(26);
+              setTitleWidth(330);
+              setTitleHeight(48);
+              setTitleFontSize(23);
               setTitleY(0);
               setTitleX(0);
               setTitleText("شهادة صحية لراغبي الزواج");
