@@ -1197,12 +1197,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
           {/* Section 3: Hb Electrophoresis */}
           <div className="mt-1 w-full flex items-start gap-4" style={{ direction: 'ltr', paddingLeft: '55px' }}>
-            <div className="whitespace-nowrap mt-[2px] min-w-fit">
-                <p style={{ fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', margin: 0 }}>
+            <div className="whitespace-nowrap mt-[2px] min-w-fit ml-[-10px]">
+                <p style={{ fontWeight: 'bold', textDecoration: 'underline', margin: 0 }}>
                     Hb Electrophoresis :
                 </p>
             </div>
-            <div className="flex w-full justify-start gap-[40px] pr-10">
+            <div className="flex w-full justify-start gap-[40px] pr-10 mt-[30px]">
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("A : ")}
