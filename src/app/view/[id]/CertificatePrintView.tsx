@@ -1207,7 +1207,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     Hb Electrophoresis :
                 </p>
             </div>
-            <div className="flex w-full justify-start gap-[60px] pr-10 mt-[30px]">
+            <div className="flex w-[80%] justify-between pr-10 mt-[30px]">
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("A : ")}
@@ -1338,7 +1338,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1 items-center">
                     <div className="col-span-7 pt-1">
-                        <p className="mr-3 mt-[-20px] text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap" style={{ wordSpacing: '6px' }}>
+                        <p className="mr-3 mt-[-50px] text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap" style={{ wordSpacing: '6px' }}>
                           {isEditingText ? (
                             <input
                               type="text"
