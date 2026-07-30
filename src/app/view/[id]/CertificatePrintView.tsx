@@ -1142,7 +1142,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
 
             {/* Left (شمال): Government Seal placeholder */}
-            <div className="flex flex-col items-center" style={{ direction: 'ltr', minWidth: '90px' }}>
+            <div className="flex flex-col items-center ml-[150px]" style={{ direction: 'ltr', minWidth: '90px' }}>
               <div className="border border-black bg-white flex items-center justify-center font-semibold" style={{ width: '80px', height: '80px' }}>
                 <span dir="ltr" className="text-[9pt]">4%</span>
               </div>
