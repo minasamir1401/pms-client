@@ -1231,7 +1231,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           {/* Section 3: Hb Electrophoresis */}
           <div className="mt-1 w-full">
             <div className="w-full mb-2">
-                <p style={{ direction: 'ltr', fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', width: '100%', display: 'block', textAlign: 'left', margin: 0, paddingLeft: '35px' }}>
+                <p style={{ direction: 'ltr', fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', width: '100%', display: 'block', textAlign: 'left', margin: 0, paddingLeft: '55px' }}>
                     Hb Electrophoresis :
                 </p>
             </div>
