@@ -66,9 +66,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(35);
   const [sectionGap, setSectionGap] = useState(1);
   const [gridGap, setGridGap] = useState(0.5);
-  const [titleWidth, setTitleWidth] = useState(260);
-  const [titleHeight, setTitleHeight] = useState(38);
-  const [titleFontSize, setTitleFontSize] = useState(18);
+  const [titleWidth, setTitleWidth] = useState(340);
+  const [titleHeight, setTitleHeight] = useState(50);
+  const [titleFontSize, setTitleFontSize] = useState(22);
   const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
   const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
   const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
@@ -792,9 +792,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setQrSize(35);
               setSectionGap(1);
               setGridGap(0.5);
-              setTitleWidth(260);
-              setTitleHeight(38);
-              setTitleFontSize(18);
+              setTitleWidth(340);
+              setTitleHeight(50);
+              setTitleFontSize(22);
               setTitleY(0);
               setTitleX(0);
               setTitleText("شهادة صحية لراغبي الزواج");
@@ -1113,14 +1113,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         >
           {/* Header Row */}
           <div className="flex justify-between items-start relative pt-2">
-            {/* Right: Ministry Logo (وزارة الصحة والسكان) */}
-            <div className="flex flex-col items-center" style={{ minWidth: '90px' }}>
-              <img
-                src="/images/logo-ar-black.png"
-                alt="شعار وزارة الصحة والسكان"
-                style={{ width: '85px', height: 'auto', objectFit: 'contain' }}
-              />
-            </div>
+            {/* Right: empty spacer */}
+            <div style={{ minWidth: '90px' }}></div>
 
             {/* Center: Certificate Title */}
             <div 
