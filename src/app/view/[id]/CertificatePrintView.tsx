@@ -1293,7 +1293,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
                         <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                     </p>
-                    <p className="mr-[216px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                    <p className="mr-[226px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                         {renderLabel("رقم القومى : ")}
                         <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
                     </p>
@@ -1338,7 +1338,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1 items-center">
                     <div className="col-span-7 pt-1">
-                        <p className="mr-3 text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap">
+                        <p className="mr-3 text-[9pt] text-red-600 font-semibold m-0 whitespace-nowrap" style={{ wordSpacing: '6px' }}>
                           {isEditingText ? (
                             <input
                               type="text"
@@ -1352,7 +1352,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         </p>
                     </div>
                     <div className="col-span-5 flex flex-col items-start pr-3">
-                        <div className="flex flex-col items-center mr-[30px] mt-[37.8px]">
+                        <div className="flex flex-col items-center mr-[30px] mt-[17.8px]">
                             <div className="bg-white p-1 border border-black w-fit">
                                 {currentUrl ? (
                                   <QRCodeSVG value={currentUrl} size={qrSize} />
