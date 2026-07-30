@@ -1168,7 +1168,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 {renderLabel("اسم الوحدة: ", "header-label-bold")}
                 {renderEditableField("unitName", "text", "header-label-bold whitespace-nowrap", "w-48")}
             </div>
-            <div className="col-span-3 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap">
+            <div className="col-span-3 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap mr-[-100px]">
                 {renderLabel("المحافظة: ", "header-label-bold")}
                 {renderEditableField("governorate", "text", "header-label-bold whitespace-nowrap", "w-32")}
             </div>
