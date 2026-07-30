@@ -66,9 +66,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(35);
   const [sectionGap, setSectionGap] = useState(2);
   const [gridGap, setGridGap] = useState(10);
-  const [titleWidth, setTitleWidth] = useState(330);
-  const [titleHeight, setTitleHeight] = useState(48);
-  const [titleFontSize, setTitleFontSize] = useState(23);
+  const [titleWidth, setTitleWidth] = useState(280);
+  const [titleHeight, setTitleHeight] = useState(40);
+  const [titleFontSize, setTitleFontSize] = useState(21);
   const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
   const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
   const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
@@ -305,12 +305,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     );
   };
 
-  const renderLabel = (defaultText: string) => {
+  const renderLabel = (defaultText: string, customClass = "") => {
     return (
       <span
         contentEditable={isEditingText}
         suppressContentEditableWarning
-        className={`field-label ${isEditingText ? "border-b border-dashed border-teal-300 outline-none inline-block whitespace-pre" : ""}`}
+        className={`field-label ${customClass} ${isEditingText ? "border-b border-dashed border-teal-300 outline-none inline-block whitespace-pre" : ""}`}
       >
         {defaultText}
       </span>
@@ -356,7 +356,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
 
-    const innerClass = "mr-3 text-[9pt] font-cairo m-0 flex items-center gap-1";
+    const innerClass = "mr-3 text-[9pt]  m-0 flex items-center gap-1";
 
     switch (fieldId) {
       case "fullName":
@@ -456,7 +456,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
     const wrapperProps = {
       className: `${colSpan} flex items-center ${activeSwapClasses}`,
     };
-    const innerClass = "mr-3 text-[9pt] font-cairo m-0 flex items-center gap-1";
+    const innerClass = "mr-3 text-[9pt]  m-0 flex items-center gap-1";
 
     switch (fieldId) {
       case "height":
@@ -605,9 +605,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col lg:flex-row print:bg-white print:text-black print:p-0 print:m-0 w-full">
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+        
         body, html {
-          font-family: 'Cairo', Arial, 'Segoe UI', Tahoma, sans-serif !important;
+          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
           color: #000000 !important;
         }
 
@@ -777,9 +777,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setQrSize(35);
               setSectionGap(2);
               setGridGap(10);
-              setTitleWidth(330);
-              setTitleHeight(48);
-              setTitleFontSize(23);
+              setTitleWidth(280);
+              setTitleHeight(40);
+              setTitleFontSize(21);
               setTitleY(0);
               setTitleX(0);
               setTitleText("شهادة صحية لراغبي الزواج");
@@ -1122,9 +1122,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 <div
                   className="absolute"
                   style={{
-                    inset: '2px', // 2px border thickness
+                    inset: '1px', // 1px border thickness
                     background: 'white',
-                    clipPath: 'polygon(13px 0, calc(100% - 13px) 0, 100% 13px, 100% calc(100% - 13px), calc(100% - 13px) 100%, 13px 100%, 0 calc(100% - 13px), 0 13px)'
+                    clipPath: 'polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px)'
                   }}
                 />
                 
@@ -1164,7 +1164,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
           </div>
 
-          <div className="grid grid-cols-10 gap-2 mb-2 mt-4">
+          <div className="grid grid-cols-10 gap-2 mb-1 mt-0">
             <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("تاريخ الإصدار : ")}
                 {isEditingText ? (
@@ -1178,8 +1178,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   <span className="text-[9pt]">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
-            <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("اسم الوحدة: ")}
+            <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: 'Arial, sans-serif' }}>
+                {renderLabel("اسم الوحدة: ", "font-normal")}
                 {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
             </div>
             <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
@@ -1304,13 +1304,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1 gap-x-4">
                     <div className="col-span-8">
-                        <p className="mr-3 text-[9pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        <p className="mr-3 text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
                             <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                         </p>
                     </div>
                     <div className="col-span-4">
-                        <p className="text-[9pt] font-cairo m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                        <p className="text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("رقم القومى : ")}
                             <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
                         </p>
@@ -1326,7 +1326,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         dir="rtl"
                       />
                     ) : (
-                      <p className="mr-3 text-[9pt] font-cairo leading-relaxed text-justify">
+                      <p className="mr-3 text-[9pt]  leading-relaxed text-justify">
                         {consentText}
                       </p>
                     )}
