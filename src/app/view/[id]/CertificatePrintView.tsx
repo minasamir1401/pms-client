@@ -1313,7 +1313,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         dir="rtl"
                       />
                     ) : (
-                      <p className="mr-3 text-[9pt] font-semibold leading-relaxed text-justify" style={{ wordSpacing: '2px' }}>
+                      <p className="mr-3 text-[9pt] font-semibold leading-tight text-justify">
                         {consentText}
                       </p>
                     )}
