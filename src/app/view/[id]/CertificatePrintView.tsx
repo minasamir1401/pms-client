@@ -1113,12 +1113,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
         >
           {/* Header Row */}
           <div className="flex justify-between items-start relative pt-2">
-            {/* Right: Government seal placeholder */}
-            <div className="flex flex-col items-center" style={{ direction: 'ltr', minWidth: '90px' }}>
-              <div className="border border-black bg-white flex items-center justify-center text-[8.5pt] font-semibold" style={{ width: '80px', height: '80px' }}>
-                <span dir="ltr" className="text-[9pt]">4%</span>
-              </div>
-              <span className="font-semibold mt-1 text-[9pt]">ختم شعار الجمهورية</span>
+            {/* Right: Ministry Logo (وزارة الصحة والسكان) */}
+            <div className="flex flex-col items-center" style={{ minWidth: '90px' }}>
+              <img
+                src="/images/logo-ar-black.png"
+                alt="شعار وزارة الصحة والسكان"
+                style={{ width: '85px', height: 'auto', objectFit: 'contain' }}
+              />
             </div>
 
             {/* Center: Certificate Title */}
@@ -1151,8 +1152,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               </div>
             </div>
 
-            {/* Left: empty spacer for balance */}
-            <div style={{ minWidth: '90px' }}></div>
+            {/* Left (شمال): Government Seal placeholder */}
+            <div className="flex flex-col items-center" style={{ direction: 'ltr', minWidth: '90px' }}>
+              <div className="border border-black bg-white flex items-center justify-center font-semibold" style={{ width: '80px', height: '80px' }}>
+                <span dir="ltr" className="text-[9pt]">4%</span>
+              </div>
+              <span className="font-semibold mt-1 text-[9pt]">ختم شعار الجمهورية</span>
+            </div>
           </div>
 
           <div className="grid grid-cols-10 gap-2 mb-2 mt-4">
