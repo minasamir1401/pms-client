@@ -1310,7 +1310,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     )}
                 </div>
 
-                <div className="grid grid-cols-12 mt-1">
+                <div className="grid grid-cols-12 mt-6">
                     <div className="col-span-4 border-l border-black flex flex-col gap-1">
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">......................</span></p>
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">......................</span></p>
