@@ -607,7 +607,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       <style jsx global>{`
         
         body, html {
-          font-family: Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+          font-family: Tahoma, "Helvetica Neue", Helvetica, sans-serif !important;
           color: #000000 !important;
         }
 
@@ -1116,7 +1116,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   height: `${titleHeight}px`,
                   fontSize: `${titleFontSize}px`,
                   fontWeight: '900',
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                  fontFamily: 'Tahoma, "Helvetica Neue", Helvetica, sans-serif',
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
@@ -1159,7 +1159,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   <span className="text-[9pt]">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
-            <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: 'Arial, sans-serif' }}>
+            <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: 'Tahoma, sans-serif' }}>
                 {renderLabel("اسم الوحدة: ", "font-normal")}
                 {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
             </div>
