@@ -1151,14 +1151,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               </div>
             </div>
 
-            {/* Left: Ministry Logo */}
-            <div className="flex flex-col items-center" style={{ direction: 'ltr', minWidth: '90px' }}>
-              <img 
-                src="/images/logo-ar-black.png" 
-                alt="شعار وزارة الصحة" 
-                style={{ width: '85px', height: 'auto', objectFit: 'contain' }} 
-              />
-            </div>
+            {/* Left: empty spacer for balance */}
+            <div style={{ minWidth: '90px' }}></div>
           </div>
 
           <div className="grid grid-cols-10 gap-2 mb-2 mt-4">
