@@ -607,7 +607,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
       <style jsx global>{`
         
         body, html {
-          font-family: 'Simplified Arabic', 'Traditional Arabic', 'Times New Roman', Arial, sans-serif !important;
+          font-family: 'Calibri', 'Segoe UI', sans-serif !important;
           color: #000000 !important;
         }
 
@@ -1121,7 +1121,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   height: `${titleHeight}px`,
                   fontSize: `${titleFontSize}px`,
                   fontWeight: '900',
-                  fontFamily: "'Simplified Arabic', 'Traditional Arabic', 'Times New Roman', Arial, sans-serif",
+                  fontFamily: "'Calibri', 'Segoe UI', sans-serif",
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
@@ -1164,7 +1164,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   <span className="text-[11pt] font-bold header-label-bold">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
-            <div className="col-span-4 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: "'Simplified Arabic', 'Traditional Arabic', 'Times New Roman', Arial, sans-serif" }}>
+            <div className="col-span-4 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: "'Calibri', 'Segoe UI', sans-serif" }}>
                 {renderLabel("اسم الوحدة: ", "header-label-bold")}
                 {renderEditableField("unitName", "text", "header-label-bold whitespace-nowrap", "w-48")}
             </div>
@@ -1266,6 +1266,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <h2
               className={`text-[10.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
+              style={{ wordSpacing: '12px' }}
             >
               إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب
             </h2>
