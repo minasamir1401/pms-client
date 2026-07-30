@@ -1215,7 +1215,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-normal text-[9pt]">Normal</label>
+                      <label className="font-semibold text-[10pt]">Normal</label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
@@ -1225,7 +1225,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-normal text-[9pt]">Normal</label>
+                      <label className="font-semibold text-[10pt]">Normal</label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
@@ -1235,7 +1235,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-normal text-[9pt]">Normal</label>
+                      <label className="font-semibold text-[10pt]">Normal</label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
@@ -1245,7 +1245,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-normal text-[9pt]">Normal</label>
+                      <label className="font-semibold text-[10pt]">Normal</label>
                   </div>
               </div>
               <div className="flex flex-col mb-1">
@@ -1255,7 +1255,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                       {renderLabel(" %")}
                   </label>
                   <div>
-                      <label className="font-normal text-[9pt]">Normal</label>
+                      <label className="font-semibold text-[10pt]">Normal</label>
                   </div>
               </div>
             </div>
