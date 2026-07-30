@@ -1142,8 +1142,16 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
           </div>
 
-          <div className="grid grid-cols-10 gap-2 mb-2 mt-4">
-            <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
+          <div className="flex justify-between w-full mb-2 mt-4">
+            <div className="font-semibold flex items-center gap-1 whitespace-nowrap">
+                {renderLabel("المحافظة: ")}
+                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[9pt]", "w-32")}
+            </div>
+            <div className="font-semibold flex items-center gap-1 whitespace-nowrap">
+                {renderLabel("اسم الوحدة: ")}
+                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
+            </div>
+            <div className="font-semibold flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("تاريخ الإصدار : ")}
                 {isEditingText ? (
                   <input
@@ -1156,20 +1164,12 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                   <span className="text-[9pt]">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
-            <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("اسم الوحدة: ")}
-                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
-            </div>
-            <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("المحافظة: ")}
-                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[9pt]", "w-32")}
-            </div>
           </div>
 
           {/* Section 1: Basic Information */}
           <div className="w-full">
             <h2
-              className={`text-[10.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
+              className={`text-[10.5pt] font-black text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
             >
               البيانات الأساسية
@@ -1193,13 +1193,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           </div>
 
           {/* Section 3: Hb Electrophoresis */}
-          <div className="mt-1 w-full">
-            <div className="w-full mb-2">
-                <p style={{ direction: 'ltr', fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', width: '100%', display: 'block', textAlign: 'left', margin: 0, paddingLeft: '55px' }}>
+          <div className="mt-1 w-full flex items-start gap-4" style={{ direction: 'ltr', paddingLeft: '55px' }}>
+            <div className="whitespace-nowrap mt-[2px] min-w-fit">
+                <p style={{ fontWeight: 'bold', textDecoration: 'underline', fontFamily: 'cairo', margin: 0 }}>
                     Hb Electrophoresis :
                 </p>
             </div>
-            <div className="flex w-full justify-center gap-[40px]" style={{ direction: 'ltr', paddingLeft: '50px' }}>
+            <div className="flex w-full justify-start gap-[40px] pr-10">
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("A : ")}
@@ -1265,14 +1265,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <div className="bg-white w-full">
                 <div className="grid grid-cols-12">
                     <div className="col-span-5 flex flex-col gap-3 pt-[3px]">
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">--------------</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">-----------------</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">-------------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">........................</span></p>
                     </div>
                     <div className="col-span-4 flex flex-col gap-3 pt-[3px]">
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">----------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                     </div>
                     <div className="col-span-3 flex flex-col items-center">
                         <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
@@ -1312,8 +1312,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
                 <div className="grid grid-cols-12 mt-1">
                     <div className="col-span-4 border-l border-black flex flex-col gap-1">
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">------------------</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">-----------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("الاسم (رباعى) : ")}<span className="font-normal text-gray-400">......................</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">......................</span></p>
                     </div>
                     <div className="col-span-3 border-l border-black flex flex-col items-center">
                         <div className="w-[60px] h-[60px] rounded-full border border-black mb-1"></div>
@@ -1324,7 +1324,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                           {renderLabel("اسم الطرف الاخر(رباعى) : ")}
                           {renderEditableField("partnerName", "text", "font-bold text-[9pt]", "w-40")}
                         </p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">--------------------</span></p>
+                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("توقيع الطرف الاخر : ")}<span className="font-normal text-gray-400">......................</span></p>
                         <p className="mr-3 text-[9pt] font-semibold flex items-center gap-1 m-0">
                           {renderLabel("الرقم القومى للطرف الاخر : ")}
                           {renderEditableField("partnerNationalId", "text", "font-bold font-mono", "w-40")}
