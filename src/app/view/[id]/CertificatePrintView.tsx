@@ -58,14 +58,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [editedCert, setEditedCert] = useState(certificate);
   const [isEditingText, setIsEditingText] = useState(false);
   const [fontSize, setFontSize] = useState(8);
-  const [lineHeight, setLineHeight] = useState(1.0);
+  const [lineHeight, setLineHeight] = useState(2.0);
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [fontWeight, setFontWeight] = useState(400);
-  const [paddingX, setPaddingX] = useState(8);
-  const [paddingY, setPaddingY] = useState(2);
+  const [paddingX, setPaddingX] = useState(5);
+  const [paddingY, setPaddingY] = useState(3);
   const [qrSize, setQrSize] = useState(35);
-  const [sectionGap, setSectionGap] = useState(1);
-  const [gridGap, setGridGap] = useState(0.5);
+  const [sectionGap, setSectionGap] = useState(2);
+  const [gridGap, setGridGap] = useState(10);
   const [titleWidth, setTitleWidth] = useState(330);
   const [titleHeight, setTitleHeight] = useState(48);
   const [titleFontSize, setTitleFontSize] = useState(23);
@@ -805,14 +805,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           <button
             onClick={() => {
               setFontSize(8);
-              setLineHeight(1.0);
+              setLineHeight(2.0);
               setLetterSpacing(0);
               setFontWeight(400);
-              setPaddingX(8);
-              setPaddingY(2);
+              setPaddingX(5);
+              setPaddingY(3);
               setQrSize(35);
-              setSectionGap(1);
-              setGridGap(0.5);
+              setSectionGap(2);
+              setGridGap(10);
               setTitleWidth(330);
               setTitleHeight(48);
               setTitleFontSize(23);
