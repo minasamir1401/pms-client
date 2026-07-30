@@ -1273,17 +1273,21 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             
             <div className="bg-white w-full">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-5 flex flex-col gap-3 pt-[3px]">
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">........................</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">........................</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">........................</span></p>
+                    <div className="col-span-9 flex flex-col gap-3 pt-[3px]">
+                        <div className="flex items-center gap-8">
+                            <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1 min-w-[250px]">{renderLabel("اسم الممرض/الممرضة : ")}<span className="font-normal text-gray-400">........................</span></p>
+                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        </div>
+                        <div className="flex items-center gap-8">
+                            <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1 min-w-[250px]">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">........................</span></p>
+                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        </div>
+                        <div className="flex items-center gap-8">
+                            <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1 min-w-[250px]">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">........................</span></p>
+                            <p className="text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
+                        </div>
                     </div>
-                    <div className="col-span-4 flex flex-col gap-3 pt-[3px] mr-[-30px]">
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
-                        <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
-                    </div>
-                    <div className="col-span-3 flex flex-col items-center">
+                    <div className="col-span-3 flex flex-col items-center mr-[-100px]">
                         <div className="w-[80px] h-[80px] rounded-full border border-black"></div>
                         <p className="pt-[2px] text-center font-semibold text-[9pt] m-0">ختم شعار الجمهورية</p>
                     </div>
@@ -1294,7 +1298,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
                         <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                     </p>
-                    <p className="mr-[226px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                    <p className="mr-[106px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                         {renderLabel("رقم القومى : ")}
                         <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
                     </p>
