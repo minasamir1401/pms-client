@@ -1266,7 +1266,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             <h2
               className={`text-[10.5pt] font-semibold text-black mb-1 ${isEditingText ? 'outline-none border-b border-dashed border-teal-300 inline-block' : ''}`}
               contentEditable={isEditingText} suppressContentEditableWarning
-              style={{ wordSpacing: '12px' }}
+              style={{ letterSpacing: '1px' }}
             >
               إقرار المنتفع/المنتفعة بإعلامه بنتيجة الفحص وتوصيات الطبيب
             </h2>
