@@ -1142,16 +1142,8 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
           </div>
 
-          <div className="flex justify-between w-full mb-2 mt-4">
-            <div className="font-semibold flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("المحافظة: ")}
-                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[9pt]", "w-32")}
-            </div>
-            <div className="font-semibold flex items-center gap-1 whitespace-nowrap">
-                {renderLabel("اسم الوحدة: ")}
-                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
-            </div>
-            <div className="font-semibold flex items-center gap-1 whitespace-nowrap">
+          <div className="grid grid-cols-10 gap-2 mb-2 mt-4">
+            <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
                 {renderLabel("تاريخ الإصدار : ")}
                 {isEditingText ? (
                   <input
@@ -1163,6 +1155,14 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 ) : (
                   <span className="text-[9pt]">{formatDate(editedCert.issueDate)}</span>
                 )}
+            </div>
+            <div className="col-span-4 font-semibold flex items-center gap-1 whitespace-nowrap">
+                {renderLabel("اسم الوحدة: ")}
+                {renderEditableField("unitName", "text", "font-normal whitespace-nowrap text-[9pt]", "w-48")}
+            </div>
+            <div className="col-span-3 font-semibold flex items-center gap-1 whitespace-nowrap">
+                {renderLabel("المحافظة: ")}
+                {renderEditableField("governorate", "text", "font-normal whitespace-nowrap text-[9pt]", "w-32")}
             </div>
           </div>
 
