@@ -1298,7 +1298,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         {renderLabel("أقر أنا الموقع/الموقعه أدناه : ")}
                         <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                     </p>
-                    <p className="mr-[136px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
+                    <p className="mr-[106px] text-[9pt] m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                         {renderLabel("رقم القومى : ")}
                         <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
                     </p>
