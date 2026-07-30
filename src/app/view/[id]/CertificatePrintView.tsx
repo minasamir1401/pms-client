@@ -1277,7 +1277,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("اسم الطبيب/الطبيبة : ")}<span className="font-normal text-gray-400">........................</span></p>
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("مدير الوحدة : ")}<span className="font-normal text-gray-400">........................</span></p>
                     </div>
-                    <div className="col-span-4 flex flex-col gap-3 pt-[3px]">
+                    <div className="col-span-4 flex flex-col gap-3 pt-[3px] mr-[-30px]">
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
                         <p className="mr-3 text-[9pt] font-semibold m-0 flex items-center gap-1">{renderLabel("التوقيع : ")}<span className="font-normal text-gray-400">........................</span></p>
