@@ -66,9 +66,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
   const [qrSize, setQrSize] = useState(35);
   const [sectionGap, setSectionGap] = useState(1);
   const [gridGap, setGridGap] = useState(0.5);
-  const [titleWidth, setTitleWidth] = useState(340);
-  const [titleHeight, setTitleHeight] = useState(50);
-  const [titleFontSize, setTitleFontSize] = useState(22);
+  const [titleWidth, setTitleWidth] = useState(380);
+  const [titleHeight, setTitleHeight] = useState(58);
+  const [titleFontSize, setTitleFontSize] = useState(26);
   const [titleY, setTitleY] = useState(certificate.titleY ?? 0);
   const [titleX, setTitleX] = useState(certificate.titleX ?? 0);
   const [titleText, setTitleText] = useState(certificate.titleText ?? "شهادة صحية لراغبي الزواج");
@@ -613,13 +613,11 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
         .print-page {
           width: 210mm;
-          height: 295mm; /* slightly less than 297mm to prevent overflow */
+          min-height: 297mm;
           padding: ${paddingY}mm ${paddingX}mm;
-          padding-bottom: 200px !important;
           box-sizing: border-box;
           background-color: #ffffff;
           color: #000000 !important;
-          /* font-size removed */
           line-height: ${lineHeight} !important;
           letter-spacing: ${letterSpacing}px !important;
           overflow: hidden;
@@ -688,13 +686,10 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           body, html {
             background-color: #ffffff !important;
             color: #000000 !important;
-            width: 210mm;
-            height: 297mm;
             margin: 0 !important;
             padding: 0 !important;
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
-            overflow: hidden !important;
           }
           .no-print {
             display: none !important;
@@ -703,19 +698,18 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             box-shadow: none !important;
             border: none !important;
             margin: 0 !important;
-            padding: 0 !important;
+            padding: 8mm 12mm !important;
             box-sizing: border-box;
             background-color: #ffffff !important;
             color: #000000 !important;
             width: 210mm !important;
-            height: 297mm !important;
-            max-height: 297mm !important;
-            overflow: hidden;
+            min-height: 0 !important;
+            height: auto !important;
+            overflow: visible !important;
             page-break-after: avoid;
             page-break-before: avoid;
-            /* Scale down by 30% to fix oversized print */
-            transform: scale(0.7) !important;
-            transform-origin: top center !important;
+            /* zoom shrinks content AND layout - no empty space at bottom */
+            zoom: 0.78;
           }
         }
         @page {
@@ -792,9 +786,9 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               setQrSize(35);
               setSectionGap(1);
               setGridGap(0.5);
-              setTitleWidth(340);
-              setTitleHeight(50);
-              setTitleFontSize(22);
+              setTitleWidth(380);
+              setTitleHeight(58);
+              setTitleFontSize(26);
               setTitleY(0);
               setTitleX(0);
               setTitleText("شهادة صحية لراغبي الزواج");
