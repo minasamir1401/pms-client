@@ -1356,7 +1356,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                         </p>
                     </div>
                     <div className="col-span-5 flex flex-col items-start pr-3">
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center" style={{ transform: 'translateX(-30px)' }}>
                             <div className="bg-white p-1 border border-black w-fit">
                                 {currentUrl ? (
                                   <QRCodeSVG value={currentUrl} size={qrSize} />
