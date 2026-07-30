@@ -1110,7 +1110,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
               }}
             >
               <div 
-                className={`border-2 border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none px-6 ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
+                className={`border border-black rounded-[4px] text-black font-bold flex items-center justify-center leading-none px-6 ${isEditingText ? 'border-dashed border-teal-500 bg-teal-50/20' : ''}`}
                 style={{
                   width: `${titleWidth}px`,
                   height: `${titleHeight}px`,

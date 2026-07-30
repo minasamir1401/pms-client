@@ -334,7 +334,7 @@ export default function SearchPage() {
             استعلام عن نتيجة الفحص الطبي
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-            أدخل كود الشهادة يدوياً أو قم **بإرفاق صورة الشهادة أو ملف PDF** لقراءة رمز الاستجابة السريعة (QR Code) فوراً والتحقق من صحتها.
+            أدخل كود الشهادة يدوياً للتحقق من صحتها.
           </p>
         </div>
 
@@ -392,47 +392,7 @@ export default function SearchPage() {
             </div>
           </form>
 
-          {/* Or Divider */}
-          <div className="relative flex py-2 items-center">
-            <div className="flex-grow border-t border-slate-200/80"></div>
-            <span className="flex-shrink mx-4 text-slate-400 text-xs font-semibold">أو مسح ملف الشهادة</span>
-            <div className="flex-grow border-t border-slate-200/80"></div>
-          </div>
 
-          {/* QR Attachment Upload Section */}
-          <div>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileUpload}
-              accept="image/*,application/pdf"
-              className="hidden"
-            />
-            
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={loading || scanLoading}
-              className="w-full flex flex-col items-center justify-center border-2 border-dashed border-slate-200 hover:border-teal-400/80 rounded-2xl p-4 sm:p-6 bg-slate-50/50 hover:bg-teal-50/10 transition-all cursor-pointer group disabled:opacity-50"
-            >
-              {scanLoading ? (
-                <div className="flex flex-col items-center gap-2">
-                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-teal-500 border-t-transparent" />
-                  <span className="text-xs font-bold text-slate-600 text-center">جاري قراءة وتحليل ملف الشهادة...</span>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-2 text-center">
-                  <div className="h-10 w-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-teal-600 group-hover:border-teal-200 shadow-sm transition-all">
-                    <QrCode className="h-5.5 w-5.5" />
-                  </div>
-                  <div className="text-xs font-bold text-slate-600">
-                    اضغط هنا لإرفاق صورة الشهادة أو ملف الـ PDF
-                  </div>
-                  <p className="text-[9px] sm:text-[10px] text-slate-400">يدعم صور الكاميرا (PNG, JPG) وملفات المستندات الرسمية (PDF)</p>
-                </div>
-              )}
-            </button>
-          </div>
 
           {/* Success Scanned Message */}
           {successMessage && (
