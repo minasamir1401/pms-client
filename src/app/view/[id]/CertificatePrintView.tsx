@@ -1207,7 +1207,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                     Hb Electrophoresis :
                 </p>
             </div>
-            <div className="flex w-[95%] justify-between pr-[80px] mt-[30px] ml-[-43px]">
+            <div className="flex w-[95%] justify-between pr-5 mt-[30px] ml-[-100px]">
               <div className="flex flex-col mb-1">
                   <label className="font-semibold flex items-center gap-1 whitespace-nowrap">
                       {renderLabel("A : ")}
