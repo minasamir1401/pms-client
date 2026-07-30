@@ -1290,7 +1290,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                             <span className="font-bold text-[9pt]">{editedCert.fullName !== null ? editedCert.fullName : "-"}</span>
                         </p>
                     </div>
-                    <div className="col-span-3 flex justify-center">
+                    <div className="col-span-3 flex justify-start">
                         <p className="text-[9pt]  m-0 flex items-center gap-1 font-semibold whitespace-nowrap">
                             {renderLabel("رقم القومى : ")}
                             <span className="font-bold text-[9pt]">{editedCert.nationalId !== null ? editedCert.nationalId : "-"}</span>
