@@ -620,7 +620,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
           color: #000000 !important;
           line-height: ${lineHeight} !important;
           letter-spacing: ${letterSpacing}px !important;
-          overflow: hidden;
         }
 
         /* Override Tailwind classes inside the printed certificate for dynamic font size and weight scaling */
@@ -1096,7 +1095,7 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
 
         {/* Official A4 Layout Replication */}
         <div
-          className="print-page bg-white text-black shadow-xl flex flex-col"
+          className="print-page bg-white text-black shadow-xl"
           dir="rtl"
           onClick={() => { if (isAdmin && !isEditingText) setIsEditingText(true); }}
           title={!isEditingText && isAdmin ? "انقر للبدء في التعديل" : undefined}
@@ -1383,8 +1382,6 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
             </div>
           </div>
 
-          {/* Spacer to push footer to bottom */}
-          <div className="flex-grow"></div>
 
         </div>
       </div>
