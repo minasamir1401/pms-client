@@ -1156,12 +1156,13 @@ export default function CertificatePrintView({ certificate }: CertificatePrintVi
                 {isEditingText ? (
                   <input
                     type="text"
+                    dir="ltr"
                     value={editedCert.issueDate}
                     onChange={(e) => setEditedCert({ ...editedCert, issueDate: e.target.value })}
                     className="bg-teal-50/70 border border-teal-300 rounded px-1 py-0 text-black font-bold text-center focus:outline-none focus:bg-white text-[11pt] w-28"
                   />
                 ) : (
-                  <span className="text-[11pt] font-bold header-label-bold">{formatDate(editedCert.issueDate)}</span>
+                  <span className="text-[11pt] font-bold header-label-bold" dir="ltr">{formatDate(editedCert.issueDate)}</span>
                 )}
             </div>
             <div className="col-span-4 font-bold text-[11pt] flex items-center gap-1 whitespace-nowrap" style={{ fontFamily: "'Calibri', 'Segoe UI', sans-serif" }}>
