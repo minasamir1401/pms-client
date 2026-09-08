@@ -358,18 +358,6 @@ export default function SearchPage() {
           </div>
         </div>
 
-        {/* Action Bar (Search button ONLY - Edit and Print removed for client) */}
-        <div className="no-print bg-slate-50 border-b border-slate-200 py-2.5 px-4 shadow-xs sticky top-0 z-30">
-          <div className="max-w-5xl mx-auto flex items-center justify-start">
-            <button
-              onClick={() => { setCertificate(null); setCertCode(""); setSuccessMessage(""); }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-teal-700 bg-white hover:bg-teal-50 border border-slate-300 transition cursor-pointer shadow-xs"
-            >
-              <ArrowRight className="h-4 w-4" />
-              بحث جديد
-            </button>
-          </div>
-        </div>
 
         {/* Exact Official Government Layout Replication */}
         <main className="flex-1 w-full pb-10">
@@ -652,10 +640,10 @@ export default function SearchPage() {
                       </p>
                     </div>
                     <div className="col-sm-3"></div>
-                    <div className="col-sm-4 pt-3 flex flex-col items-center justify-center">
+                    <div className="col-sm-4">
                       <QRCodeSVG
                         value={typeof window !== "undefined" ? `${window.location.origin}/view/${certificate.certificateId}` : `http://localhost:3000/view/${certificate.certificateId}`}
-                        size={110}
+                        size={85}
                         level="M"
                         className="qr-code img-thumbnail img-responsive"
                       />
@@ -664,8 +652,8 @@ export default function SearchPage() {
 
                   <div className="row">
                     <div className="col-sm-8"></div>
-                    <div className="col-sm-4 mb-1 text-center">
-                      <p style={{ color: "black", fontWeight: "bold", fontSize: "14px" }}>
+                    <div className="col-sm-4 mb-1">
+                      <p style={{ color: "black", fontWeight: "bold", fontSize: "13px" }}>
                         {certificate.qrCodeLabel || `2026-${certificate.certificateId}`}
                       </p>
                     </div>
@@ -673,6 +661,29 @@ export default function SearchPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Official Close Button matching exact HTML */}
+          <div className="text-center my-4 no-print">
+            <a
+              href="javascript:void(0);"
+              onClick={(e) => {
+                e.preventDefault();
+                if (typeof window !== "undefined" && window.opener) {
+                  window.close();
+                }
+                setCertificate(null);
+                setCertCode("");
+                setYearPrefix("");
+                setSuccessMessage("");
+              }}
+              className="btn btn-danger btn-md"
+              id="closeBtn"
+            >
+              <i className="fas fa-window-close"></i>
+              {" "}إغلاق
+            </a>
+            <input id="oldSheetStatus" name="oldSheetStatus" hidden defaultValue="" />
           </div>
         </main>
 
