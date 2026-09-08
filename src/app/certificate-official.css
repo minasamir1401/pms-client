@@ -1,5 +1,158 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
 
+/* ========================================================= */
+/* Official Header (#removeLayoutHeader)                     */
+/* ========================================================= */
+#removeLayoutHeader.form-inline {
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.5rem 1.5rem !important;
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid #dee2e6 !important;
+  width: 100% !important;
+}
+
+#removeLayoutHeader .navbar-brand {
+  display: inline-block !important;
+  padding-top: 0.3125rem !important;
+  padding-bottom: 0.3125rem !important;
+}
+
+#removeLayoutHeader .nav-img {
+  height: 80px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+
+#removeLayoutHeader .site-name {
+  flex: 1 !important;
+  text-align: center !important;
+}
+
+#removeLayoutHeader #sitename h4 {
+  font-family: 'Cairo', Tahoma, Arial, sans-serif !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: #212529 !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+#removeLayoutHeader .col-md-2 {
+  flex: 0 0 16.666667% !important;
+  max-width: 16.666667% !important;
+  padding: 0 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#removeLayoutHeader [id="100million"],
+#removeLayoutHeader [id="Oncology"] {
+  max-height: 70px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+
+@media (max-width: 768px) {
+  #removeLayoutHeader.form-inline {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+  #removeLayoutHeader .col-md-2 {
+    max-width: 120px !important;
+  }
+}
+
+/* ========================================================= */
+/* Official Search Form                                      */
+/* ========================================================= */
+.container.mt-5.text-center h3 {
+  font-family: 'Cairo', Tahoma, Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #212529 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.textboxes {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  direction: ltr !important;
+  gap: 10px !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.textboxes .input-one {
+  width: 100px !important;
+}
+
+.textboxes .input-two {
+  width: 200px !important;
+}
+
+.textboxes input.form-control {
+  height: 42px !important;
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem !important;
+  color: #495057 !important;
+  background-color: #ffffff !important;
+  width: 100% !important;
+  font-family: 'Cairo', monospace, sans-serif !important;
+}
+
+.textboxes input.form-control:focus {
+  border-color: #17a2b8 !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.25) !important;
+}
+
+.textboxes p {
+  margin: 0 !important;
+  color: #212529 !important;
+}
+
+.btn.btn-info#enterPIN {
+  color: #fff !important;
+  background-color: #17a2b8 !important;
+  border-color: #17a2b8 !important;
+  padding: 0.45rem 2.5rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-radius: 0.25rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.15s ease-in-out !important;
+  font-family: 'Cairo', Tahoma, Arial, sans-serif !important;
+  display: inline-block !important;
+}
+
+.btn.btn-info#enterPIN:hover {
+  background-color: #138496 !important;
+  border-color: #117a8b !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  margin-top: 10px !important;
+  font-family: 'Cairo', Tahoma, Arial, sans-serif !important;
+}
+
+/* ========================================================= */
+/* Official Certificate Result View (#TableDiv)              */
+/* ========================================================= */
+
 /* Header bar */
 .bg-header.small-header {
   height: 8px;

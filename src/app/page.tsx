@@ -337,34 +337,26 @@ export default function SearchPage() {
   if (certificate) {
     return (
       <div className="min-h-screen bg-white text-slate-800 flex flex-col justify-between no-client-print" dir="rtl">
-        {/* Responsive Official Header based on provided layout */}
-        <header 
-          className="border-b border-sky-100 bg-gradient-to-r from-sky-50 via-teal-50 to-blue-50 shadow-sm w-full" 
-          id="removeLayoutHeader"
-        >
-          <div className="max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-4 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex-shrink-0">
-              <a className="navbar-brand" href="#">
-                <img className="nav-img h-16 sm:h-20 md:h-24 w-auto object-contain" src="/images/logo-ar-black.png" alt="شعار الوزارة" />
-              </a>
-            </div>
-
-            <div className="site-name flex-grow text-center" id="sitename">
-              <h4 style={{ textAlign: 'center' }} className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-slate-800 leading-snug">
-                مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
-              </h4>
-            </div>
-
-            <div className="flex items-center justify-center gap-5 sm:gap-6 shrink-0">
-              <div className="w-24 sm:w-28 md:w-32">
-                <img src="/images/100Million.png" alt="100 مليون صحة" style={{ width: '100%' }} />
-              </div>
-              <div className="w-24 sm:w-28 md:w-32">
-                <img src="/images/OncLogo.png" alt="Onc Logo" style={{ width: '100%' }} />
-              </div>
-            </div>
+        {/* Official Header matching exact HTML */}
+        <div className="form-inline my-2 my-lg-0 bg-light" id="removeLayoutHeader">
+          <div className="">
+            <a className="navbar-brand" href="#">
+              <img src="/prenup/Content/css/images/logo-ar-black.png" alt="" className="nav-img" />
+            </a>
           </div>
-        </header>
+          <div className="site-name" id="sitename">
+            <h4 style={{ textAlign: "center" }}>
+              مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
+            </h4>
+          </div>
+
+          <div className="col-md-2">
+            <img style={{ width: "100%" }} src="/prenup/Content/css/images/100Million.png" id="100million" alt="100 مليون صحة" />
+          </div>
+          <div className="col-md-2">
+            <img style={{ width: "100%" }} src="/prenup/Content/css/images/OncLogo.png" id="Oncology" alt="مبادرة الكشف المبكر وعلاج الأورام السرطانية" />
+          </div>
+        </div>
 
         {/* Action Bar (Search button ONLY - Edit and Print removed for client) */}
         <div className="no-print bg-slate-50 border-b border-slate-200 py-2.5 px-4 shadow-xs sticky top-0 z-30">
@@ -694,131 +686,77 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 selection:bg-teal-500 selection:text-white flex flex-col justify-between relative overflow-hidden" dir="rtl">
-      {/* Background Decorative Gradients */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] right-[-10%] h-[50%] w-[60%] rounded-full bg-teal-500/5 blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[50%] w-[60%] rounded-full bg-emerald-500/5 blur-[120px]" />
+    <div className="min-h-screen bg-white text-slate-800 flex flex-col justify-between" dir="rtl">
+      {/* Official Header */}
+      <div className="form-inline my-2 my-lg-0 bg-light" id="removeLayoutHeader">
+        <div className="">
+          <a className="navbar-brand" href="#">
+            <img src="/prenup/Content/css/images/logo-ar-black.png" alt="" className="nav-img" />
+          </a>
+        </div>
+        <div className="site-name" id="sitename">
+          <h4 style={{ textAlign: "center" }}>
+            مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
+          </h4>
+        </div>
+
+        <div className="col-md-2">
+          <img style={{ width: "100%" }} src="/prenup/Content/css/images/100Million.png" id="100million" alt="100 مليون صحة" />
+        </div>
+        <div className="col-md-2">
+          <img style={{ width: "100%" }} src="/prenup/Content/css/images/OncLogo.png" id="Oncology" alt="مبادرة الكشف المبكر وعلاج الأورام السرطانية" />
+        </div>
       </div>
 
-      {/* Responsive Official Header based on provided layout */}
-      <header 
-        className="relative z-10 border-b border-sky-100 bg-gradient-to-r from-sky-50 via-teal-50 to-blue-50 sticky top-0 shadow-sm w-full" 
-        id="removeLayoutHeader"
-      >
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 md:px-16 py-4 sm:py-5 flex flex-col md:flex-row items-center justify-between gap-6">
-          
-          <div className="flex-shrink-0">
-            <a className="navbar-brand" href="#">
-              <img className="nav-img h-16 sm:h-20 md:h-24 w-auto object-contain" src="/images/logo-ar-black.png" alt="شعار الوزارة" />
-            </a>
-          </div>
-
-          <div className="site-name flex-grow text-center" id="sitename">
-            <h4 style={{ textAlign: 'center' }} className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-slate-800 leading-snug">
-              مبادرة السيد رئيس الجمهورية لفحص المقبلين على الزواج
-            </h4>
-          </div>
-
-          <div className="flex items-center justify-center gap-5 sm:gap-6 shrink-0">
-            <div className="w-24 sm:w-28 md:w-32">
-              <img src="/images/100Million.png" alt="100 مليون صحة" style={{ width: '100%' }} />
-            </div>
-            <div className="w-24 sm:w-28 md:w-32">
-              <img src="/images/OncLogo.png" alt="Onc Logo" style={{ width: '100%' }} />
-            </div>
-          </div>
-
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="relative z-10 flex-1 flex flex-col items-center justify-start py-6 sm:py-10 px-2.5 sm:px-4 max-w-5xl w-full mx-auto space-y-6 sm:space-y-8">
-        
-        {/* Intro & Search Form */}
-        <div className="text-center max-w-xl space-y-3">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
-            استعلام عن نتيجة الفحص الطبي
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-            أدخل كود الشهادة يدوياً للتحقق من صحتها.
-          </p>
-        </div>
-
-        {/* Search & Upload Section */}
-        <div className="w-full max-w-2xl bg-white rounded-2xl border border-slate-200/80 p-3.5 min-[340px]:p-6 sm:p-8 shadow-lg shadow-slate-100/50 space-y-6">
-          
-          {/* Manual Input Form */}
-          <form onSubmit={handleSearchSubmit} className="space-y-4">
-            <label className="block text-xs font-bold text-slate-500">
-              استعلام يدوي برقم الشهادة المعتمد
-            </label>
-            
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-1.5 sm:gap-2 bg-slate-50 border border-slate-200/80 rounded-xl p-2 sm:p-2.5 shadow-inner" dir="ltr">
-                {/* Year prefix */}
+      {/* Main Content: Exact Official Search Box */}
+      <main className="flex-1 w-full pb-10">
+        <div className="container mt-5 text-center">
+          <h3>ادخل رقم الاستمارة</h3>
+          <form onSubmit={handleSearchSubmit}>
+            <div className="row text-center mt-4 textboxes">
+              <div className="text-center input-one">
                 <input
+                  id="YEAR"
                   type="text"
+                  className="form-control text-center"
                   maxLength={4}
-                  placeholder="2026"
                   value={yearPrefix}
                   onChange={(e) => setYearPrefix(e.target.value.replace(/\D/g, ""))}
-                  className="w-14 sm:w-20 text-center font-bold text-slate-800 bg-white border border-slate-200 rounded-lg py-2 sm:py-2.5 outline-none focus:border-teal-500 shadow-sm font-mono text-sm sm:text-base"
-                  title="السنة الكودية"
-                />
-                
-                {/* Separator */}
-                <span className="text-slate-400 font-bold text-lg sm:text-xl font-mono px-0.5 sm:px-1 select-none">-</span>
-                
-                {/* 8-Digit ID code */}
-                <input
-                  type="text"
-                  maxLength={8}
-                  placeholder="12345678"
-                  value={certCode}
-                  onChange={(e) => setCertCode(e.target.value.replace(/\D/g, ""))}
-                  className="flex-1 min-w-0 text-center font-bold tracking-normal min-[340px]:tracking-widest text-slate-800 bg-white border border-slate-200 rounded-lg py-2 sm:py-2.5 outline-none focus:border-teal-500 shadow-sm font-mono text-sm sm:text-base"
-                  title="رقم الشهادة"
+                  placeholder="2026"
                 />
               </div>
-
-              <button
-                type="submit"
-                disabled={loading || scanLoading}
-                className="w-full rounded-xl bg-gradient-to-r from-teal-500 to-emerald-500 py-3 sm:py-3.5 px-6 text-sm font-bold text-white shadow-md hover:brightness-105 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
-              >
-                {loading ? (
-                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                ) : (
-                  <>
-                    <Search className="h-4.5 w-4.5" />
-                    استعلام يدوي
-                  </>
-                )}
-              </button>
+              <div className="text-center">
+                <p style={{ fontSize: "25px", fontWeight: "bold" }}>-</p>
+              </div>
+              <div className="text-center input-two">
+                <input
+                  id="DOCNUMBER"
+                  type="text"
+                  className="form-control text-center"
+                  maxLength={8}
+                  value={certCode}
+                  onChange={(e) => setCertCode(e.target.value.replace(/\D/g, ""))}
+                  placeholder="05015745"
+                />
+              </div>
             </div>
+
+            {error ? (
+              <div id="error" className="text-danger">{error}</div>
+            ) : (
+              <div id="error" className="text-danger" hidden>برجاء إدخال رقم الاستمارة</div>
+            )}
+            <div id="DocumentNotFound" className="text-danger" hidden>لا يوجد بيانات</div>
+            <br />
+            <button className="btn btn-info" id="enterPIN" type="submit" name="login" disabled={loading}>
+              {loading ? "جاري الإدخال..." : "إدخال"}
+            </button>
           </form>
-
-          {/* Success Scanned Message */}
-          {successMessage && (
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 sm:p-4 flex items-center gap-2 text-emerald-800 text-xs sm:text-sm animate-fadeIn">
-              <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
-              <span className="font-semibold">{successMessage}</span>
-            </div>
-          )}
-
-          {error && (
-            <div className="rounded-xl border border-red-200 bg-red-50 p-3 sm:p-4 flex items-start gap-3 text-red-600 text-xs sm:text-sm animate-fadeIn">
-              <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
-              <span className="leading-relaxed">{error}</span>
-            </div>
-          )}
         </div>
-
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-slate-200 bg-white py-6 text-center text-slate-400 text-[10px] sm:text-xs">
+      {/* Official Footer */}
+      <footer className="border-t border-slate-200 bg-white py-6 text-center text-slate-400 text-[10px] sm:text-xs">
         <p className="mb-1">جميع الحقوق محفوظة © وزارة الصحة والسكان 2026</p>
         <p className="text-[10px] text-slate-300">منظومة التسجيل المعتمدة والتحقق المشفر من الفحص الطبي للمقبلين على الزواج</p>
       </footer>
