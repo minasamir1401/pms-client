@@ -8,10 +8,17 @@
   flex-flow: row wrap !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 0.5rem 1.5rem !important;
-  background-color: #f8f9fa !important;
-  border-bottom: 1px solid #dee2e6 !important;
+  padding: 0.5rem 2rem !important;
+  background-color: #ffffff !important;
+  background-image: url('/prenup/Content/css/images/header-bg.jpg') !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center bottom !important;
   width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  min-height: 96px !important;
 }
 
 #removeLayoutHeader .navbar-brand {
@@ -155,10 +162,10 @@
 
 /* Header bar */
 .bg-header.small-header {
-  height: 8px;
-  background: #00bcd4;
-  width: 100%;
-  display: block;
+  height: 8px !important;
+  background: #0DA2D3 !important;
+  width: 100% !important;
+  display: block !important;
 }
 
 /* Master font and styling strictly scoped to #TableDiv */
