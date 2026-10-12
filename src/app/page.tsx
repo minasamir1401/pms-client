@@ -747,7 +747,7 @@ export default function SearchPage() {
                   maxLength={8}
                   value={certCode}
                   onChange={(e) => setCertCode(e.target.value.replace(/\D/g, ""))}
-                  placeholder="05015745"
+                  placeholder="06015745"
                 />
               </div>
             </div>
